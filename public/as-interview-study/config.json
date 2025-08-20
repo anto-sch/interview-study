@@ -54,6 +54,63 @@
             ],
             "nextButtonLocation": "belowStimulus",
             "instructionLocation": "belowStimulus"
+        },
+        "eulerTask": {
+            "description": "A logical reasoning task with Euler diagrams as hints",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-interview-study/assets/EulerTask.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A", "B", "C", "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        },
+        "baseline": {
+            "description": "A logical reasoning task without hints as baseline.",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-interview-study/assets/BaselineTask.tsx",
+            "parameters": {
+                "text": "The context of the task."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A", "B", "C", "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
         }
     },
     "components": {
@@ -118,6 +175,58 @@
                     ]
                 }
             ]
+        },
+        "eulertask1": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "text": "It takes a particular talent to be a successful business manager. Business courses can help people to solve management problems, but such courses can do so only for those people with managerial talent. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise.",
+                "data": [
+                    {
+                        "antecedent": "B",
+                        "consequent": "T",
+                        "text": "It takes <mark class='T'>a particular talent</mark> <mark class='B'>to be a successful business manager</mark>."
+                    },
+                    {
+                        "antecedent": "S",
+                        "consequent": "T",
+                        "text": "<mark class='S'>Business courses can help people to solve management problems</mark>, but such courses can do so only for <mark class='T'>those people with managerial talent</mark>. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "If the statements above are true, which of the following must also be true on the basis of them?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "People who are helped by business courses in solving management problems also have managerial talent.",
+                        "Those people who have never taken business courses are unable to solve management problems when such problems arise.",
+                        "People who lack managerial talent are more likely to take business courses than are people who have managerial talent.",
+                        "People who are already skilled at solving management problems are unlikely to benefit from business courses."
+                    ]
+                }
+            ]
+        },
+        "baseline1": {
+            "baseComponent": "baseline",
+            "parameters": {
+                "text": "It takes a particular talent to be a successful business manager. Business courses can help people to solve management problems, but such courses can do so only for those people with managerial talent. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "If the statements above are true, which of the following must also be true on the basis of them?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "People who are helped by business courses in solving management problems also have managerial talent.",
+                        "Those people who have never taken business courses are unable to solve management problems when such problems arise.",
+                        "People who lack managerial talent are more likely to take business courses than are people who have managerial talent.",
+                        "People who are already skilled at solving management problems are unlikely to benefit from business courses."
+                    ]
+                }
+            ]
         }
     },
     "sequence": {
@@ -125,7 +234,9 @@
         "components": [
             "introduction",
             "consent",
-            "venntask1"
+            "venntask1",
+            "eulertask1",
+            "baseline1"
         ]
     }
 }
