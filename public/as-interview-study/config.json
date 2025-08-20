@@ -1,0 +1,131 @@
+{
+    "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.1.1/src/parser/StudyConfigSchema.json",
+    "studyMetadata": {
+        "title": "Interview Study: Logical Diagramming for Conditionals",
+        "version": "pilot",
+        "authors": [
+            "Antonia Schlieder"
+        ],
+        "date": "2025-08-19",
+        "description": "Interview study on logical diagrams as hints for solving reasoning tasks on conditionals in natural language.",
+        "organizations": [
+            "Heidelberg University"
+        ]
+    },
+    "uiConfig": {
+        "contactEmail": "antonia.schlieder@iwr.uni-heidelberg.de",
+        "helpTextPath": "as-interview-study/assets/help.md",
+        "logoPath": "revisitAssets/revisitLogoSquare.svg",
+        "withProgressBar": true,
+        "autoDownloadStudy": false,
+        "sidebar": true
+    },
+    "baseComponents": {
+        "vennTask": {
+            "description": "A logical reasoning task with Venn diagrams as hints",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-interview-study/assets/VennTask.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A", "B", "C", "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        }
+    },
+    "components": {
+        "introduction": {
+            "type": "markdown",
+            "path": "as-interview-study/assets/introduction.md",
+            "response": []
+        },
+        "consent": {
+            "type": "markdown",
+            "path": "as-interview-study/assets/consent-cm.md",
+            "nextButtonText": "Agree",
+            "response": [
+                {
+                    "id": "signature",
+                    "prompt": "Your signature",
+                    "location": "belowStimulus",
+                    "type": "shortText",
+                    "placeholder": "Please provide your signature"
+                },
+                {
+                    "id": "accept",
+                    "prompt": "Do you consent to the study and wish to continue?",
+                    "requiredValue": "Accept",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Decline",
+                        "Accept"
+                    ]
+                }
+            ]
+        },
+        "venntask1": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "It takes a particular talent to be a successful business manager. Business courses can help people to solve management problems, but such courses can do so only for those people with managerial talent. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise.",
+                "data": [
+                    {
+                        "antecedent": "B",
+                        "consequent": "T",
+                        "text": "It takes <mark class='T'>a particular talent</mark> <mark class='B'>to be a successful business manager</mark>."
+                    },
+                    {
+                        "antecedent": "S",
+                        "consequent": "T",
+                        "text": "<mark class='S'>Business courses can help people to solve management problems</mark>, but such courses can do so only for <mark class='T'>those people with managerial talent</mark>. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "If the statements above are true, which of the following must also be true on the basis of them?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "People who are helped by business courses in solving management problems also have managerial talent.",
+                        "Those people who have never taken business courses are unable to solve management problems when such problems arise.",
+                        "People who lack managerial talent are more likely to take business courses than are people who have managerial talent.",
+                        "People who are already skilled at solving management problems are unlikely to benefit from business courses."
+                    ]
+                }
+            ]
+        }
+    },
+    "sequence": {
+        "order": "fixed",
+        "components": [
+            "introduction",
+            "consent",
+            "venntask1"
+        ]
+    }
+}
