@@ -267,21 +267,21 @@ export default function VennThreeSets({
             svg,
             fullRect,
             idA,
-            regions.singles[A] ? palette.singles[A] : palette.shade,
+            regions.singles[A] ? "#FFFF" : palette.shade,
             0.9
         );
         drawRectWithClip(
             svg,
             fullRect,
             idB,
-            regions.singles[B] ? palette.singles[B] : palette.shade,
+            regions.singles[B] ? "#FFFF" : palette.shade,
             0.9
         );
         drawRectWithClip(
             svg,
             fullRect,
             idC,
-            regions.singles[C] ? palette.singles[C] : palette.shade,
+            regions.singles[C] ? "#FFFF" : palette.shade,
             0.9
         );
 
@@ -293,7 +293,7 @@ export default function VennThreeSets({
             idA,
             idB,
             regions.pairs[pairKey(A, B)]
-                ? palette.pairs[pairKey(A, B)]
+                ? "#FFFF"
                 : palette.shade,
             0.9
         );
@@ -303,7 +303,7 @@ export default function VennThreeSets({
             idA,
             idC,
             regions.pairs[pairKey(A, C)]
-                ? palette.pairs[pairKey(A, C)]
+                ? "#FFFF"
                 : palette.shade,
             0.9
         );
@@ -313,7 +313,7 @@ export default function VennThreeSets({
             idB,
             idC,
             regions.pairs[pairKey(B, C)]
-                ? palette.pairs[pairKey(B, C)]
+                ? "#FFFF"
                 : palette.shade,
             0.9
         );
@@ -325,7 +325,7 @@ export default function VennThreeSets({
             idA,
             idB,
             idC,
-            regions.triple ? palette.triple : palette.shade,
+            regions.triple ? "#FFFF" : palette.shade,
             0.9
         );
 
@@ -372,29 +372,32 @@ export default function VennThreeSets({
         const labelOffset = 0.9 * r;
         svg
             .append("text")
-            .attr("x", centers[A].x - labelOffset)
-            .attr("y", centers[A].y + labelOffset)
+            .attr("x", centers[A].x - 1.5 * labelOffset)
+            .attr("y", centers[A].y + 0.9 * labelOffset)
             .attr("font-family", fontFamily)
-            .attr("font-size", 14)
-            .attr("fill", stroke)
+            .attr("font-size", 20)
+            .attr("font-weight", "bold")
+            .attr("fill", palette.singles[A])
             .text(labels[A] ?? A);
 
         svg
             .append("text")
-            .attr("x", centers[B].x + labelOffset * 0.5)
-            .attr("y", centers[B].y + labelOffset)
+            .attr("x", centers[B].x + labelOffset * 1.1)
+            .attr("y", centers[B].y + 0.9 * labelOffset)
             .attr("font-family", fontFamily)
-            .attr("font-size", 14)
-            .attr("fill", stroke)
+            .attr("font-size", 20)
+            .attr("font-weight", "bold")
+            .attr("fill", palette.singles[B])
             .text(labels[B] ?? B);
 
         svg
             .append("text")
             .attr("x", centers[C].x)
-            .attr("y", centers[C].y - labelOffset * 0.8)
+            .attr("y", centers[C].y - labelOffset * 1.3)
             .attr("font-family", fontFamily)
-            .attr("font-size", 14)
-            .attr("fill", stroke)
+            .attr("font-size", 20)
+            .attr("font-weight", "bold")
+            .attr("fill", palette.singles[C])
             .attr("text-anchor", "middle")
             .text(labels[C] ?? C);
     }, [

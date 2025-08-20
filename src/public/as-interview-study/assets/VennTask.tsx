@@ -67,8 +67,6 @@ function cssEscapeSimple(s: string) {
 function buildScopedCSS(classList: ReadonlyArray<string>, scopeId: string) {
     let css = `.vp-text-block[data-scope="${scopeId}"] .vp-sentence + .vp-sentence::before { content: " "; } .vp-text-block[data-scope="${scopeId}"] .vp-sentence mark { background: transparent; color: inherit; padding: 0 2px; border-radius: 3px; transition: background-color .15s ease, color .15s ease; }`.trim();
 
-    console.log(classList)
-
     classList.forEach((cls, idx) => {
         const color = colorForIndex(idx);
         const sel = cssEscapeSimple(cls);
@@ -92,17 +90,17 @@ function VennTask({ parameters }: { parameters: any }) {
     // Sizing (you can override via parameters)
     const gap: number = parameters?.gap ?? 16;
 
-    const twoWidth: number = parameters?.twoWidth ?? 176;
-    const twoHeight: number = parameters?.twoHeight ?? 128;
+    const twoWidth: number = parameters?.twoWidth ?? 100;
+    const twoHeight: number = parameters?.twoHeight ?? 90;
 
-    const threeWidth: number = parameters?.threeWidth ?? 176;
+    const threeWidth: number = parameters?.threeWidth ?? 130;
     const threeHeight: number = parameters?.threeHeight ?? 200;
 
     const textMaxWidth: number | undefined = parameters?.textMaxWidth ?? 500; // e.g., 360
 
     // VennThreeSets passthrough options (optional)
     const combineMode = parameters?.combineMode; // "or" | "and" | "vote"
-    const centerDistance = parameters?.centerDistance ?? 60; // number
+    const centerDistance = parameters?.centerDistance ?? 40; // number
     const orientation = parameters?.orientation; // "twoBottom" | "twoTop"
 
     // Convert to VennTwoSets data array
@@ -140,7 +138,7 @@ function VennTask({ parameters }: { parameters: any }) {
                 className="vp-grid"
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "1fr auto auto",
+                    gridTemplateColumns: "0.85fr auto auto",
                     alignItems: "center",
                     gap,
                     width: "75%"
@@ -155,7 +153,7 @@ function VennTask({ parameters }: { parameters: any }) {
                         style={{
                             maxWidth: textMaxWidth,
                             whiteSpace: "normal",
-                            lineHeight: 1.4
+                            lineHeight: 2
                         }}
                     >
                         {items.map((it, idx) => {
@@ -262,7 +260,7 @@ function VennTask({ parameters }: { parameters: any }) {
             </div>
 
             {/* Controls */}
-            <div className="vp-controls" style={{ display: "flex", gap }}>
+            <div className="vp-controls" style={{ display: "flex", marginBottom: "20px", gap }}>
                 <button
                     type="button"
                     className="vp-btn-hint"

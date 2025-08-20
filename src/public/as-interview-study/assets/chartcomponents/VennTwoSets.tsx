@@ -123,7 +123,7 @@ export default function VennTwoSets({
       .attr("y", 0)
       .attr("width", width)
       .attr("height", height)
-      .attr("fill", norm.onlyLeft ? palette.A : palette.shade)
+      .attr("fill", norm.onlyLeft ? "#FFFF" : palette.shade)
       .attr("opacity", 0.9)
       .attr("clip-path", `url(#${idClipA})`);
 
@@ -134,7 +134,7 @@ export default function VennTwoSets({
       .attr("y", 0)
       .attr("width", width)
       .attr("height", height)
-      .attr("fill", norm.onlyRight ? palette.B : palette.shade)
+      .attr("fill", norm.onlyRight ? "#FFFF" : palette.shade)
       .attr("opacity", 0.9)
       .attr("clip-path", `url(#${idClipB})`);
 
@@ -146,7 +146,7 @@ export default function VennTwoSets({
       .attr("y", 0)
       .attr("width", width)
       .attr("height", height)
-      .attr("fill", norm.both ? palette.AB : palette.shade)
+      .attr("fill", norm.both ? "#FFFF" : palette.shade)
       .attr("opacity", 0.9)
       .attr("clip-path", `url(#${idClipB})`);
 
@@ -172,20 +172,22 @@ export default function VennTwoSets({
     // Labels
     svg
       .append("text")
-      .attr("x", cxA - r * 0.55)
-      .attr("y", cy - r * 0.9)
+      .attr("x", cxA - r * 0.75)
+      .attr("y", cy - r * 1.0)
       .attr("font-family", fontFamily)
-      .attr("font-size", 14)
-      .attr("fill", stroke)
+      .attr("font-size", 20)
+      .attr("font-weight", "bold")
+      .attr("fill", palette.A)
       .text(labelLeft);
 
     svg
       .append("text")
-      .attr("x", cxB + r * 0.35)
-      .attr("y", cy - r * 0.9)
+      .attr("x", cxB + r * 0.55)
+      .attr("y", cy - r * 1.0)
       .attr("font-family", fontFamily)
-      .attr("font-size", 14)
-      .attr("fill", stroke)
+      .attr("font-size", 20)
+      .attr("font-weight", "bold")
+      .attr("fill", palette.B)
       .text(labelRight);
   }, [
     data,
