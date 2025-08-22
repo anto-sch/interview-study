@@ -1,31 +1,107 @@
 {
     "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.1.1/src/parser/StudyConfigSchema.json",
     "studyMetadata": {
-        "title": "Interview Study: Logical Diagramming for Conditionals",
+        "title": "Logical Diagramming for Conditionals",
         "version": "pilot",
         "authors": [
             "Antonia Schlieder"
         ],
         "date": "2025-08-19",
-        "description": "Interview study on logical diagrams as hints for solving reasoning tasks on conditionals in natural language.",
+        "description": "First part of a user study on Venn diagrams as hints for solving reasoning tasks on conditionals in natural language.",
         "organizations": [
             "Heidelberg University"
         ]
     },
     "uiConfig": {
         "contactEmail": "antonia.schlieder@iwr.uni-heidelberg.de",
-        "helpTextPath": "as-interview-study/assets/help.md",
+        "helpTextPath": "as-venn-study-part-1/assets/help.md",
         "logoPath": "revisitAssets/revisitLogoSquare.svg",
         "withProgressBar": true,
         "autoDownloadStudy": false,
         "sidebar": true
     },
+    "importedLibraries": [
+        "hus"
+    ],
     "baseComponents": {
+        "post-task": {
+            "description": "post-task questionnaire",
+            "instruction": "",
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "seq",
+                    "prompt": "Overall, the task was ...",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "rightLabel": "very difficult",
+                    "leftLabel": "very easy",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "confidence",
+                    "prompt": "How certain are you that you selected the correct answer?",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "rightLabel": "very uncertain",
+                    "leftLabel": "very certain",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-context",
+                    "prompt": "I understood the logical structure of the context.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "rightLabel": "strongly disagree",
+                    "leftLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-question",
+                    "prompt": "I understood what kind of logical relationship the question was asking about.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "rightLabel": "strongly disagree",
+                    "leftLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-answers",
+                    "prompt": "I understood the logical structure of the answer options.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "rightLabel": "strongly disagree",
+                    "leftLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-hints",
+                    "prompt": "I understood how the hints relate to the context.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "rightLabel": "strongly disagree",
+                    "leftLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                }
+            ]
+        },
         "vennTask": {
             "description": "A logical reasoning task with Venn diagrams as hints",
             "instruction": "",
             "type": "react-component",
-            "path": "as-interview-study/assets/VennTask.tsx",
+            "path": "as-venn-study-part-1/assets/VennTask.tsx",
             "parameters": {
                 "data": [
                     {
@@ -62,7 +138,7 @@
             "description": "A logical reasoning task with Euler diagrams as hints",
             "instruction": "",
             "type": "react-component",
-            "path": "as-interview-study/assets/EulerTask.tsx",
+            "path": "as-venn-study-part-1/assets/EulerTask.tsx",
             "parameters": {
                 "data": [
                     {
@@ -99,7 +175,7 @@
             "description": "A logical reasoning task without hints as baseline.",
             "instruction": "",
             "type": "react-component",
-            "path": "as-interview-study/assets/BaselineTask.tsx",
+            "path": "as-venn-study-part-1/assets/BaselineTask.tsx",
             "parameters": {
                 "text": "The context of the task."
             },
@@ -125,12 +201,12 @@
     "components": {
         "introduction": {
             "type": "markdown",
-            "path": "as-interview-study/assets/introduction.md",
+            "path": "as-venn-study-part-1/assets/introduction.md",
             "response": []
         },
         "consent": {
             "type": "markdown",
-            "path": "as-interview-study/assets/consent-cm.md",
+            "path": "as-venn-study-part-1/assets/consent-cm.md",
             "nextButtonText": "Agree",
             "response": [
                 {
@@ -315,10 +391,10 @@
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                       "Maria plants either petunias or geraniums in her garden. If Maria plants petunias, she plants purple ones. If Maria plants geraniums, she plants red ones. Since both petunias and geraniums are flowers, Maria will have either purple or red flowers in her garden.",
-                       "If Shawn starts gardening in early spring, he can plant tomatoes early. If Shawn can plant tomatoes early, he will have plenty of tomatoes for canning. But he does not have plenty of tomatoes for canning, so either he did not start gardening in early spring or he did not plant tomatoes early.",
-                       "If Bryan's fruit trees are to produce well, he must either prune them in the fall or fertilize them in the spring. Since Bryan wants his trees to produce well but forgot to prune them last fall, Bryan is sure to fertilize his trees this spring.",
-                       "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
+                        "Maria plants either petunias or geraniums in her garden. If Maria plants petunias, she plants purple ones. If Maria plants geraniums, she plants red ones. Since both petunias and geraniums are flowers, Maria will have either purple or red flowers in her garden.",
+                        "If Shawn starts gardening in early spring, he can plant tomatoes early. If Shawn can plant tomatoes early, he will have plenty of tomatoes for canning. But he does not have plenty of tomatoes for canning, so either he did not start gardening in early spring or he did not plant tomatoes early.",
+                        "If Bryan's fruit trees are to produce well, he must either prune them in the fall or fertilize them in the spring. Since Bryan wants his trees to produce well but forgot to prune them last fall, Bryan is sure to fertilize his trees this spring.",
+                        "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
                     ]
                 }
             ]
@@ -485,10 +561,10 @@
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                       "Maria plants either petunias or geraniums in her garden. If Maria plants petunias, she plants purple ones. If Maria plants geraniums, she plants red ones. Since both petunias and geraniums are flowers, Maria will have either purple or red flowers in her garden.",
-                       "If Shawn starts gardening in early spring, he can plant tomatoes early. If Shawn can plant tomatoes early, he will have plenty of tomatoes for canning. But he does not have plenty of tomatoes for canning, so either he did not start gardening in early spring or he did not plant tomatoes early.",
-                       "If Bryan's fruit trees are to produce well, he must either prune them in the fall or fertilize them in the spring. Since Bryan wants his trees to produce well but forgot to prune them last fall, Bryan is sure to fertilize his trees this spring.",
-                       "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
+                        "Maria plants either petunias or geraniums in her garden. If Maria plants petunias, she plants purple ones. If Maria plants geraniums, she plants red ones. Since both petunias and geraniums are flowers, Maria will have either purple or red flowers in her garden.",
+                        "If Shawn starts gardening in early spring, he can plant tomatoes early. If Shawn can plant tomatoes early, he will have plenty of tomatoes for canning. But he does not have plenty of tomatoes for canning, so either he did not start gardening in early spring or he did not plant tomatoes early.",
+                        "If Bryan's fruit trees are to produce well, he must either prune them in the fall or fertilize them in the spring. Since Bryan wants his trees to produce well but forgot to prune them last fall, Bryan is sure to fertilize his trees this spring.",
+                        "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
                     ]
                 }
             ]
@@ -512,6 +588,53 @@
                     ]
                 }
             ]
+        },
+        "pt1": {
+            "baseComponent": "post-task"
+        },
+        "pt2": {
+            "baseComponent": "post-task"
+        },
+        "post-study": {
+            "description": "post-study questionnaire",
+            "instruction": "",
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "hint-help",
+                    "prompt": "The hints made solving the tasks easier.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "rightLabel": "strongly disagree",
+                    "leftLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "hint-info",
+                    "prompt": "I felt that the hints offered just the right amount of information to help me solve the task.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "rightLabel": "strongly disagree",
+                    "leftLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "strategies",
+                    "prompt": "Please describe if you used any strategies (e.g., process of elimination) or aids (e.g., sketching out thoughts) while working on the tasks.",
+                    "location": "aboveStimulus",
+                    "type": "longText"
+                },
+                {
+                    "id": "hints",
+                    "prompt": "Please describe how you used the hints for solving the tasks. How did they affect your strategies?",
+                    "location": "aboveStimulus",
+                    "type": "longText"
+                }
+            ]
         }
     },
     "sequence": {
@@ -520,7 +643,9 @@
             "introduction",
             "consent",
             "venntask1",
+            "pt1",
             "venntask2",
+            "pt2",
             "venntask3",
             "venntask4",
             "venntask5",
@@ -529,7 +654,9 @@
             "eulertask3",
             "eulertask4",
             "eulertask5",
-            "baseline1"
+            "baseline1",
+            "$hus.co.hus",
+            "post-study"
         ]
     }
 }

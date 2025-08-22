@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.1.1/src/parser/GlobalConfigSchema.json",
   "configsList": [
+    "as-venn-study-part-1",
     "as-interview-study",
     "basic-questionnaire-study",
     "tutorial",
@@ -40,6 +41,9 @@
   "configs": {
     "as-interview-study": {
 	    "path": "as-interview-study/config.json"
+    },
+    "as-venn-study-part-1": {
+	    "path": "as-venn-study-part-1/config.json"
     },
     "basic-questionnaire-study": {
 	    "path": "basic-questionnaire-study/config.json"
