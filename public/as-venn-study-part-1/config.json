@@ -234,11 +234,13 @@
             "parameters": {
                 "data": [
                     {
+                        "argument": "premise",
                         "antecedent": "B",
                         "consequent": "T",
                         "text": "It takes <mark class='T'>a particular talent</mark> <mark class='B'>to be a successful business manager</mark>."
                     },
                     {
+                        "argument": "premise",
                         "antecedent": "S",
                         "consequent": "T",
                         "text": "<mark class='S'>Business courses can help people to solve management problems</mark>, but such courses can do so only for <mark class='T'>those people with managerial talent</mark>. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
@@ -265,16 +267,19 @@
             "parameters": {
                 "data": [
                     {
+                        "argument": "premise",
                         "antecedent": "L",
                         "consequent": "not S",
                         "text": "Researcher: Research has shown that <mark class='L'>inhaling the scent of lavender</mark> has <mark class='S'>measurable physiological effects tending to reduce stress</mark>."
                     },
                     {
+                        "argument": "premise",
                         "antecedent": "S",
                         "consequent": "I",
                         "text": "It is known that <mark class='S'>intense stress</mark> can <mark class='I'>impair the immune system, making one more susceptible to illness</mark>."
                     },
                     {
+                        "argument": "conclusion",
                         "antecedent": "L",
                         "consequent": "not I",
                         "text": "Therefore, it is likely that the <mark class='I'>incidence of illness</mark> among <mark class='L'>those who regularly inhale the scent of lavender</mark> <mark class='I'>is reduced</mark> by this practice."
@@ -301,16 +306,19 @@
             "parameters": {
                 "data": [
                     {
+                        "argument": "premise",
                         "antecedent": "T",
                         "consequent": "not C",
                         "text": "Since <mark class='T'>anyone who supports the new tax plan</mark> has <mark class='C'>no chance of being elected</mark>, "
                     },
                     {
+                        "argument": "premise",
                         "antecedent": "E",
                         "consequent": "not T",
                         "text": "and <mark class='E'>anyone who truly understands economics</mark> would <mark class='T'>not support the tax plan</mark>, "
                     },
                     {
+                        "argument": "conclusion",
                         "antecedent": "C",
                         "consequent": "E",
                         "text": "only <mark class='E'>someone who truly understands economics</mark> would <mark class='C'>have any chance of being elected.</mark>"
@@ -337,11 +345,13 @@
             "parameters": {
                 "data": [
                     {
+                        "argument": "premise",
                         "antecedent": "C",
                         "consequent": "not S",
                         "text": "Many artists claim that art critics find it is easier to write about art that they dislike than to write about art that they like. Whether or not this hypothesis is correct, <mark class='C'>most art criticism is devoted to</mark> <mark class='S'>art works that fail to satisfy the critic</mark>."
                     },
                     {
+                        "argument": "conclusion",
                         "antecedent": "C",
                         "consequent": "not G",
                         "text": "Hence it follows that <mark class='C'>most art criticism is devoted to</mark> <mark class='G'>works other than the greatest works of art</mark>."
@@ -368,16 +378,19 @@
             "parameters": {
                 "data": [
                     {
+                        "argument": "premise",
                         "antecedent": "M",
                         "consequent": "H",
                         "text": "If Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='H'>get a bad case of heartburn</mark> later."
                     },
                     {
+                        "argument": "premise",
                         "antecedent": "H",
                         "consequent": "G",
                         "text": "If Patricia <mark class='H'>gets a bad case of heartburn</mark> later, she will <mark class='G'>be grouchy tomorrow morning</mark>."
                     },
                     {
+                        "argument": "conclusion",
                         "antecedent": "M",
                         "consequent": "G",
                         "text": "So if Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='G'>be grouchy tomorrow morning</mark>."

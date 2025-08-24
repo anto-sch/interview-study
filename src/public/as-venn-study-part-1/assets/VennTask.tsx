@@ -48,7 +48,7 @@ function colorForIndex(i: number) {
     const sat = 80;   // %
     const light = 85; // %
     // return `hsl(${hue}, ${sat}%, ${light}%)`;
-    return colors[i]+"88"
+    return colors[i] + "88"
 }
 
 function buildColorMap(classList: readonly string[]): Map<string, string> {
@@ -77,15 +77,10 @@ function buildScopedCSS(classList: ReadonlyArray<string>, scopeId: string) {
 }
 
 function VennTask({ parameters }: { parameters: any }) {
-    // const text: string = parameters?.text ?? parameters?.title ?? "";
-    // const data = implicationsToVennPairs(parameters?.data);
-    // const pairs: PairData[] = Array.isArray(parameters?.pairs)
-    //     ? (parameters.pairs as PairData[])
-    //     : Array.isArray(data)
-    //         ? (data as PairData[])
-    //         : [];
 
     const items: Implication[] = Array.isArray(parameters?.data) ? parameters.data : [];
+    const premises = items.filter(item => item.argument === "premise");
+    const hasConclusion = items.some(item => item.argument === "conclusion");
 
     // Sizing (you can override via parameters)
     const gap: number = parameters?.gap ?? 16;
@@ -94,7 +89,7 @@ function VennTask({ parameters }: { parameters: any }) {
     const twoHeight: number = parameters?.twoHeight ?? 90;
 
     const threeWidth: number = parameters?.threeWidth ?? 130;
-    const threeHeight: number = parameters?.threeHeight ?? 200;
+    const threeHeight: number = parameters?.threeHeight ?? 160;
 
     const textMaxWidth: number | undefined = parameters?.textMaxWidth ?? 500; // e.g., 360
 
@@ -104,15 +99,19 @@ function VennTask({ parameters }: { parameters: any }) {
     const orientation = parameters?.orientation; // "twoBottom" | "twoTop"
 
     // Convert to VennTwoSets data array
+    const premisePairs: PairData[] = implicationsToVennPairs(premises);
     const pairs: PairData[] = implicationsToVennPairs(items);
 
     // Progressive reveal state with one extra step for the 3-set diagram
     // step range: 0 .. items.length + 1
     const [step, setStep] = useState<number>(0);
-    const totalSteps = items.length + 1;
+    
+    let totalSteps = items.length + 1;
+    hasConclusion && (totalSteps = totalSteps + 1);
 
     const revealedCount = Math.min(step, items.length); // sentences + VennTwoSets revealed
     const showThree = step >= items.length + 1;
+    const showConclusion = step >= items.length + 2;
 
     const canHint = step < totalSteps && items.length > 0;
 
@@ -229,15 +228,19 @@ function VennTask({ parameters }: { parameters: any }) {
                 <div
                     className="vp-three"
                     style={{
-                        display: "flex",
-                        justifyContent: "center",
+                        display: "grid",
+                        gridAutoRows: "min-content",
+                        gap,
+                        // display: "flex",
+                        // justifyContent: "center",
                         width: threeWidth,
-                        height: threeHeight
+                        height: threeHeight*2
                     }}
                 >
                     <div
                         className={`vp-three-inner ${showThree ? "is-revealed" : ""}`}
                         style={{
+                            display: "flex",
                             width: threeWidth,
                             height: threeHeight,
                             visibility: showThree ? "visible" : "hidden"
@@ -246,10 +249,32 @@ function VennTask({ parameters }: { parameters: any }) {
                     >
                         {pairs.length > 0 ? (
                             <VennThreeSets
+                                data={premisePairs}
+                                width={threeWidth}
+                                height={threeHeight}
+                                colors={{ "singles": { [classList[0]]: colorMap.get(classList[0]) ?? "undefined", [classList[1]]: colorMap.get(classList[1]) ?? "undefined", [classList[2]]: colorMap.get(classList[2]) ?? "undefined" } }}
+                                {...(combineMode ? { combineMode } : {})}
+                                {...(centerDistance ? { centerDistance } : {})}
+                                {...(orientation ? { orientation } : {})}
+                            />
+                        ) : null}
+                    </div>
+                    <div
+                        className={`vp-three-inner-conclusion ${showConclusion ? "is-revealed" : ""}`}
+                        style={{
+                            display: "flex",
+                            width: threeWidth,
+                            height: threeHeight,
+                            visibility: showConclusion ? "visible" : "hidden"
+                        }}
+                        aria-hidden={!showThree}
+                    >
+                        {(pairs.length > 0 && hasConclusion) ? (
+                            <VennThreeSets
                                 data={pairs}
                                 width={threeWidth}
                                 height={threeHeight}
-                                colors={{"singles": {[classList[0]]: colorMap.get(classList[0]) ?? "undefined", [classList[1]]: colorMap.get(classList[1]) ?? "undefined", [classList[2]]: colorMap.get(classList[2]) ?? "undefined"}}}
+                                colors={{ "singles": { [classList[0]]: colorMap.get(classList[0]) ?? "undefined", [classList[1]]: colorMap.get(classList[1]) ?? "undefined", [classList[2]]: colorMap.get(classList[2]) ?? "undefined" } }}
                                 {...(combineMode ? { combineMode } : {})}
                                 {...(centerDistance ? { centerDistance } : {})}
                                 {...(orientation ? { orientation } : {})}

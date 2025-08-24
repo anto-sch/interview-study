@@ -1,4 +1,5 @@
 export type Implication = {
+    argument: string;
     antecedent: string;
     consequent: string;
     text: string;
