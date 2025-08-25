@@ -1,7 +1,11 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
+import { initializeTrrack, Registry } from '@trrack/core';
+import { optimize } from 'svgo';
+import { StimulusParams } from '../../../store/types';
 import VennTwoSets from "./chartcomponents/VennTwoSets";
 import VennThreeSets from "./chartcomponents/VennThreeSets";
 import { Implication, implicationsToVennPairs, parseLiteral } from "./chartcomponents/ImplicationsToVennPairs";
+import { SvgDraw } from './SVGdraw'; // adjust the path
 
 type PairData = Record<string, boolean | undefined>;
 
@@ -41,13 +45,8 @@ function uniqueMarkClassesDOM(items: Implication[]): string[] {
 }
 
 // 2) Color generator (distinct-ish colors)
-// Cycles through hues using golden-angle steps
 function colorForIndex(i: number) {
     const colors = ["#874fff", "#FF7237", "#24CB71"]
-    const hue = (i * 137.508) % 360;
-    const sat = 80;   // %
-    const light = 85; // %
-    // return `hsl(${hue}, ${sat}%, ${light}%)`;
     return colors[i] + "88"
 }
 
@@ -76,13 +75,50 @@ function buildScopedCSS(classList: ReadonlyArray<string>, scopeId: string) {
     return css;
 }
 
-function VennTask({ parameters }: { parameters: any }) {
+function minifySvg(svg: string) {
+    const { data } = optimize(svg, {
+        multipass: true,
+        plugins: [
+            {
+                name: 'preset-default', params: {
+                    overrides: {
+                        // keep viewBox; tune precision for your tolerance (2–3 is often fine)
+                        removeViewBox: false,
+                        cleanupNumericValues: { floatPrecision: 2 },
+                        convertPathData: { floatPrecision: 2 },
+                    }
+                }
+            },
+            'removeViewBox'
+        ],
+    });
+    return data;
+}
+
+function getSingleDifference(arr1: string[], arr2: string[]) {
+    // Copy the arrays and sort for a predictable comparison
+    const a = [...arr1].sort();
+    const b = [...arr2].sort();
+    const len = Math.max(a.length, b.length);
+    for (let i = 0; i < len; i++) {
+        if (a[i] !== b[i]) {
+            // That element is the only mismatch
+            return (a[i] !== undefined && b[i] !== undefined)
+                ? (a.length > b.length ? a[i] : b[i])
+                : (a[i] !== undefined ? a[i] : b[i]);
+        }
+    }
+    // No difference found
+    return undefined;
+}
+
+function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
 
     const items: Implication[] = Array.isArray(parameters?.data) ? parameters.data : [];
     const premises = items.filter(item => item.argument === "premise");
     const hasConclusion = items.some(item => item.argument === "conclusion");
 
-    // Sizing (you can override via parameters)
+    // Sizing of diagrams
     const gap: number = parameters?.gap ?? 16;
 
     const twoWidth: number = parameters?.twoWidth ?? 100;
@@ -102,10 +138,10 @@ function VennTask({ parameters }: { parameters: any }) {
     const premisePairs: PairData[] = implicationsToVennPairs(premises);
     const pairs: PairData[] = implicationsToVennPairs(items);
 
-    // Progressive reveal state with one extra step for the 3-set diagram
+    // Progressive reveal state with one extra step for the 3-set diagram or two if there is a conclusion in the argument
     // step range: 0 .. items.length + 1
     const [step, setStep] = useState<number>(0);
-    
+
     let totalSteps = items.length + 1;
     hasConclusion && (totalSteps = totalSteps + 1);
 
@@ -125,22 +161,75 @@ function VennTask({ parameters }: { parameters: any }) {
     // Unique scope id so styles don't leak between component instances
     const scopeId = useRef(`vp-${Math.random().toString(36).slice(2, 9)}`).current;
 
+    // get propositions in premises
+    const classListPremises = useMemo(() => uniqueMarkClassesDOM(premises), [premises]);
+    // get propositions in argument
     const classList = useMemo(() => uniqueMarkClassesDOM(items), [items]);
     const colorMap = useMemo(() => buildColorMap(classList), [classList]);
     const dynamicCSS = useMemo(() => buildScopedCSS(classList, scopeId), [classList, scopeId]);
 
+    const extraProposition = getSingleDifference(classList, classListPremises)
+    
+    let extraImplication: Record<string, boolean | undefined> = {};
+    if (extraProposition !== undefined) {
+        extraImplication = {
+            [extraProposition]: true, 
+            [`${extraProposition},${classList[0]}`]: true, 
+            [classList[0]]: true}
+    }
+    console.log(extraProposition, extraImplication)
+
+    const [svg, setSvg] = React.useState<string>('');
+
+    const { actions, trrack } = useMemo(() => {
+        const reg = Registry.create();
+
+        const clickAction = reg.register('draw', (state, currentSketch: any) => {
+            state.sketch = currentSketch;
+            return state;
+        });
+
+        const trrackInst = initializeTrrack({
+            registry: reg,
+            initialState: { sketch: [] },
+        });
+
+        return {
+            actions: {
+                clickAction,
+            },
+            trrack: trrackInst,
+        };
+    }, []);
+
+    
+
+    const handleSvgChange = useCallback((s: string) => {
+        setSvg(s);
+        trrack.apply('draw path', actions.clickAction(s));
+
+        const min = minifySvg(s);
+        console.log(min)
+
+        setAnswer({
+            status: true,
+            provenanceGraph: trrack.graph.backend,
+            answers: { "sketch": min } // You can set the answers here if you want to control it manually, otherwise leave empty.
+        });
+    }, [actions, setAnswer, trrack]);
+
     return (
 
         <div className="vp-dynamic-container" style={{ display: "grid", gap }}>
-            {/* Grid with three columns: [text | all VennTwoSets (space reserved) | VennThreeSets (space reserved)] */}
+            {/* Grid with three columns: [text | all VennTwoSets (space reserved) | VennThreeSets (space reserved) | sketch pad] */}
             <div
                 className="vp-grid"
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "0.85fr auto auto",
+                    gridTemplateColumns: "0.85fr auto auto auto",
                     alignItems: "center",
                     gap,
-                    width: "75%"
+                    width: "100%"
                 }}
             >
                 {/* Left column: sentences as one flowing block, no manual line breaks */}
@@ -231,10 +320,8 @@ function VennTask({ parameters }: { parameters: any }) {
                         display: "grid",
                         gridAutoRows: "min-content",
                         gap,
-                        // display: "flex",
-                        // justifyContent: "center",
                         width: threeWidth,
-                        height: threeHeight*2
+                        height: threeHeight * 2
                     }}
                 >
                     <div
@@ -249,7 +336,7 @@ function VennTask({ parameters }: { parameters: any }) {
                     >
                         {pairs.length > 0 ? (
                             <VennThreeSets
-                                data={premisePairs}
+                                data={extraProposition === undefined ? premisePairs : [...premisePairs, extraImplication]}
                                 width={threeWidth}
                                 height={threeHeight}
                                 colors={{ "singles": { [classList[0]]: colorMap.get(classList[0]) ?? "undefined", [classList[1]]: colorMap.get(classList[1]) ?? "undefined", [classList[2]]: colorMap.get(classList[2]) ?? "undefined" } }}
@@ -282,8 +369,30 @@ function VennTask({ parameters }: { parameters: any }) {
                         ) : null}
                     </div>
                 </div>
+                {/* Far right: sketch pad for externalization */}
+                <div
+                    className="sketchpad"
+                    style={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}
+                >
+                    <div
+                        style={{ border: '1px solid #ccc', borderRadius: 8, padding: 8 }}>
+                        <SvgDraw
+                            width={400}
+                            height={400}
+                            stroke="#228be6"
+                            strokeWidth={2}
+                            background="white"
+                            onChangeSvg={handleSvgChange}
+                        />
+                        <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>
+                            sketchpad
+                        </div>
+                    </div>
+                </div>
             </div>
-
             {/* Controls */}
             <div className="vp-controls" style={{ display: "flex", marginBottom: "20px", gap }}>
                 <button
