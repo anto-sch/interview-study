@@ -48,7 +48,7 @@ function colorForIndex(i: number) {
     const sat = 80;   // %
     const light = 85; // %
     // return `hsl(${hue}, ${sat}%, ${light}%)`;
-    return colors[i]+"88"
+    return colors[i] + "88"
 }
 
 function buildColorMap(classList: readonly string[]): Map<string, string> {
@@ -76,16 +76,27 @@ function buildScopedCSS(classList: ReadonlyArray<string>, scopeId: string) {
     return css;
 }
 
-function VennTask({ parameters }: { parameters: any }) {
-    // const text: string = parameters?.text ?? parameters?.title ?? "";
-    // const data = implicationsToVennPairs(parameters?.data);
-    // const pairs: PairData[] = Array.isArray(parameters?.pairs)
-    //     ? (parameters.pairs as PairData[])
-    //     : Array.isArray(data)
-    //         ? (data as PairData[])
-    //         : [];
+function getSingleDifference(arr1: string[], arr2: string[]) {
+    // Copy the arrays and sort for a predictable comparison
+    const a = [...arr1].sort();
+    const b = [...arr2].sort();
+    const len = Math.max(a.length, b.length);
+    for (let i = 0; i < len; i++) {
+        if (a[i] !== b[i]) {
+            // That element is the only mismatch
+            return (a[i] !== undefined && b[i] !== undefined)
+                ? (a.length > b.length ? a[i] : b[i])
+                : (a[i] !== undefined ? a[i] : b[i]);
+        }
+    }
+    // No difference found
+    return undefined;
+}
 
+function VennTask({ parameters }: { parameters: any }) {
     const items: Implication[] = Array.isArray(parameters?.data) ? parameters.data : [];
+    const premises = items.filter(item => item.argument === "premise");
+    const hasConclusion = items.some(item => item.argument === "conclusion");
 
     // Sizing (you can override via parameters)
     const gap: number = parameters?.gap ?? 16;
@@ -104,15 +115,18 @@ function VennTask({ parameters }: { parameters: any }) {
     const orientation = parameters?.orientation; // "twoBottom" | "twoTop"
 
     // Convert to VennTwoSets data array
+    const premisePairs: PairData[] = implicationsToVennPairs(premises);
     const pairs: PairData[] = implicationsToVennPairs(items);
 
     // Progressive reveal state with one extra step for the 3-set diagram
     // step range: 0 .. items.length + 1
     const [step, setStep] = useState<number>(0);
-    const totalSteps = items.length + 1;
+    let totalSteps = items.length + 1;
+    hasConclusion && (totalSteps = totalSteps + 1);
 
     const revealedCount = Math.min(step, items.length); // sentences + VennTwoSets revealed
     const showThree = step >= items.length + 1;
+    const showConclusion = step >= items.length + 2;
 
     const canHint = step < totalSteps && items.length > 0;
 
@@ -126,9 +140,22 @@ function VennTask({ parameters }: { parameters: any }) {
     // Unique scope id so styles don't leak between component instances
     const scopeId = useRef(`vp-${Math.random().toString(36).slice(2, 9)}`).current;
 
+    // get propositions in premises
+    const classListPremises = useMemo(() => uniqueMarkClassesDOM(premises), [premises]);
     const classList = useMemo(() => uniqueMarkClassesDOM(items), [items]);
     const colorMap = useMemo(() => buildColorMap(classList), [classList]);
     const dynamicCSS = useMemo(() => buildScopedCSS(classList, scopeId), [classList, scopeId]);
+
+    const extraProposition = getSingleDifference(classList, classListPremises)
+
+    let extraImplication: Record<string, boolean | undefined> = {};
+    if (extraProposition !== undefined) {
+        extraImplication = {
+            [extraProposition]: true,
+            [`${extraProposition},${classList[0]}`]: true,
+            [classList[0]]: true
+        }
+    }
 
     return (
 
@@ -229,15 +256,17 @@ function VennTask({ parameters }: { parameters: any }) {
                 <div
                     className="vp-three"
                     style={{
-                        display: "flex",
-                        justifyContent: "center",
+                        display: "grid",
+                        gridAutoRows: "min-content",
+                        gap,
                         width: threeWidth,
-                        height: threeHeight
+                        height: threeHeight * 2
                     }}
                 >
                     <div
                         className={`vp-three-inner ${showThree ? "is-revealed" : ""}`}
                         style={{
+                            display: "flex",
                             width: threeWidth,
                             height: threeHeight,
                             visibility: showThree ? "visible" : "hidden"
@@ -246,10 +275,32 @@ function VennTask({ parameters }: { parameters: any }) {
                     >
                         {pairs.length > 0 ? (
                             <VennThreeSets
+                                data={extraProposition === undefined ? premisePairs : [...premisePairs, extraImplication]}
+                                width={threeWidth}
+                                height={threeHeight}
+                                colors={{ "singles": { [classList[0]]: colorMap.get(classList[0]) ?? "undefined", [classList[1]]: colorMap.get(classList[1]) ?? "undefined", [classList[2]]: colorMap.get(classList[2]) ?? "undefined" } }}
+                                {...(combineMode ? { combineMode } : {})}
+                                {...(centerDistance ? { centerDistance } : {})}
+                                {...(orientation ? { orientation } : {})}
+                            />
+                        ) : null}
+                    </div>
+                    <div
+                        className={`vp-three-inner-conclusion ${showConclusion ? "is-revealed" : ""}`}
+                        style={{
+                            display: "flex",
+                            width: threeWidth,
+                            height: threeHeight,
+                            visibility: showConclusion ? "visible" : "hidden"
+                        }}
+                        aria-hidden={!showThree}
+                    >
+                        {(pairs.length > 0 && hasConclusion) ? (
+                            <VennThreeSets
                                 data={pairs}
                                 width={threeWidth}
                                 height={threeHeight}
-                                colors={{"singles": {[classList[0]]: colorMap.get(classList[0]) ?? "undefined", [classList[1]]: colorMap.get(classList[1]) ?? "undefined", [classList[2]]: colorMap.get(classList[2]) ?? "undefined"}}}
+                                colors={{ "singles": { [classList[0]]: colorMap.get(classList[0]) ?? "undefined", [classList[1]]: colorMap.get(classList[1]) ?? "undefined", [classList[2]]: colorMap.get(classList[2]) ?? "undefined" } }}
                                 {...(combineMode ? { combineMode } : {})}
                                 {...(centerDistance ? { centerDistance } : {})}
                                 {...(orientation ? { orientation } : {})}

@@ -35,8 +35,8 @@
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
-                    "rightLabel": "very difficult",
-                    "leftLabel": "very easy",
+                    "leftLabel": "very difficult",
+                    "rightLabel": "very easy",
                     "required": true,
                     "withDivider": true
                 },
@@ -46,8 +46,8 @@
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
-                    "rightLabel": "very uncertain",
-                    "leftLabel": "very certain",
+                    "leftLabel": "very uncertain",
+                    "rightLabel": "very certain",
                     "required": true,
                     "withDivider": true
                 },
@@ -57,8 +57,8 @@
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
-                    "rightLabel": "strongly disagree",
-                    "leftLabel": "strongly agree",
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
                     "required": true,
                     "withDivider": true
                 },
@@ -68,8 +68,8 @@
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
-                    "rightLabel": "strongly disagree",
-                    "leftLabel": "strongly agree",
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
                     "required": true,
                     "withDivider": true
                 },
@@ -79,8 +79,8 @@
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
-                    "rightLabel": "strongly disagree",
-                    "leftLabel": "strongly agree",
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
                     "required": true,
                     "withDivider": true
                 },
@@ -90,8 +90,8 @@
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
-                    "rightLabel": "strongly disagree",
-                    "leftLabel": "strongly agree",
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
                     "required": true,
                     "withDivider": true
                 }
@@ -619,8 +619,8 @@
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
-                    "rightLabel": "strongly disagree",
-                    "leftLabel": "strongly agree",
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
                     "required": true,
                     "withDivider": true
                 },
@@ -630,8 +630,8 @@
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
-                    "rightLabel": "strongly disagree",
-                    "leftLabel": "strongly agree",
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
                     "required": true,
                     "withDivider": true
                 },
@@ -648,6 +648,43 @@
                     "type": "longText"
                 }
             ]
+        },
+        "sketchpad": {
+            "description": "sketchpad",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-venn-study-part-1/assets/Sketchpad.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
         }
     },
     "sequence": {
@@ -669,7 +706,8 @@
             "eulertask5",
             "baseline1",
             "$hus.co.hus",
-            "post-study"
+            "post-study",
+            "sketchpad"
         ]
     }
 }
