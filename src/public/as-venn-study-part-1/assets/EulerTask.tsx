@@ -1,6 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 import EulerTwoSets from "./chartcomponents/EulerTwoSets";
 import { Implication, implicationsToVennPairs, parseLiteral } from "./chartcomponents/ImplicationsToVennPairs";
+import './chartcomponents/UIstyles.css';
 
 type PairData = Record<string, boolean | undefined>;
 

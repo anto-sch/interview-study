@@ -5,6 +5,7 @@ import { StimulusParams } from '../../../store/types';
 import VennTwoSets from "./chartcomponents/VennTwoSets";
 import VennThreeSets from "./chartcomponents/VennThreeSets";
 import { Implication, implicationsToVennPairs, parseLiteral } from "./chartcomponents/ImplicationsToVennPairs";
+import './chartcomponents/UIstyles.css';
 import { SvgDraw } from './SVGdraw'; // adjust the path
 
 type PairData = Record<string, boolean | undefined>;
@@ -151,12 +152,12 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
 
     const canHint = step < totalSteps && items.length > 0;
 
-    const onHint = () => {
-        if (!canHint) return;
-        setStep((s) => Math.min(s + 1, totalSteps));
-    };
+    // const onHint = () => {
+    //     if (!canHint) return;
+    //     setStep((s) => Math.min(s + 1, totalSteps));
+    // };
 
-    const onReset = () => setStep(0);
+    // const onReset = () => setStep(0);
 
     // Unique scope id so styles don't leak between component instances
     const scopeId = useRef(`vp-${Math.random().toString(36).slice(2, 9)}`).current;
@@ -169,13 +170,14 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
     const dynamicCSS = useMemo(() => buildScopedCSS(classList, scopeId), [classList, scopeId]);
 
     const extraProposition = getSingleDifference(classList, classListPremises)
-    
+
     let extraImplication: Record<string, boolean | undefined> = {};
     if (extraProposition !== undefined) {
         extraImplication = {
-            [extraProposition]: true, 
-            [`${extraProposition},${classList[0]}`]: true, 
-            [classList[0]]: true}
+            [extraProposition]: true,
+            [`${extraProposition},${classList[0]}`]: true,
+            [classList[0]]: true
+        }
     }
     console.log(extraProposition, extraImplication)
 
@@ -189,20 +191,52 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
             return state;
         });
 
+        const getHint = reg.register('hint', (state, currentHint: number) => {
+            state.hint = currentHint;
+            return state;
+        });
+
+        const resetHint = reg.register('reset', (state, currentHint: number) => {
+            state.hint = currentHint;
+            return state;
+        });
+
         const trrackInst = initializeTrrack({
             registry: reg,
-            initialState: { sketch: [] },
+            initialState: { sketch: [], hint: 0 },
         });
 
         return {
             actions: {
                 clickAction,
+                getHint,
+                resetHint
             },
             trrack: trrackInst,
         };
     }, []);
 
-    
+    const onHint = useCallback(() => {
+        if (!canHint) return;
+        setStep((s) => Math.min(s + 1, totalSteps));
+        trrack.apply('get hint', actions.clickAction(step));
+
+        setAnswer({
+            status: true,
+            provenanceGraph: trrack.graph.backend,
+            answers: {}
+        });
+    }, [actions, trrack]);
+
+    const onReset = useCallback(() => {
+        setStep(0);
+        trrack.apply('reset hint', actions.clickAction(step));
+        setAnswer({
+            status: true,
+            provenanceGraph: trrack.graph.backend,
+            answers: {}
+        });
+    }, [actions, trrack]);
 
     const handleSvgChange = useCallback((s: string) => {
         setSvg(s);
@@ -395,6 +429,7 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
             </div>
             {/* Controls */}
             <div className="vp-controls" style={{ display: "flex", marginBottom: "20px", gap }}>
+                Remember to look at the hint!
                 <button
                     type="button"
                     className="vp-btn-hint"

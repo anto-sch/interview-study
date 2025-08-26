@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useState } from "react";
 import VennTwoSets from "./chartcomponents/VennTwoSets";
 import VennThreeSets from "./chartcomponents/VennThreeSets";
 import { Implication, implicationsToVennPairs, parseLiteral } from "./chartcomponents/ImplicationsToVennPairs";
+import './chartcomponents/UIstyles.css';
 
 type PairData = Record<string, boolean | undefined>;
 
