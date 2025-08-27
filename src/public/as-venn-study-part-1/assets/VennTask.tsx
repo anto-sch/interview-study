@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { initializeTrrack, Registry } from '@trrack/core';
 import { optimize } from 'svgo';
 import { StimulusParams } from '../../../store/types';
@@ -152,13 +152,6 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
 
     const canHint = step < totalSteps && items.length > 0;
 
-    // const onHint = () => {
-    //     if (!canHint) return;
-    //     setStep((s) => Math.min(s + 1, totalSteps));
-    // };
-
-    // const onReset = () => setStep(0);
-
     // Unique scope id so styles don't leak between component instances
     const scopeId = useRef(`vp-${Math.random().toString(36).slice(2, 9)}`).current;
 
@@ -227,6 +220,19 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
             answers: {}
         });
     }, [actions, trrack]);
+
+    useEffect(() => {
+        let timer: number | undefined;
+        if (!canHint) return; 
+        if (step > 0) {
+            timer = window.setTimeout(() => {
+                setStep(s => Math.min(s + 1, totalSteps));
+            }, 1500);
+        }
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
+    }, [step, totalSteps]);
 
     const onReset = useCallback(() => {
         setStep(0);
