@@ -7,14 +7,14 @@
             "Antonia Schlieder"
         ],
         "date": "2025-08-19",
-        "description": "First part of a user study on Venn diagrams as hints for solving reasoning tasks on conditionals in natural language.",
+        "description": "First part of a user study that functions as the baseline for reasoning with conditionals in natural language.",
         "organizations": [
             "Heidelberg University"
         ]
     },
     "uiConfig": {
         "contactEmail": "antonia.schlieder@iwr.uni-heidelberg.de",
-        "helpTextPath": "as-venn-study-part-1/assets/help.md",
+        "helpTextPath": "as-baseline-study-part-1/assets/help.md",
         "logoPath": "revisitAssets/revisitLogoSquare.svg",
         "withProgressBar": true,
         "autoDownloadStudy": false,
@@ -83,17 +83,6 @@
                     "rightLabel": "strongly agree",
                     "required": true,
                     "withDivider": true
-                },
-                {
-                    "id": "understand-hints",
-                    "prompt": "I understood how the hints relate to the context.",
-                    "location": "aboveStimulus",
-                    "type": "likert",
-                    "numItems": 7,
-                    "leftLabel": "strongly disagree",
-                    "rightLabel": "strongly agree",
-                    "required": true,
-                    "withDivider": true
                 }
             ]
         },
@@ -101,7 +90,7 @@
             "description": "A logical reasoning task with Venn diagrams as hints",
             "instruction": "",
             "type": "react-component",
-            "path": "as-venn-study-part-1/assets/VennTask.tsx",
+            "path": "as-baseline-study-part-1/assets/VennTask.tsx",
             "parameters": {
                 "data": [
                     {
@@ -138,7 +127,7 @@
             "description": "A logical reasoning task with Euler diagrams as hints",
             "instruction": "",
             "type": "react-component",
-            "path": "as-venn-study-part-1/assets/EulerTask.tsx",
+            "path": "as-baseline-study-part-1/assets/EulerTask.tsx",
             "parameters": {
                 "data": [
                     {
@@ -175,7 +164,7 @@
             "description": "A logical reasoning task without hints as baseline.",
             "instruction": "",
             "type": "react-component",
-            "path": "as-venn-study-part-1/assets/BaselineTask.tsx",
+            "path": "as-baseline-study-part-1/assets/BaselineTask.tsx",
             "parameters": {
                 "text": "The context of the task."
             },
@@ -201,12 +190,12 @@
     "components": {
         "introduction": {
             "type": "markdown",
-            "path": "as-venn-study-part-1/assets/introduction.md",
+            "path": "as-baseline-study-part-1/assets/introduction.md",
             "response": []
         },
         "consent": {
             "type": "markdown",
-            "path": "as-venn-study-part-1/assets/consent-cm.md",
+            "path": "as-baseline-study-part-1/assets/consent-cm.md",
             "nextButtonText": "Agree",
             "response": [
                 {
@@ -224,41 +213,18 @@
         },
         "tutorial1": {
             "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial1.md",
-            "response": []
-        },
-        "tutorial2": {
-            "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial2.md",
-            "response": []
-        },
-        "tutorial3": {
-            "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial3.md",
+            "path": "as-baseline-study-part-1/assets/tutorial1.md",
             "response": []
         },
         "tutorial4": {
             "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial4.md",
+            "path": "as-baseline-study-part-1/assets/tutorial4.md",
             "response": []
         },
         "taskIM1": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "premise",
-                        "antecedent": "B",
-                        "consequent": "T",
-                        "text": "It takes <mark class='T'>a particular talent</mark> <mark class='B'>to be a successful business manager</mark>."
-                    },
-                    {
-                        "conditional": "premise",
-                        "antecedent": "S",
-                        "consequent": "T",
-                        "text": "<mark class='S'>Business courses can help people to solve management problems</mark>, but such courses can do so only for <mark class='T'>those people with managerial talent</mark>. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
-                    }
-                ]
+                "text": "It takes a particular talent to be a successful business manager. Business courses can help people to solve management problems, but such courses can do so only for those people with managerial talent. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
             },
             "response": [
                 {
@@ -282,22 +248,9 @@
             ]
         },
         "taskIM432": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "premise",
-                        "antecedent": "S",
-                        "consequent": "R",
-                        "text": "Everyone <mark class='S'>sitting in the clubhouse of the golf course today at ten o' clock</mark> <mark class='R'>had just registered for a beginner' s golf lesson</mark>. Gerald, Robert, and Shirley <mark class='S'>were sitting in the clubhouse this morning at ten o' clock</mark>."
-                    },
-                    {
-                        "conditional": "premise",
-                        "antecedent": "A",
-                        "consequent": "not R",
-                        "text": "No <mark class='A'>accomplished golfer</mark> would <mark class='R not'>register for a beginner' s golf lesson</mark>."
-                    }
-                ]
+                "text": "Everyone sitting in the clubhouse of the golf course today at ten o' clock had just registered for a beginner' s golf lesson. Gerald, Robert, and Shirley were sitting in the clubhouse this morning at ten o' clock. No accomplished golfer would register for a beginner' s golf lesson."
             },
             "response": [
                 {
@@ -321,22 +274,9 @@
             ]
         },
         "taskIM484": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "premise",
-                        "antecedent": "A",
-                        "consequent": "T",
-                        "text": "Geoffrey never <mark class='A'>attends a movie</mark> without <mark class='T'>watching the trailer</mark> and generally tries to read the reviews prior to the show."
-                    },
-                    {
-                        "conditional": "premise",
-                        "antecedent": "A",
-                        "consequent": "W",
-                        "text": "<mark class='A'>At the theater</mark>, Geoffrey sometimes buys popcorn and always <mark class='W'>buys a bottle of water</mark>. Geoffrey <mark class='A'>recently saw the eighth installment of the Boy Wizard Chronicles</mark>."
-                    }
-                ]
+                "text": "Geoffrey never attends a movie without watching the trailer and generally tries to read the reviews prior to the show. At the theater, Geoffrey sometimes buys popcorn and always buys a bottle of water. Geoffrey recently saw the eighth installment of the Boy Wizard Chronicles."
             },
             "response": [
                 {
@@ -360,28 +300,9 @@
             ]
         },
         "taskIF97": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "premise",
-                        "antecedent": "T",
-                        "consequent": "not C",
-                        "text": "Since <mark class='T'>anyone who supports the new tax plan</mark> has <mark class='C not'>no chance of being elected</mark>, "
-                    },
-                    {
-                        "conditional": "premise",
-                        "antecedent": "E",
-                        "consequent": "not T",
-                        "text": "and <mark class='E'>anyone who truly understands economics</mark> would <mark class='T not'>not support the tax plan</mark>, "
-                    },
-                    {
-                        "conditional": "conclusion",
-                        "antecedent": "C",
-                        "consequent": "E",
-                        "text": "only <mark class='E'>someone who truly understands economics</mark> would <mark class='C'>have any chance of being elected.</mark>"
-                    }
-                ]
+                "text": "Since anyone who supports the new tax plan has no chance of being elected, and anyone who truly understands economics would not support the tax plan, only someone who truly understands economics would have any chance of being elected."
             },
             "response": [
                 {
@@ -405,28 +326,9 @@
             ]
         },
         "taskIF210": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "premise",
-                        "antecedent": "H",
-                        "consequent": "S",
-                        "text": "<mark class='H'>On some hot days</mark> <mark class='S'>the smog in Hillview reaches unsafe levels</mark>,"
-                    },
-                    {
-                        "conditional": "premise",
-                        "antecedent": "H",
-                        "consequent": "W",
-                        "text": " and <mark class='H'>on some hot days</mark> <mark class='W'>the wind blows into Hillview from the east</mark>."
-                    },
-                    {
-                        "conditional": "conclusion",
-                        "antecedent": "W",
-                        "consequent": "S",
-                        "text": "Therefore, on some days when <mark class='W'>the wind blows into Hillview from the east</mark>, <mark class='S'>the smog in Hillview reaches unsafe levels</mark>."
-                    }
-                ]
+                "text": "On some hot days the smog in Hillview reaches unsafe levels, and on some hot days the wind blows into Hillview from the east. Ttherefore, on some days when the wind blows into Hillview from the east, the smog in Hillview reaches unsafe levels."
             },
             "response": [
                 {
@@ -450,22 +352,9 @@
             ]
         },
         "taskSA370": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "premise",
-                        "antecedent": "C",
-                        "consequent": "not S",
-                        "text": "Many artists claim that art critics find it is easier to write about art that they dislike than to write about art that they like. Whether or not this hypothesis is correct, <mark class='C'>most art criticism is devoted to</mark> <mark class='S not'>art works that fail to satisfy the critic</mark>."
-                    },
-                    {
-                        "conditional": "conclusion",
-                        "antecedent": "C",
-                        "consequent": "not G",
-                        "text": "Hence it follows that <mark class='C'>most art criticism is devoted to</mark> <mark class='G not'>works other than the greatest works of art</mark>."
-                    }
-                ]
+                "text": "Many artists claim that art critics find it is easier to write about art that they dislike than to write about art that they like. Whether or not this hypothesis is correct, most art criticism is devoted to art works that fail to satisfy the critic. Hence it follows that most art criticism is devoted toworks other than the greatest works of art."
             },
             "response": [
                 {
@@ -483,22 +372,9 @@
             ]
         },
         "taskSA473": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "premise",
-                        "antecedent": "E",
-                        "consequent": "G",
-                        "text": "<mark class='E'>Having an efficient, attractive subway system</mark> <mark class='G'>makes good economic sense</mark>."
-                    },
-                    {
-                        "conditional": "conclusion",
-                        "antecedent": "N",
-                        "consequent": "G",
-                        "text": "So, <mark class='N'>the city needs to purchase new subway cars</mark>, since <mark class='G'>the city should always do what makes good economic sense</mark>."
-                    }
-                ]
+                "text": "Having an efficient, attractive subway system makes good economic sense. So, the city needs to purchase new subway cars, since the city should always do what makes good economic sense."
             },
             "response": [
                 {
@@ -522,22 +398,9 @@
             ]
         },
         "taskNA258": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "conclusion",
-                        "antecedent": "S",
-                        "consequent": "not L",
-                        "text": "Zoologist: <mark class='S'>Animals can certainly signal each other with sounds and gestures</mark>. However, <mark class='S'>this</mark> does not <mark class='L not'>confirm the thesis that animals possess language</mark>, "
-                    },
-                    {
-                        "conditional": "premise",
-                        "antecedent": "S",
-                        "consequent": "not P",
-                        "text": "for <mark class='S'>it</mark> does not <mark class='P not'>prove that animals possess the ability to use sounds or gestures to refer to concrete objects or abstract ideas</mark>."
-                    }
-                ]
+                "text": "Zoologist: Animals can certainly signal each other with sounds and gestures. However, this does not confirm the thesis that animals possess language, for it does not prove that animals possess the ability to use sounds or gestures to refer to concrete objects or abstract ideas."
             },
             "response": [
                 {
@@ -561,28 +424,9 @@
             ]
         },
         "taskMA316": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "premise",
-                        "antecedent": "M",
-                        "consequent": "H",
-                        "text": "If Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='H'>get a bad case of heartburn</mark> later."
-                    },
-                    {
-                        "conditional": "premise",
-                        "antecedent": "H",
-                        "consequent": "G",
-                        "text": "If Patricia <mark class='H'>gets a bad case of heartburn</mark> later, she will <mark class='G'>be grouchy tomorrow morning</mark>."
-                    },
-                    {
-                        "conditional": "conclusion",
-                        "antecedent": "M",
-                        "consequent": "G",
-                        "text": "So if Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='G'>be grouchy tomorrow morning</mark>."
-                    }
-                ]
+                "text": "If Patricia eats a heavy, spicy meal tonight, she will get a bad case of heartbum later. If Patricia gets a bad case of heartbum later, she will be grouchy tomorrow morning. So if Patricia eats a heavy, spicy meal tonight, she will be grouchy tomorrow morning."
             },
             "response": [
                 {
@@ -606,28 +450,9 @@
             ]
         },
         "taskMA417": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
-                "data": [
-                    {
-                        "conditional": "premise",
-                        "antecedent": "H",
-                        "consequent": "S",
-                        "text": "All <mark class='H'>historians</mark> are <mark class='S'>able to spot trends</mark>."
-                    },
-                    {
-                        "conditional": "premise",
-                        "antecedent": "S",
-                        "consequent": "D",
-                        "text": "But anyone <mark class='S'>able to spot trends</mark> is <mark class='D'>able to distinguish the significant from the insignificant</mark>."
-                    },
-                    {
-                        "conditional": "conclusion",
-                        "antecedent": "D",
-                        "consequent": "H",
-                        "text": "Thus anyone who <mark class='D'>can distinguish the significant from the insignificant</mark> is <mark class='H'>a historian</mark>."
-                    }
-                ]
+                "text": "All historians are able to spot trends. But anyone able to spot trends is able to distinguish the significant from the insignificant. Thus anyone who can distinguish the significant from the insignificant is a historian."
             },
             "response": [
                 {
@@ -686,36 +511,8 @@
             "type": "questionnaire",
             "response": [
                 {
-                    "id": "hint-help",
-                    "prompt": "The hints made solving the tasks easier.",
-                    "location": "aboveStimulus",
-                    "type": "likert",
-                    "numItems": 7,
-                    "leftLabel": "strongly disagree",
-                    "rightLabel": "strongly agree",
-                    "required": true,
-                    "withDivider": true
-                },
-                {
-                    "id": "hint-info",
-                    "prompt": "I felt that the hints offered just the right amount of information to help me solve the task.",
-                    "location": "aboveStimulus",
-                    "type": "likert",
-                    "numItems": 7,
-                    "leftLabel": "strongly disagree",
-                    "rightLabel": "strongly agree",
-                    "required": true,
-                    "withDivider": true
-                },
-                {
                     "id": "strategies",
                     "prompt": "Please describe if you used any strategies (e.g., process of elimination) or aids (e.g., sketching out thoughts/taking notes) while working on the tasks.",
-                    "location": "aboveStimulus",
-                    "type": "longText"
-                },
-                {
-                    "id": "hints",
-                    "prompt": "Please describe how you used the hints for solving the tasks. How did they affect your strategies?",
                     "location": "aboveStimulus",
                     "type": "longText"
                 }
@@ -728,8 +525,6 @@
             "introduction",
             "consent",
             "tutorial1",
-            "tutorial2",
-            "tutorial3",
             "tutorial4",
             {
                 "order": "random",
@@ -806,7 +601,6 @@
                     }
                 ]
             },
-            "$hus.co.hus",
             "post-study"
         ]
     }

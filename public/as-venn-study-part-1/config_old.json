@@ -210,6 +210,13 @@
             "nextButtonText": "Agree",
             "response": [
                 {
+                    "id": "signature",
+                    "prompt": "Your signature",
+                    "location": "belowStimulus",
+                    "type": "shortText",
+                    "placeholder": "Please provide your signature"
+                },
+                {
                     "id": "accept",
                     "prompt": "Do you consent to the study and wish to continue?",
                     "requiredValue": "Accept",
@@ -221,26 +228,6 @@
                     ]
                 }
             ]
-        },
-        "tutorial1": {
-            "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial1.md",
-            "response": []
-        },
-        "tutorial2": {
-            "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial2.md",
-            "response": []
-        },
-        "tutorial3": {
-            "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial3.md",
-            "response": []
-        },
-        "tutorial4": {
-            "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial4.md",
-            "response": []
         },
         "taskIM1": {
             "baseComponent": "vennTask",
@@ -281,6 +268,84 @@
                 }
             ]
         },
+        "taskIM180": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "F",
+                        "consequent": "not M",
+                        "text": "Amy McConnell is considering running for election against the incumbent, Gregory Lutz. If <mark class='F'>Lutz has a large campaign fund</mark>, then he is already far ahead, and <mark class='M'>McConnell will not run against him</mark>."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "S",
+                        "consequent": "M",
+                        "text": "If <mark class='F'>Lutz does not have a large campaign fund</mark>, McConnell will scrutinize Lutz' s record for any <mark class='S'>hints of scandal</mark> that she could use against him. <mark class='S'>Anything of a scandalous nature</mark> would increase McConnell' s chances of winning, and <mark class='M'>she would campaign for election</mark>."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "not S",
+                        "consequent": "not M",
+                        "text": "If <mark class='S'>Lutz has a clean record</mark>, however, <mark class='M'>McConnell will not run against him</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Given the information in the passage, which one of the following must be false?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Lutz's record contains nothing that would increase McConnell's chances of winning, and she runs against him.",
+                        "Lutz's record contains scandalous items, and McConnell does not run against him.",
+                        "Lutz does not have a large campaign fund, and McConnell does not run against him.",
+                        "Lutz's record contains items that would increase McConnell's chances of winning, and she runs against him."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Lutz's record contains nothing that would increase McConnell's chances of winning, and she runs against him."
+                }
+            ]
+        },
+        "taskIM193": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "D",
+                        "consequent": "R",
+                        "text": "Small species, such as fathead minnows and waterfleas, can be used to uncover the quantity of toxic chemicals being dumped into rivers and streams. Under new rules issued in a certain country, these 'indicator' species will be used to test the effluent pouring out of sewage treatment plants and factories among the country' s waterways. If <mark class='D'>many of these animals die as a result of the test</mark>, the country is going to <mark class='R'>require that pollution levels be reduced</mark>. The new rules will apply to about 450 of the 2, 000 factories and sewage treatment plants that legally discharge into the country' s rivers and streams."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Which one of the following can be inferred from the passage above?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "If few individuals of the indicator species die during the test period, the country will not take action on water pollution.",
+                        "If, after the test, the country does not require that pollution levels be reduced, then few or none of the individuals of the indicator species died as a result of the test.",
+                        "Under the new rules, certain small species will be introduced into water samples taken from 2, 000 sites around the country.",
+                        "In the country in question, there are 1, 550 factories and sewage treatment plants that discharge pollutants illegally."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "If, after the test, the country does not require that pollution levels be reduced, then few or none of the individuals of the indicator species died as a result of the test."
+                }
+            ]
+        },
         "taskIM432": {
             "baseComponent": "vennTask",
             "parameters": {
@@ -295,7 +360,7 @@
                         "conditional": "premise",
                         "antecedent": "A",
                         "consequent": "not R",
-                        "text": "No <mark class='A'>accomplished golfer</mark> would <mark class='R not'>register for a beginner' s golf lesson</mark>."
+                        "text": "No <mark class='A'>accomplished golfer</mark> would <mark class='R'>register for a beginner' s golf lesson</mark>."
                     }
                 ]
             },
@@ -367,13 +432,13 @@
                         "conditional": "premise",
                         "antecedent": "T",
                         "consequent": "not C",
-                        "text": "Since <mark class='T'>anyone who supports the new tax plan</mark> has <mark class='C not'>no chance of being elected</mark>, "
+                        "text": "Since <mark class='T'>anyone who supports the new tax plan</mark> has <mark class='C'>no chance of being elected</mark>, "
                     },
                     {
                         "conditional": "premise",
                         "antecedent": "E",
                         "consequent": "not T",
-                        "text": "and <mark class='E'>anyone who truly understands economics</mark> would <mark class='T not'>not support the tax plan</mark>, "
+                        "text": "and <mark class='E'>anyone who truly understands economics</mark> would <mark class='T'>not support the tax plan</mark>, "
                     },
                     {
                         "conditional": "conclusion",
@@ -449,6 +514,96 @@
                 }
             ]
         },
+        "taskIF497": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "A",
+                        "consequent": "not B",
+                        "text": "A theory is either true or false. <mark class='A'>Galileo' s observations of Jupiter' s satellites</mark> showed that the <mark class='B'>Ptolemaic theory of the motion of celestial bodies</mark> is false."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "C",
+                        "consequent": "not B",
+                        "text": "Therefore, since the <mark class='C'>Copernican theory of planetary motion</mark> is inconsistent with the <mark class='B'>Ptolemaic account</mark>,"
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "A",
+                        "consequent": "C",
+                        "text": " <mark class='A'>Galileo' s observations of Jupiter' s satellites</mark> proved the truth of the <mark class='C'>Copernican theory</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The argument above is open to the objection that it makes the questionable assumption that",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "numerous counterexamples were necessary in order to show the Ptolemaic theory to be false",
+                        "whoever first observed something inconsistent with the truth of the Ptolemaic theory should be credited with having proved that theory false",
+                        "the Ptolemaic and Copernican theories, being inconsistent, cannot both be false",
+                        "the Ptolemaic and Copernican theories, being inconsistent, cannot both be based on exactly the same evidence"
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "the Ptolemaic and Copernican theories, being inconsistent, cannot both be false"
+                }
+            ]
+        },
+        "taskSA133": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "not A",
+                        "consequent": "G",
+                        "text": "Activist: Any member of the city council ought either to <mark class='G'>vote against the proposal</mark> or to <mark class='A'>abstain</mark>."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "A",
+                        "consequent": "V",
+                        "text": "But if <mark class='A'>all the members abstain</mark>, <mark class='V'>the matter will be decided by the city' s voters</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "not V",
+                        "consequent": "G",
+                        "text": "So <mark class='G'>at least one member of the city council should vote against the proposal</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The conclusion of the activist's argument follows logically if which one of the following is assumed?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "No members of the city council will vote in favor of the proposal.",
+                        "If one member of the city council ought to vote against the proposal, the other members should abstain in the vote on the proposal.",
+                        "The proposal should not be decided by the city's voters.",
+                        "If not every member of the city council abstains in the vote on the proposal, the matter will not be decided by the city's voters."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "The proposal should not be decided by the city's voters."
+                }
+            ]
+        },
         "taskSA370": {
             "baseComponent": "vennTask",
             "parameters": {
@@ -457,13 +612,13 @@
                         "conditional": "premise",
                         "antecedent": "C",
                         "consequent": "not S",
-                        "text": "Many artists claim that art critics find it is easier to write about art that they dislike than to write about art that they like. Whether or not this hypothesis is correct, <mark class='C'>most art criticism is devoted to</mark> <mark class='S not'>art works that fail to satisfy the critic</mark>."
+                        "text": "Many artists claim that art critics find it is easier to write about art that they dislike than to write about art that they like. Whether or not this hypothesis is correct, <mark class='C'>most art criticism is devoted to</mark> <mark class='S'>art works that fail to satisfy the critic</mark>."
                     },
                     {
                         "conditional": "conclusion",
                         "antecedent": "C",
                         "consequent": "not G",
-                        "text": "Hence it follows that <mark class='C'>most art criticism is devoted to</mark> <mark class='G not'>works other than the greatest works of art</mark>."
+                        "text": "Hence it follows that <mark class='C'>most art criticism is devoted to</mark> <mark class='G'>works other than the greatest works of art</mark>."
                     }
                 ]
             },
@@ -479,6 +634,45 @@
                         "The greatest works of art are works that inevitably satisfy all critics.",
                         "No art critic enjoys writing about art works that he or she dislikes intensely."
                     ]
+                }
+            ]
+        },
+        "taskSA458": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "I",
+                        "consequent": "not D",
+                        "text": "Archaeologists are discovering a great deal about the Sals culture. For example, recent excavations have unearthed smelting furnaces and tools of smeltedcopper and bronze. There were <mark class='D'>distinct Sals words</mark> for copper and for bronze,but <mark class='D'>none for</mark> <mark class='I'>iron</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "I",
+                        "consequent": "not S",
+                        "text": "Thus, the Sals did not <mark class='S'>smelt</mark> <mark class='I'>iron</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The conclusion drawn above follows logically if which one of the following is assumed?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "If a culture smelted a metal, then it had a distinct word for that metal.",
+                        "If a culture was unfamiliar with a metal, then it did not have a distinct word for that metal.",
+                        "If a culture smelted copper and bronze, then it had distinct words for copper and bronze.",
+                        "If a culture had a distinct word for a metal, then it smelted that metal."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "If a culture smelted a metal, then it had a distinct word for that metal."
                 }
             ]
         },
@@ -521,6 +715,90 @@
                 }
             ]
         },
+        "taskNA108": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "G",
+                        "consequent": "C",
+                        "text": "Although computers can enhance people's ability to communicate, <mark class='G'>computer games</mark> are a cause of <mark class='C'>underdeveloped communication skills in children</mark>."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "G",
+                        "consequent": "not T",
+                        "text": "After-school <mark class='G'>hours spent playing computer games</mark> are hours not spent <mark class='T'>talking with people</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "G",
+                        "consequent": "C",
+                        "text": "Therefore, <mark class='G'>children who spend all their spare time playing these games</mark> have <mark class='C'>less experience in interpersonal communication than other children have</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The argument depends on which of the following assumptions?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "The mental skills developed through playing computer games do not contribute significantly to children's intellectual development.",
+                        "Passive activities such as watching television and listening to music do not hinder the development of communication skills in children.",
+                        "Formal instruction contributes little or nothing to children's acquisition of communication skills.",
+                        "Children who do not spend all of their after-school hours playing computer games spend at least some of that time talking with other people."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Children who do not spend all of their after-school hours playing computer games spend at least some of that time talking with other people."
+                }
+            ]
+        },
+        "taskNA113": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "B",
+                        "consequent": "T",
+                        "text": "Economic considerations color every aspect of international dealings, and nations are just like individuals in that the <mark class='T'>lender sets the terms of its dealings</mark> with the <mark class='B'>borrower</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "B",
+                        "consequent": "not W",
+                        "text": "That is why <mark class='B'>a nation that owes money to another nation</mark> cannot <mark class='W'>be a world leader</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The reasoning in the passage assumes which one of the following?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A nation that can set the terms of its dealings with other nations is certain to be a world leader.",
+                        "A nation that has no dealings with any other nation cannot be a world leader.",
+                        "A nation that has the terms of its dealings with another nation set by that nation cannot be a world leader.",
+                        "A nation that does not lend to any other nation cannot be a world leader."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "A nation that has the terms of its dealings with another nation set by that nation cannot be a world leader."
+                }
+            ]
+        },
         "taskNA258": {
             "baseComponent": "vennTask",
             "parameters": {
@@ -529,13 +807,13 @@
                         "conditional": "conclusion",
                         "antecedent": "S",
                         "consequent": "not L",
-                        "text": "Zoologist: <mark class='S'>Animals can certainly signal each other with sounds and gestures</mark>. However, <mark class='S'>this</mark> does not <mark class='L not'>confirm the thesis that animals possess language</mark>, "
+                        "text": "Zoologist: <mark class='S'>Animals can certainly signal each other with sounds and gestures</mark>. However, <mark class='S'>this</mark> does not <mark class='L'>confirm the thesis that animals possess language</mark>, "
                     },
                     {
                         "conditional": "premise",
                         "antecedent": "S",
                         "consequent": "not P",
-                        "text": "for <mark class='S'>it</mark> does not <mark class='P not'>prove that animals possess the ability to use sounds or gestures to refer to concrete objects or abstract ideas</mark>."
+                        "text": "for <mark class='S'>it</mark> does not <mark class='P'>prove that animals possess the ability to use sounds or gestures to refer to concrete objects or abstract ideas</mark>."
                     }
                 ]
             },
@@ -557,6 +835,96 @@
                 {
                     "id": "lr-response",
                     "answer": "If a system of sounds or gestures contains no expressions referring to concrete objects or abstract ideas, then that system is not a language."
+                }
+            ]
+        },
+        "taskMA81": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "F",
+                        "consequent": "C",
+                        "text": "If a society <mark class='F'>encourages freedom of thought and expression</mark>, then, during the time when it does so, <mark class='C'>creativity will flourish in that society</mark>."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "U",
+                        "consequent": "C",
+                        "text": "<mark class='U'>In the United States</mark> <mark class='C'>creativity flourished</mark> <mark class='U'>during the eighteenth century</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "U",
+                        "consequent": "F",
+                        "text": "It is clear, therefore, that <mark class='F'>freedom of thought was encouraged</mark> <mark class='U'>in the United States during eighteenth century</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "An error of reasoning of the same kind as one contained in the passage is present in each of EXCEPT:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "According to the airline industry, airfares have to rise if air travel is to be made safer; since airfares were just raised, we can rest assured that air travel will therefore become safer.",
+                        "People who are really interested in the preservation of wildlife obviously do not go hunting for big game; since Gerda has never gone hunting for big game and intends never to do so, it is clear that she is really interested in the preservation of wildlife.",
+                        "If the contents of a bottle are safe to drink, the bottle will not be marked \"poison, \" so, since the bottle is not marked \"poison, \" its contents will be safe to drink.",
+                        "None of the so-called Western democracies is really democratic, because, for a country to be democratic, the opinion of each of its citizens must have a meaningful effect on government, and in none of these countries does each citizen's opinion have such an effect."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "None of the so-called Western democracies is really democratic, because, for a country to be democratic, the opinion of each of its citizens must have a meaningful effect on government, and in none of these countries does each citizen's opinion have such an effect."
+                }
+            ]
+        },
+        "taskMA221": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "S",
+                        "consequent": "M",
+                        "text": "Company president: Almost <mark class='S'>every really successful product</mark> introduced in the last ten years has been <mark class='M'>launched by a massive television advertising campaign</mark>."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "V",
+                        "consequent": "M",
+                        "text": "We are using a <mark class='M'>massive television advertising campaign</mark> to introduce <mark class='V'>the Vegetaste Burger</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "V",
+                        "consequent": "S",
+                        "text": "So <mark class='V'>the Vegetaste Burger</mark> will probably be <mark class='S'>very successful</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The flawed nature of the company president's argument can most effectively be demonstrated by noting that, by parallel reasoning, we could conclude that",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "almost all of Acme's employees oppose the pending merger with Barrington Corporation, since almost all of Acme's employees are factory workers, and almost all of the factory workers at Acme oppose the merger",
+                        "the president of Corbin Corporation has an office that is not in Corbin's headquarters building, since almost all of the offices in Corbin's headquarters building are small, whereas Corbin's president has a large office",
+                        "Robinson will probably be appointed as president of Sifton University, since almost every one of Sifton's previous presidents had a Ph. D. , and Robinson has a Ph. D.",
+                        "Donna has at least ten years of experience as a computer programmer, since almost every programmer who works for Coderight Software has at least ten years experience, and Donna will probably be hired as a programmer by Coderight"
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Robinson will probably be appointed as president of Sifton University, since almost every one of Sifton's previous presidents had a Ph. D. , and Robinson has a Ph. D."
                 }
             ]
         },
@@ -650,7 +1018,58 @@
                 }
             ]
         },
+        "taskMA471": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "E",
+                        "consequent": "I",
+                        "text": "Some <mark class='E'>eloquent speakers</mark> <mark class='I'>impress their audiences</mark> with the vividness and clarity of the messages conveyed."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "O",
+                        "consequent": "not E",
+                        "text": "Speakers who <mark class='O'>resort to obscenity</mark>, however, are not <mark class='E'>genuinely eloquent</mark>, "
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "O",
+                        "consequent": "not I",
+                        "text": "so <mark class='O'>none of these speakers</mark> <mark class='I'>impress their audiences</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The flawed reasoning in which one of the following is most similar to that in the argument above?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Cities that are centers of commerce are always centers of industry as well. It follows that some centers of commerce are small cities, since there are centers of industry that are not small cities.",
+                        "A culture without myths will also lack fundamental moral certainties. Thus, this culture must lack fundamental moral certainties, since it is devoid of myth.",
+                        "Sculptors sometimes produce significant works of art. But musicians are not sculptors. Hence, musicians never produce significant works of art.",
+                        "Most farmers like living in rural areas. Since Carla is not a farmer, she probably would not enjoy living in the country."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Sculptors sometimes produce significant works of art. But musicians are not sculptors. Hence, musicians never produce significant works of art."
+                }
+            ]
+        },
         "pt_IM1": {
+            "baseComponent": "post-task"
+        },
+        "pt_IM180": {
+            "baseComponent": "post-task"
+        },
+        "pt_IM193": {
             "baseComponent": "post-task"
         },
         "pt_IM432": {
@@ -665,19 +1084,43 @@
         "pt_IF210": {
             "baseComponent": "post-task"
         },
+        "pt_IF497": {
+            "baseComponent": "post-task"
+        },
+        "pt_SA133": {
+            "baseComponent": "post-task"
+        },
         "pt_SA370": {
+            "baseComponent": "post-task"
+        },
+        "pt_SA458": {
             "baseComponent": "post-task"
         },
         "pt_SA473": {
             "baseComponent": "post-task"
         },
+        "pt_NA108": {
+            "baseComponent": "post-task"
+        },
+        "pt_NA113": {
+            "baseComponent": "post-task"
+        },
         "pt_NA258": {
+            "baseComponent": "post-task"
+        },
+        "pt_MA81": {
+            "baseComponent": "post-task"
+        },
+        "pt_MA221": {
             "baseComponent": "post-task"
         },
         "pt_MA316": {
             "baseComponent": "post-task"
         },
         "pt_MA417": {
+            "baseComponent": "post-task"
+        },
+        "pt_MA471": {
             "baseComponent": "post-task"
         },
         "post-study": {
@@ -709,7 +1152,7 @@
                 },
                 {
                     "id": "strategies",
-                    "prompt": "Please describe if you used any strategies (e.g., process of elimination) or aids (e.g., sketching out thoughts/taking notes) while working on the tasks.",
+                    "prompt": "Please describe if you used any strategies (e.g., process of elimination) or aids (e.g., sketching out thoughts) while working on the tasks.",
                     "location": "aboveStimulus",
                     "type": "longText"
                 },
@@ -720,6 +1163,43 @@
                     "type": "longText"
                 }
             ]
+        },
+        "sketchpad": {
+            "description": "sketchpad",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-venn-study-part-1/assets/Sketchpad.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
         }
     },
     "sequence": {
@@ -727,10 +1207,6 @@
         "components": [
             "introduction",
             "consent",
-            "tutorial1",
-            "tutorial2",
-            "tutorial3",
-            "tutorial4",
             {
                 "order": "random",
                 "components": [
@@ -739,6 +1215,20 @@
                         "components": [
                             "taskIM1",
                             "pt_IM1"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIM180",
+                            "pt_IM180"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIM193",
+                            "pt_IM193"
                         ]
                     },
                     {
@@ -772,8 +1262,29 @@
                     {
                         "order": "fixed",
                         "components": [
+                            "taskIF497",
+                            "pt_IF497"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskSA133",
+                            "pt_SA133"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
                             "taskSA370",
                             "pt_SA370"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskSA458",
+                            "pt_SA458"
                         ]
                     },
                     {
@@ -786,8 +1297,36 @@
                     {
                         "order": "fixed",
                         "components": [
+                            "taskNA108",
+                            "pt_NA108"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskNA113",
+                            "pt_NA113"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
                             "taskNA258",
                             "pt_NA258"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskMA81",
+                            "pt_MA81"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskMA221",
+                            "pt_MA221"
                         ]
                     },
                     {
@@ -802,6 +1341,13 @@
                         "components": [
                             "taskMA417",
                             "pt_MA417"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskMA471",
+                            "pt_MA471"
                         ]
                     }
                 ]

@@ -7,14 +7,14 @@
             "Antonia Schlieder"
         ],
         "date": "2025-08-19",
-        "description": "First part of a user study on Venn diagrams as hints for solving reasoning tasks on conditionals in natural language.",
+        "description": "First part of a user study on Euler diagrams as hints for solving reasoning tasks on conditionals in natural language.",
         "organizations": [
             "Heidelberg University"
         ]
     },
     "uiConfig": {
         "contactEmail": "antonia.schlieder@iwr.uni-heidelberg.de",
-        "helpTextPath": "as-venn-study-part-1/assets/help.md",
+        "helpTextPath": "as-euler-study-part-1/assets/help.md",
         "logoPath": "revisitAssets/revisitLogoSquare.svg",
         "withProgressBar": true,
         "autoDownloadStudy": false,
@@ -101,7 +101,7 @@
             "description": "A logical reasoning task with Venn diagrams as hints",
             "instruction": "",
             "type": "react-component",
-            "path": "as-venn-study-part-1/assets/VennTask.tsx",
+            "path": "as-euler-study-part-1/assets/VennTask.tsx",
             "parameters": {
                 "data": [
                     {
@@ -138,7 +138,7 @@
             "description": "A logical reasoning task with Euler diagrams as hints",
             "instruction": "",
             "type": "react-component",
-            "path": "as-venn-study-part-1/assets/EulerTask.tsx",
+            "path": "as-euler-study-part-1/assets/EulerTask.tsx",
             "parameters": {
                 "data": [
                     {
@@ -175,7 +175,7 @@
             "description": "A logical reasoning task without hints as baseline.",
             "instruction": "",
             "type": "react-component",
-            "path": "as-venn-study-part-1/assets/BaselineTask.tsx",
+            "path": "as-euler-study-part-1/assets/BaselineTask.tsx",
             "parameters": {
                 "text": "The context of the task."
             },
@@ -201,12 +201,12 @@
     "components": {
         "introduction": {
             "type": "markdown",
-            "path": "as-venn-study-part-1/assets/introduction.md",
+            "path": "as-euler-study-part-1/assets/introduction.md",
             "response": []
         },
         "consent": {
             "type": "markdown",
-            "path": "as-venn-study-part-1/assets/consent-cm.md",
+            "path": "as-euler-study-part-1/assets/consent-cm.md",
             "nextButtonText": "Agree",
             "response": [
                 {
@@ -224,26 +224,21 @@
         },
         "tutorial1": {
             "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial1.md",
+            "path": "as-euler-study-part-1/assets/tutorial1.md",
             "response": []
         },
         "tutorial2": {
             "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial2.md",
-            "response": []
-        },
-        "tutorial3": {
-            "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial3.md",
+            "path": "as-euler-study-part-1/assets/tutorial2.md",
             "response": []
         },
         "tutorial4": {
             "type": "markdown",
-            "path": "as-venn-study-part-1/assets/tutorial4.md",
+            "path": "as-euler-study-part-1/assets/tutorial4.md",
             "response": []
         },
         "taskIM1": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -282,7 +277,7 @@
             ]
         },
         "taskIM432": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -321,7 +316,7 @@
             ]
         },
         "taskIM484": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -360,7 +355,7 @@
             ]
         },
         "taskIF97": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -405,7 +400,7 @@
             ]
         },
         "taskIF210": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -450,7 +445,7 @@
             ]
         },
         "taskSA370": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -483,7 +478,7 @@
             ]
         },
         "taskSA473": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -522,7 +517,7 @@
             ]
         },
         "taskNA258": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -561,7 +556,7 @@
             ]
         },
         "taskMA316": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -606,7 +601,7 @@
             ]
         },
         "taskMA417": {
-            "baseComponent": "vennTask",
+            "baseComponent": "eulerTask",
             "parameters": {
                 "data": [
                     {
@@ -729,7 +724,6 @@
             "consent",
             "tutorial1",
             "tutorial2",
-            "tutorial3",
             "tutorial4",
             {
                 "order": "random",

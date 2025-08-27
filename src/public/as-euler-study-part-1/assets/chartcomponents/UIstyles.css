@@ -1,0 +1,39 @@
+.vp-controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.vp-btn-hint,
+.vp-btn-reset {
+    background-color: #228be6;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.20s, transform 0.08s;
+}
+
+.vp-btn-hint:hover:not(:disabled),
+.vp-btn-reset:hover:not(:disabled) {
+    background-color: rgb(19, 92, 202);
+}
+
+.vp-btn-hint:active:not(:disabled),
+.vp-btn-reset:active:not(:disabled) {
+    transform: translate(2px, 2px);
+}
+
+/* Disabled state styling */
+.vp-btn-hint:disabled,
+.vp-btn-reset:disabled {
+    background-color: #90caf9;
+    color: #e3e9f2;
+    cursor: not-allowed;
+    /* Remove movement/transition for disabled state */
+    transform: none;
+}
