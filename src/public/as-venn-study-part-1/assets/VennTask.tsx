@@ -5,8 +5,8 @@ import { StimulusParams } from '../../../store/types';
 import VennTwoSets from "./chartcomponents/VennTwoSets";
 import VennThreeSets from "./chartcomponents/VennThreeSets";
 import { Implication, implicationsToVennPairs, parseLiteral } from "./chartcomponents/ImplicationsToVennPairs";
+import { SvgDraw } from './SVGdraw';
 import './chartcomponents/UIstyles.css';
-import { SvgDraw } from './SVGdraw'; // adjust the path
 
 type PairData = Record<string, boolean | undefined>;
 
@@ -70,7 +70,7 @@ function buildScopedCSS(classList: ReadonlyArray<string>, scopeId: string) {
     classList.forEach((cls, idx) => {
         const color = colorForIndex(idx);
         const sel = cssEscapeSimple(cls);
-        css += `.vp-text-block[data-scope="${scopeId}"] .vp-sentence.is-revealed mark.${sel} { background-color: ${color}; }`.trim();
+        css += `.vp-text-block[data-scope="${scopeId}"] .vp-sentence.is-revealed mark.${sel} { background-color: ${color}; } .vp-sentence.is-revealed mark.${sel}.not { text-decoration: underline; }`.trim();
     });
 
     return css;
@@ -116,8 +116,8 @@ function getSingleDifference(arr1: string[], arr2: string[]) {
 function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
 
     const items: Implication[] = Array.isArray(parameters?.data) ? parameters.data : [];
-    const premises = items.filter(item => item.argument === "premise");
-    const hasConclusion = items.some(item => item.argument === "conclusion");
+    const premises = items.filter(item => item.conditional === "premise");
+    const hasConclusion = items.some(item => item.conditional === "conclusion");
 
     // Sizing of diagrams
     const gap: number = parameters?.gap ?? 16;
@@ -172,7 +172,6 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
             [classList[0]]: true
         }
     }
-    console.log(extraProposition, extraImplication)
 
     const [svg, setSvg] = React.useState<string>('');
 
@@ -249,7 +248,6 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
         trrack.apply('draw path', actions.clickAction(s));
 
         const min = minifySvg(s);
-        console.log(min)
 
         setAnswer({
             status: true,
@@ -323,6 +321,7 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
                                 <div
                                     key={idx}
                                     className={`vp-two-item vp-two-item-${idx} ${visible ? "is-revealed" : ""}`}
+                                    title={`${visible ? items[idx].conditional : ""}`}
                                     data-index={idx}
                                     data-left={leftName}
                                     data-right={rightName}
@@ -366,6 +365,7 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
                 >
                     <div
                         className={`vp-three-inner ${showThree ? "is-revealed" : ""}`}
+                        title={`${showThree ? "premises" : ""}`}
                         style={{
                             display: "flex",
                             width: threeWidth,
@@ -388,6 +388,7 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
                     </div>
                     <div
                         className={`vp-three-inner-conclusion ${showConclusion ? "is-revealed" : ""}`}
+                        title={`${showThree ? "premises & conclusion" : ""}`}
                         style={{
                             display: "flex",
                             width: threeWidth,

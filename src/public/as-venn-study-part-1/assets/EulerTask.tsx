@@ -1,6 +1,10 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { initializeTrrack, Registry } from '@trrack/core';
+import { optimize } from 'svgo';
+import { StimulusParams } from '../../../store/types';
 import EulerTwoSets from "./chartcomponents/EulerTwoSets";
 import { Implication, implicationsToVennPairs, parseLiteral } from "./chartcomponents/ImplicationsToVennPairs";
+import { SvgDraw } from './SVGdraw';
 import './chartcomponents/UIstyles.css';
 
 type PairData = Record<string, boolean | undefined>;
@@ -48,7 +52,7 @@ function colorForIndex(i: number) {
     const sat = 80;   // %
     const light = 85; // %
     // return `hsl(${hue}, ${sat}%, ${light}%)`;
-    return colors[i]+"88"
+    return colors[i] + "88"
 }
 
 function buildColorMap(classList: readonly string[]): Map<string, string> {
@@ -70,13 +74,33 @@ function buildScopedCSS(classList: ReadonlyArray<string>, scopeId: string) {
     classList.forEach((cls, idx) => {
         const color = colorForIndex(idx);
         const sel = cssEscapeSimple(cls);
-        css += `.vp-text-block[data-scope="${scopeId}"] .vp-sentence.is-revealed mark.${sel} { background-color: ${color}; }`.trim();
+        css += `.vp-text-block[data-scope="${scopeId}"] .vp-sentence.is-revealed mark.${sel} { background-color: ${color}; } .vp-sentence.is-revealed mark.${sel}.not { text-decoration: underline; }`.trim();
     });
 
     return css;
 }
 
-function EulerTask({ parameters }: { parameters: any }) {
+function minifySvg(svg: string) {
+    const { data } = optimize(svg, {
+        multipass: true,
+        plugins: [
+            {
+                name: 'preset-default', params: {
+                    overrides: {
+                        // keep viewBox; tune precision for your tolerance (2–3 is often fine)
+                        removeViewBox: false,
+                        cleanupNumericValues: { floatPrecision: 2 },
+                        convertPathData: { floatPrecision: 2 },
+                    }
+                }
+            },
+            'removeViewBox'
+        ],
+    });
+    return data;
+}
+
+function EulerTask({ parameters, setAnswer }: StimulusParams<any>) {
 
     const items: Implication[] = Array.isArray(parameters?.data) ? parameters.data : [];
 
@@ -102,19 +126,96 @@ function EulerTask({ parameters }: { parameters: any }) {
 
     const canHint = step < totalSteps && items.length > 0;
 
-    const onHint = () => {
-        if (!canHint) return;
-        setStep((s) => Math.min(s + 1, totalSteps));
-    };
-
-    const onReset = () => setStep(0);
-
     // Unique scope id so styles don't leak between component instances
     const scopeId = useRef(`vp-${Math.random().toString(36).slice(2, 9)}`).current;
 
     const classList = useMemo(() => uniqueMarkClassesDOM(items), [items]);
     const colorMap = useMemo(() => buildColorMap(classList), [classList]);
     const dynamicCSS = useMemo(() => buildScopedCSS(classList, scopeId), [classList, scopeId]);
+
+    const [svg, setSvg] = React.useState<string>('');
+
+    const { actions, trrack } = useMemo(() => {
+        const reg = Registry.create();
+
+        const clickAction = reg.register('draw', (state, currentSketch: any) => {
+            state.sketch = currentSketch;
+            return state;
+        });
+
+        const getHint = reg.register('hint', (state, currentHint: number) => {
+            state.hint = currentHint;
+            return state;
+        });
+
+        const resetHint = reg.register('reset', (state, currentHint: number) => {
+            state.hint = currentHint;
+            return state;
+        });
+
+        const trrackInst = initializeTrrack({
+            registry: reg,
+            initialState: { sketch: [], hint: 0 },
+        });
+
+        return {
+            actions: {
+                clickAction,
+                getHint,
+                resetHint
+            },
+            trrack: trrackInst,
+        };
+    }, []);
+
+    const onHint = useCallback(() => {
+        if (!canHint) return;
+        setStep((s) => Math.min(s + 1, totalSteps));
+        trrack.apply('get hint', actions.clickAction(step));
+
+        setAnswer({
+            status: true,
+            provenanceGraph: trrack.graph.backend,
+            answers: {}
+        });
+    }, [actions, trrack]);
+
+    useEffect(() => {
+        let timer: number | undefined;
+        if (!canHint) return;
+        if (step > 0) {
+            timer = window.setTimeout(() => {
+                setStep(s => Math.min(s + 1, totalSteps));
+            }, 1500);
+        }
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
+    }, [step, totalSteps]);
+
+    const onReset = useCallback(() => {
+        setStep(0);
+        trrack.apply('reset hint', actions.clickAction(step));
+        setAnswer({
+            status: true,
+            provenanceGraph: trrack.graph.backend,
+            answers: {}
+        });
+    }, [actions, trrack]);
+
+    const handleSvgChange = useCallback((s: string) => {
+        setSvg(s);
+        trrack.apply('draw path', actions.clickAction(s));
+
+        const min = minifySvg(s);
+        console.log(min)
+
+        setAnswer({
+            status: true,
+            provenanceGraph: trrack.graph.backend,
+            answers: { "sketch": min } // You can set the answers here if you want to control it manually, otherwise leave empty.
+        });
+    }, [actions, setAnswer, trrack]);
 
     return (
 
@@ -124,10 +225,10 @@ function EulerTask({ parameters }: { parameters: any }) {
                 className="vp-grid"
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "0.85fr auto",
+                    gridTemplateColumns: "0.85fr auto auto",
                     alignItems: "center",
                     gap,
-                    width: "58%"
+                    width: "75%"
                 }}
             >
                 {/* Left column: sentences as one flowing block, no manual line breaks */}
@@ -181,6 +282,7 @@ function EulerTask({ parameters }: { parameters: any }) {
                                 <div
                                     key={idx}
                                     className={`vp-two-item vp-two-item-${idx} ${visible ? "is-revealed" : ""}`}
+                                    title={`${visible ? items[idx].conditional : ""}`}
                                     data-index={idx}
                                     data-left={leftName}
                                     data-right={rightName}
@@ -211,7 +313,29 @@ function EulerTask({ parameters }: { parameters: any }) {
                     )}
                 </div>
             </div>
-
+            {/* Far right: sketch pad for externalization */}
+            <div
+                className="sketchpad"
+                style={{
+                    display: "flex",
+                    justifyContent: "center"
+                }}
+            >
+                <div
+                    style={{ border: '1px solid #ccc', borderRadius: 8, padding: 8 }}>
+                    <SvgDraw
+                        width={400}
+                        height={400}
+                        stroke="#228be6"
+                        strokeWidth={2}
+                        background="white"
+                        onChangeSvg={handleSvgChange}
+                    />
+                    <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>
+                        sketchpad
+                    </div>
+                </div>
+            </div>
             {/* Controls */}
             <div className="vp-controls" style={{ display: "flex", marginBottom: "20px", gap }}>
                 <button
