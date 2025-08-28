@@ -1,6 +1,6 @@
 #### Task Types
 
-Each task requires you to read and comprehend a short passage, then answer one question. Before you give your answer, it is necessary to **look at the cues** by clicking on the 'Hint' button. The cues will then be revealed to you, you can replay them as often as you want. On the righthand side is a virtual sketchpad. We encourage you to take notes or sketch out your thoughts, if you find it helpful!
+Each task requires you to read and comprehend a short passage, then answer one question. Before you give your answer, it is necessary to **look at the cues** by clicking on the 'Hint' button. The cues will then be revealed to you, you can replay them as often as you want. On the right-hand side is a virtual sketchpad. We encourage you to take notes or sketch out your thoughts, if you find it helpful!
 
 The questions require a wide range of skills involved in logical reasoning, including:
 

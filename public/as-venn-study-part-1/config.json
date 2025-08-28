@@ -31,7 +31,7 @@
             "response": [
                 {
                     "id": "seq",
-                    "prompt": "Overall, the task was ...",
+                    "prompt": "1. Overall, the task was ...",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -42,7 +42,7 @@
                 },
                 {
                     "id": "confidence",
-                    "prompt": "How certain are you that you selected the correct answer?",
+                    "prompt": "2. How certain are you that you selected the correct answer?",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -53,7 +53,7 @@
                 },
                 {
                     "id": "understand-context",
-                    "prompt": "I understood the logical structure of the context.",
+                    "prompt": "3. I understood the logical structure of the context.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -64,7 +64,7 @@
                 },
                 {
                     "id": "understand-question",
-                    "prompt": "I understood what kind of logical relationship the question was asking about.",
+                    "prompt": "4. I understood what kind of logical relationship the question was asking about.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -75,7 +75,7 @@
                 },
                 {
                     "id": "understand-answers",
-                    "prompt": "I understood the logical structure of the answer options.",
+                    "prompt": "5. I understood the logical structure of the answer options.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -86,7 +86,7 @@
                 },
                 {
                     "id": "understand-hints",
-                    "prompt": "I understood how the hints relate to the context.",
+                    "prompt": "6. I understood how the hints relate to the context.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -716,6 +716,12 @@
                 {
                     "id": "hints",
                     "prompt": "Please describe how you used the hints for solving the tasks. How did they affect your strategies?",
+                    "location": "aboveStimulus",
+                    "type": "longText"
+                },
+                {
+                    "id": "exp_prog",
+                    "prompt": "Was there anything in the study that did not work? Did you see any errors?",
                     "location": "aboveStimulus",
                     "type": "longText"
                 }

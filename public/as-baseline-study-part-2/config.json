@@ -7,7 +7,7 @@
             "Antonia Schlieder"
         ],
         "date": "2025-08-19",
-        "description": "First part of a user study that functions as the baseline for reasoning with conditionals in natural language.",
+        "description": "Second part of a user study that functions as the baseline for reasoning with conditionals in natural language.",
         "organizations": [
             "Heidelberg University"
         ]
@@ -218,160 +218,114 @@
             "path": "as-baseline-study-part-1/assets/tutorial4.md",
             "response": []
         },
-        "taskIM1": {
-            "baseComponent": "baselineTask",
+        "taskIM180": {
+            "baseComponent": "vennTask",
             "parameters": {
-                "text": "It takes a particular talent to be a successful business manager. Business courses can help people to solve management problems, but such courses can do so only for those people with managerial talent. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
+                "text": "Amy McConnell is considering running for election against the incumbent, Gregory Lutz. If Lutz has a large campaign fund, then he is already far ahead, and McConnell will not run against him. If Lutz does not have a large campaign fund, McConnell will scrutinize Lutz' s record for any hints of scandal that she could use against him. Anything of a scandalous nature would increase McConnell' s chances of winning, and she would campaign for election. If Lutz has a clean record, however, McConnell will not run against him."
             },
             "response": [
                 {
                     "id": "lr-response",
-                    "prompt": "If the statements above are true, which of the following must also be true on the basis of them?",
+                    "prompt": "Given the information in the passage, which one of the following must be false?",
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                        "People who are helped by business courses in solving management problems also have managerial talent.",
-                        "Those people who have never taken business courses are unable to solve management problems when such problems arise.",
-                        "People who lack managerial talent are more likely to take business courses than are people who have managerial talent.",
-                        "People who are already skilled at solving management problems are unlikely to benefit from business courses."
+                        "Lutz's record contains nothing that would increase McConnell's chances of winning, and she runs against him.",
+                        "Lutz's record contains scandalous items, and McConnell does not run against him.",
+                        "Lutz does not have a large campaign fund, and McConnell does not run against him.",
+                        "Lutz's record contains items that would increase McConnell's chances of winning, and she runs against him."
                     ]
                 }
             ],
             "correctAnswer": [
                 {
                     "id": "lr-response",
-                    "answer": "People who are helped by business courses in solving management problems also have managerial talent."
+                    "answer": "Lutz's record contains nothing that would increase McConnell's chances of winning, and she runs against him."
                 }
             ]
         },
-        "taskIM432": {
-            "baseComponent": "baselineTask",
+        "taskIM193": {
+            "baseComponent": "vennTask",
             "parameters": {
-                "text": "Everyone sitting in the clubhouse of the golf course today at ten o' clock had just registered for a beginner' s golf lesson. Gerald, Robert, and Shirley were sitting in the clubhouse this morning at ten o' clock. No accomplished golfer would register for a beginner' s golf lesson."
+                "text": "Small species, such as fathead minnows and waterfleas, can be used to uncover the quantity of toxic chemicals being dumped into rivers and streams. Under new rules issued in a certain country, these 'indicator' species will be used to test the effluent pouring out of sewage treatment plants and factories among the country' s waterways. If many of these animals die as a result of the test, the country is going to require that pollution levels be reduced. The new rules will apply to about 450 of the 2, 000 factories and sewage treatment plants that legally discharge into the country's rivers and streams."
             },
             "response": [
                 {
                     "id": "lr-response",
-                    "prompt": "If the statements above are true, which one of the following must also be true on the basis of them?",
+                    "prompt": "Which one of the following can be inferred from the passage above?",
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                        "Gerald, Robert, and Shirley were the only people who registered for a beginner's golf lesson this morning.",
-                        "None of the people sitting in the clubhouse this morning at ten o'clock had ever played golf.",
-                        "Neither Gerald nor Shirley is an accomplished golfer.",
-                        "Everyone sitting in the clubhouse this morning at ten o'clock registered only for a beginner's golf lesson."
+                        "If few individuals of the indicator species die during the test period, the country will not take action on water pollution.",
+                        "If, after the test, the country does not require that pollution levels be reduced, then few or none of the individuals of the indicator species died as a result of the test.",
+                        "Under the new rules, certain small species will be introduced into water samples taken from 2, 000 sites around the country.",
+                        "In the country in question, there are 1, 550 factories and sewage treatment plants that discharge pollutants illegally."
                     ]
                 }
             ],
             "correctAnswer": [
                 {
                     "id": "lr-response",
-                    "answer": "Neither Gerald nor Shirley is an accomplished golfer."
+                    "answer": "If, after the test, the country does not require that pollution levels be reduced, then few or none of the individuals of the indicator species died as a result of the test."
                 }
             ]
         },
-        "taskIM484": {
-            "baseComponent": "baselineTask",
+        "taskIF497": {
+            "baseComponent": "vennTask",
             "parameters": {
-                "text": "Geoffrey never attends a movie without watching the trailer and generally tries to read the reviews prior to the show. At the theater, Geoffrey sometimes buys popcorn and always buys a bottle of water. Geoffrey recently saw the eighth installment of the Boy Wizard Chronicles."
+                "text": "A theory is either true or false. Galileo's observations of Jupiter's satellites showed that the Ptolemaic theory of the motion of celestial bodies is false. Therefore, since the Copernican theory of planetary motion is inconsistent with the Ptolemaic account, Galileo's observations of Jupiter's satellites proved the truth of the Copernican theory."
             },
             "response": [
                 {
                     "id": "lr-response",
-                    "prompt": "Based on these true statements, which of the following must be true?",
+                    "prompt": "The argument above is open to the objection that it makes the questionable assumption that",
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                        "Geoffrey has read the critics'reviews of the Boy Wizard Chronicles.",
-                        "Geoffrey ate popcorn during the Boy Wizard Chronicles.",
-                        "Geoff Geoffrey watched the Boy Wizard Chronicles' trailer and drank a bottle of water during the show.",
-                        "Geoffrey read the Boy Wizard Chronicles' reviews and drank a bottle of water during the show."
+                        "numerous counterexamples were necessary in order to show the Ptolemaic theory to be false",
+                        "whoever first observed something inconsistent with the truth of the Ptolemaic theory should be credited with having proved that theory false",
+                        "the Ptolemaic and Copernican theories, being inconsistent, cannot both be false",
+                        "the Ptolemaic and Copernican theories, being inconsistent, cannot both be based on exactly the same evidence"
                     ]
                 }
             ],
             "correctAnswer": [
                 {
                     "id": "lr-response",
-                    "answer": "Geoff Geoffrey watched the Boy Wizard Chronicles' trailer and drank a bottle of water during the show."
+                    "answer": "the Ptolemaic and Copernican theories, being inconsistent, cannot both be false"
                 }
             ]
         },
-        "taskIF97": {
-            "baseComponent": "baselineTask",
+        "taskSA133": {
+            "baseComponent": "vennTask",
             "parameters": {
-                "text": "Since anyone who supports the new tax plan has no chance of being elected, and anyone who truly understands economics would not support the tax plan, only someone who truly understands economics would have any chance of being elected."
+                "text": "Activist: Any member of the city council ought either to vote against the proposal or to abstain. But if all the members abstain, the matter will be decided by the city's voters. So at least one member of the city council should vote against the proposal."
             },
             "response": [
                 {
                     "id": "lr-response",
-                    "prompt": "The reasoning in the argument is flawed because the argument ignores the possibility that some people who",
+                    "prompt": "The conclusion of the activist's argument follows logically if which one of the following is assumed?",
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                        "truly understand economics have no chance of being elected.",
-                        "truly understand economics do not support the tax plan",
-                        "do not support the tax plan do not truly understand economics.",
-                        "do not support the tax plan have no chance of being elected."
+                        "No members of the city council will vote in favor of the proposal.",
+                        "If one member of the city council ought to vote against the proposal, the other members should abstain in the vote on the proposal.",
+                        "The proposal should not be decided by the city's voters.",
+                        "If not every member of the city council abstains in the vote on the proposal, the matter will not be decided by the city's voters."
                     ]
                 }
             ],
             "correctAnswer": [
                 {
                     "id": "lr-response",
-                    "answer": "do not support the tax plan do not truly understand economics."
+                    "answer": "The proposal should not be decided by the city's voters."
                 }
             ]
         },
-        "taskIF210": {
-            "baseComponent": "baselineTask",
+        "taskSA458": {
+            "baseComponent": "vennTask",
             "parameters": {
-                "text": "On some hot days the smog in Hillview reaches unsafe levels, and on some hot days the wind blows into Hillview from the east. Ttherefore, on some days when the wind blows into Hillview from the east, the smog in Hillview reaches unsafe levels."
-            },
-            "response": [
-                {
-                    "id": "lr-response",
-                    "prompt": "The reasoning in the argument is flawed in that the argument",
-                    "location": "belowStimulus",
-                    "type": "radio",
-                    "options": [
-                        "contains a premise that is implausible unless the conclusion is presumed to be true",
-                        "fails to recognize that one set might have some members in common with each of two others even though those two other sets have no members in common with each other",
-                        "uses the key term 'unsafe' in one sense in a premise and in another sense in the conclusion",
-                        "infers a particular causal relation from a correlation that could be explained in a variety of other ways"
-                    ]
-                }
-            ],
-            "correctAnswer": [
-                {
-                    "id": "lr-response",
-                    "answer": "fails to recognize that one set might have some members in common with each of two others even though those two other sets have no members in common with each other"
-                }
-            ]
-        },
-        "taskSA370": {
-            "baseComponent": "baselineTask",
-            "parameters": {
-                "text": "Many artists claim that art critics find it is easier to write about art that they dislike than to write about art that they like. Whether or not this hypothesis is correct, most art criticism is devoted to art works that fail to satisfy the critic. Hence it follows that most art criticism is devoted toworks other than the greatest works of art."
-            },
-            "response": [
-                {
-                    "id": "lr-response",
-                    "prompt": "The conclusion above is properly drawn if which one of the following is assumed?",
-                    "location": "belowStimulus",
-                    "type": "radio",
-                    "options": [
-                        "All art critics find it difficult to discover art works that truly satisfy them.",
-                        "A work of art that receives extensive critical attention can thereby become more widely known than it otherwise would have been.",
-                        "The greatest works of art are works that inevitably satisfy all critics.",
-                        "No art critic enjoys writing about art works that he or she dislikes intensely."
-                    ]
-                }
-            ]
-        },
-        "taskSA473": {
-            "baseComponent": "baselineTask",
-            "parameters": {
-                "text": "Having an efficient, attractive subway system makes good economic sense. So, the city needs to purchase new subway cars, since the city should always do what makes good economic sense."
+                "text": "Archaeologists are discovering a great deal about the Sals culture. For example, recent excavations have unearthed smelting furnaces and tools of smelted copper and bronze. There were distinct Sals words for copper and for bronze, but none for iron. Thus, the Sals did not smelt iron."
             },
             "response": [
                 {
@@ -380,10 +334,10 @@
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                        "New subway cars are financially affordable.",
-                        "Cost-effective subway cars are an integral part of an efficient subway system.",
-                        "New subway cars are required in order for the city to have a subway system that is efficient and attractive.",
-                        "Investment in new subway cars makes better economic sense than many of the other investment options open to the city."
+                        "If a culture smelted a metal, then it had a distinct word for that metal.",
+                        "If a culture was unfamiliar with a metal, then it did not have a distinct word for that metal.",
+                        "If a culture smelted copper and bronze, then it had distinct words for copper and bronze.",
+                        "If a culture had a distinct word for a metal, then it smelted that metal."
                     ]
                 }
             ],
@@ -394,112 +348,164 @@
                 }
             ]
         },
-        "taskNA258": {
-            "baseComponent": "baselineTask",
+        "taskNA108": {
+            "baseComponent": "vennTask",
             "parameters": {
-                "text": "Zoologist: Animals can certainly signal each other with sounds and gestures. However, this does not confirm the thesis that animals possess language, for it does not prove that animals possess the ability to use sounds or gestures to refer to concrete objects or abstract ideas."
+                "data": "Although computers can enhance people's ability to communicate, computer games are a cause of underdeveloped communication skills in children. After-school hours spent playing computer games are hours not spent talking with people. Ttherefore, children who spend all their spare time playing these games have less experience in interpersonal communication than other children have."
             },
             "response": [
                 {
                     "id": "lr-response",
-                    "prompt": "Which one of the following is an assumption on which the zoologist's argument depends?",
+                    "prompt": "The argument depends on which of the following assumptions?",
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                        "Some animals that possess a language can refer to both concrete objects and abstract ideas.",
-                        "If a system of sounds or gestures contains no expressions referring to concrete objects or abstract ideas, then that system is not a language.",
-                        "If an animal's system of sounds or gestures is not a language, then that animal is unable to entertain abstract ideas.",
-                        "Animals do not have the cognitive capabilities to entertain abstract ideas."
+                        "The mental skills developed through playing computer games do not contribute significantly to children's intellectual development.",
+                        "Passive activities such as watching television and listening to music do not hinder the development of communication skills in children.",
+                        "Formal instruction contributes little or nothing to children's acquisition of communication skills.",
+                        "Children who do not spend all of their after-school hours playing computer games spend at least some of that time talking with other people."
                     ]
                 }
             ],
             "correctAnswer": [
                 {
                     "id": "lr-response",
-                    "answer": "If a system of sounds or gestures contains no expressions referring to concrete objects or abstract ideas, then that system is not a language."
+                    "answer": "Children who do not spend all of their after-school hours playing computer games spend at least some of that time talking with other people."
                 }
             ]
         },
-        "taskMA316": {
-            "baseComponent": "baselineTask",
+        "taskNA113": {
+            "baseComponent": "vennTask",
             "parameters": {
-                "text": "If Patricia eats a heavy, spicy meal tonight, she will get a bad case of heartbum later. If Patricia gets a bad case of heartbum later, she will be grouchy tomorrow morning. So if Patricia eats a heavy, spicy meal tonight, she will be grouchy tomorrow morning."
+                "text": "Economic considerations color every aspect of international dealings, and nations are just like individuals in that the lender sets the terms of its dealings with the borrower. That is why a nation that owes money to another nation cannot be a world leader."
             },
             "response": [
                 {
                     "id": "lr-response",
-                    "prompt": "Which one of the following arguments is most similar in its logical features to the argument above?",
+                    "prompt": "The reasoning in the passage assumes which one of the following?",
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                        "Maria plants either petunias or geraniums in her garden. If Maria plants petunias, she plants purple ones. If Maria plants geraniums, she plants red ones. Since both petunias and geraniums are flowers, Maria will have either purple or red flowers in her garden.",
-                        "If Shawn starts gardening in early spring, he can plant tomatoes early. If Shawn can plant tomatoes early, he will have plenty of tomatoes for canning. But he does not have plenty of tomatoes for canning, so either he did not start gardening in early spring or he did not plant tomatoes early.",
-                        "If Bryan's fruit trees are to produce well, he must either prune them in the fall or fertilize them in the spring. Since Bryan wants his trees to produce well but forgot to prune them last fall, Bryan is sure to fertilize his trees this spring.",
-                        "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
+                        "A nation that can set the terms of its dealings with other nations is certain to be a world leader.",
+                        "A nation that has no dealings with any other nation cannot be a world leader.",
+                        "A nation that has the terms of its dealings with another nation set by that nation cannot be a world leader.",
+                        "A nation that does not lend to any other nation cannot be a world leader."
                     ]
                 }
             ],
             "correctAnswer": [
                 {
                     "id": "lr-response",
-                    "answer": "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
+                    "answer": "A nation that has the terms of its dealings with another nation set by that nation cannot be a world leader."
                 }
             ]
         },
-        "taskMA417": {
-            "baseComponent": "baselineTask",
+        "taskMA81": {
+            "baseComponent": "vennTask",
             "parameters": {
-                "text": "All historians are able to spot trends. But anyone able to spot trends is able to distinguish the significant from the insignificant. Thus anyone who can distinguish the significant from the insignificant is a historian."
+                "text": "If a society encourages freedom of thought and expression, then, during the time when it does so, creativity will flourish in that society. In the United States creativity flourished during the eighteenth century. It is clear, therefore, that freedom of thought was encouraged in the United States during eighteenth century."
             },
             "response": [
                 {
                     "id": "lr-response",
-                    "prompt": "The flawed reasoning in which one of the following arguments most closely resembles that in the argument above?",
+                    "prompt": "An error of reasoning of the same kind as one contained in the passage is present in each of EXCEPT:",
                     "location": "belowStimulus",
                     "type": "radio",
                     "options": [
-                        "Animals that possess horns or antlers use them not to attack prey but for intraspecies combat. In fact, animals so equipped never have the claws or fangs that are possessed by predators. Thus any animal that fights with members of its own species is not a predator.",
-                        "All expressions used for emotional impact are expressions used by poets. All figures of speech are expressions used for emotional impact. So any expression used by poets is a figure of speech.",
-                        "No one without a deep desire to communicate can be a blues musician. So short-story writers, all of whom have that same desire to communicate, could also have become blues musicians.",
-                        "People living in open and democratic countries have customs that are determined at least in part by an inherited past. But no country's past is a product of free choice. Thus people living in open and democratic countries can never be entirely free."
+                        "According to the airline industry, airfares have to rise if air travel is to be made safer; since airfares were just raised, we can rest assured that air travel will therefore become safer.",
+                        "People who are really interested in the preservation of wildlife obviously do not go hunting for big game; since Gerda has never gone hunting for big game and intends never to do so, it is clear that she is really interested in the preservation of wildlife.",
+                        "If the contents of a bottle are safe to drink, the bottle will not be marked \"poison, \" so, since the bottle is not marked \"poison, \" its contents will be safe to drink.",
+                        "None of the so-called Western democracies is really democratic, because, for a country to be democratic, the opinion of each of its citizens must have a meaningful effect on government, and in none of these countries does each citizen's opinion have such an effect."
                     ]
                 }
             ],
             "correctAnswer": [
                 {
                     "id": "lr-response",
-                    "answer": "All expressions used for emotional impact are expressions used by poets. All figures of speech are expressions used for emotional impact. So any expression used by poets is a figure of speech."
+                    "answer": "None of the so-called Western democracies is really democratic, because, for a country to be democratic, the opinion of each of its citizens must have a meaningful effect on government, and in none of these countries does each citizen's opinion have such an effect."
                 }
             ]
         },
-        "pt_IM1": {
+        "taskMA221": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "Company president: Almost every really successful product introduced in the last ten years has been launched by a massive television advertising campaign. We are using a massive television advertising campaign to introduce the Vegetaste Burger. So the Vegetaste Burger will probably be very successful."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The flawed nature of the company president's argument can most effectively be demonstrated by noting that, by parallel reasoning, we could conclude that",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "almost all of Acme's employees oppose the pending merger with Barrington Corporation, since almost all of Acme's employees are factory workers, and almost all of the factory workers at Acme oppose the merger",
+                        "the president of Corbin Corporation has an office that is not in Corbin's headquarters building, since almost all of the offices in Corbin's headquarters building are small, whereas Corbin's president has a large office",
+                        "Robinson will probably be appointed as president of Sifton University, since almost every one of Sifton's previous presidents had a Ph. D. , and Robinson has a Ph. D.",
+                        "Donna has at least ten years of experience as a computer programmer, since almost every programmer who works for Coderight Software has at least ten years experience, and Donna will probably be hired as a programmer by Coderight"
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Robinson will probably be appointed as president of Sifton University, since almost every one of Sifton's previous presidents had a Ph. D. , and Robinson has a Ph. D."
+                }
+            ]
+        },
+        "taskMA471": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "Some eloquent speakers impress their audiences with the vividness and clarity of the messages conveyed. Speakers who resort to obscenity, however, are not genuinely eloquent, so none of these speakers impress their audiences."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The flawed reasoning in which one of the following is most similar to that in the argument above?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Cities that are centers of commerce are always centers of industry as well. It follows that some centers of commerce are small cities, since there are centers of industry that are not small cities.",
+                        "A culture without myths will also lack fundamental moral certainties. Thus, this culture must lack fundamental moral certainties, since it is devoid of myth.",
+                        "Sculptors sometimes produce significant works of art. But musicians are not sculptors. Hence, musicians never produce significant works of art.",
+                        "Most farmers like living in rural areas. Since Carla is not a farmer, she probably would not enjoy living in the country."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Sculptors sometimes produce significant works of art. But musicians are not sculptors. Hence, musicians never produce significant works of art."
+                }
+            ]
+        },
+        "pt_IM180": {
             "baseComponent": "post-task"
         },
-        "pt_IM432": {
+        "pt_IM193": {
             "baseComponent": "post-task"
         },
-        "pt_IM484": {
+        "pt_IF497": {
             "baseComponent": "post-task"
         },
-        "pt_IF97": {
+        "pt_SA133": {
             "baseComponent": "post-task"
         },
-        "pt_IF210": {
+        "pt_SA458": {
             "baseComponent": "post-task"
         },
-        "pt_SA370": {
+        "pt_NA108": {
             "baseComponent": "post-task"
         },
-        "pt_SA473": {
+        "pt_NA113": {
             "baseComponent": "post-task"
         },
-        "pt_NA258": {
+        "pt_MA81": {
             "baseComponent": "post-task"
         },
-        "pt_MA316": {
+        "pt_MA221": {
             "baseComponent": "post-task"
         },
-        "pt_MA417": {
+        "pt_MA471": {
             "baseComponent": "post-task"
         },
         "post-study": {
@@ -535,71 +541,71 @@
                     {
                         "order": "fixed",
                         "components": [
-                            "taskIM1",
-                            "pt_IM1"
+                            "taskIM180",
+                            "pt_IM180"
                         ]
                     },
                     {
                         "order": "fixed",
                         "components": [
-                            "taskIM432",
-                            "pt_IM432"
+                            "taskIM193",
+                            "pt_IM193"
                         ]
                     },
                     {
                         "order": "fixed",
                         "components": [
-                            "taskIM484",
-                            "pt_IM484"
+                            "taskIF497",
+                            "pt_IF497"
                         ]
                     },
                     {
                         "order": "fixed",
                         "components": [
-                            "taskIF97",
-                            "pt_IF97"
+                            "taskSA133",
+                            "pt_SA133"
                         ]
                     },
                     {
                         "order": "fixed",
                         "components": [
-                            "taskIF210",
-                            "pt_IF210"
+                            "taskSA458",
+                            "pt_SA458"
                         ]
                     },
                     {
                         "order": "fixed",
                         "components": [
-                            "taskSA370",
-                            "pt_SA370"
+                            "taskNA108",
+                            "pt_NA108"
                         ]
                     },
                     {
                         "order": "fixed",
                         "components": [
-                            "taskSA473",
-                            "pt_SA473"
+                            "taskNA113",
+                            "pt_NA113"
                         ]
                     },
                     {
                         "order": "fixed",
                         "components": [
-                            "taskNA258",
-                            "pt_NA258"
+                            "taskMA81",
+                            "pt_MA81"
                         ]
                     },
                     {
                         "order": "fixed",
                         "components": [
-                            "taskMA316",
-                            "pt_MA316"
+                            "taskMA221",
+                            "pt_MA221"
                         ]
                     },
                     {
                         "order": "fixed",
                         "components": [
-                            "taskMA417",
-                            "pt_MA417"
+                            "taskMA471",
+                            "pt_MA471"
                         ]
                     }
                 ]

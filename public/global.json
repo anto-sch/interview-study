@@ -4,6 +4,9 @@
     "as-venn-study-part-1",
     "as-euler-study-part-1",
     "as-baseline-study-part-1",
+    "as-venn-study-part-2",
+    "as-euler-study-part-2",
+    "as-baseline-study-part-2",
     "as-interview-study",
     "basic-questionnaire-study",
     "tutorial",
@@ -38,23 +41,31 @@
     "test-randomization",
     "test-skip-logic",
     "test-step-logic"
-
   ],
   "configs": {
     "as-interview-study": {
-	    "path": "as-interview-study/config.json"
+      "path": "as-interview-study/config.json"
     },
     "as-venn-study-part-1": {
-	    "path": "as-venn-study-part-1/config.json"
+      "path": "as-venn-study-part-1/config.json"
     },
     "as-euler-study-part-1": {
-	    "path": "as-euler-study-part-1/config.json"
+      "path": "as-euler-study-part-1/config.json"
     },
     "as-baseline-study-part-1": {
-	    "path": "as-baseline-study-part-1/config.json"
+      "path": "as-baseline-study-part-1/config.json"
+    },
+    "as-venn-study-part-2": {
+      "path": "as-venn-study-part-2/config.json"
+    },
+    "as-euler-study-part-2": {
+      "path": "as-euler-study-part-2/config.json"
+    },
+    "as-baseline-study-part-2": {
+      "path": "as-baseline-study-part-2/config.json"
     },
     "basic-questionnaire-study": {
-	    "path": "basic-questionnaire-study/config.json"
+      "path": "basic-questionnaire-study/config.json"
     },
     "tutorial": {
       "path": "tutorial/config.json"
