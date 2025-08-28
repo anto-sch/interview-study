@@ -1,0 +1,9 @@
+# Consent
+
+I have been informed in writing about the study and the experimental procedure and agree to participate in the study.
+
+I agree to the described collection and processing of data (demographic data, audio recording of interview). This data is recorded and evaluated in pseudonymized form at the Interdisciplinary Center for Scientific Computing (IWR), using a number and without disclosing my name. There is a coding list that links my name to this number. This coding list is only accessible to the experimenters and the project manager, meaning that only these individuals can link the collected data to my name. Once data collection has been completed (i.e., 4 weeks after study completion) the coding list will be deleted. My data will then be anonymized. This means that no one will be able to link the collected data to my name. The audio recording of the interview will be transcribed and then immediately deleted. I am aware that I can revoke my consent to the storage of this data without any disadvantages for me. I can request the deletion of all my data at any time. However, if the coding list has already been deleted, my data record can no longer be identified and therefore cannot be deleted.
+
+I agree that my fully anonymized data may be used for research purposes. For this purpose, they will be stored on hard drives at the Heidelberg University for at least 10 years after data evaluation or at least 10 years after publication of a publication on this study. I understand that participation in the study is voluntary and that I can terminate my participation at any time without giving reasons.
+
+By accepting below, you acknowledge that you have been informed about and consent to be a participant in the study described above. Make sure that your questions are answered to your satisfaction before signing. You are entitled to retain a copy of this consent agreement.

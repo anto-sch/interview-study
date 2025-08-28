@@ -1,0 +1,112 @@
+{
+  "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.1.1/src/parser/LibraryConfigSchema.json",
+  "description": "A 10-item questionnaire adapted from the System Usability Scale (SUS) designed to assess the usability of hints.",
+  "components": {
+    "hus": {
+      "type": "questionnaire",
+      "response": [
+        {
+          "id": "use-frequently",
+          "prompt": "I think that I would like to use the hints **frequently**",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        },
+        {
+          "id": "unnecessarily-complex",
+          "prompt": "I found the hints **unnecessarily complex**",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        },
+        {
+          "id": "easy-to-use",
+          "prompt": "I thought the hints were **easy to use**",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        },
+        {
+          "id": "need-technical-support",
+          "prompt": "I think that I would **need the support of a professional or teacher** to be able to use the hints",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        },
+        {
+          "id": "well-integrated",
+          "prompt": "I found the various steps of the hints were **well integrated**",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        },
+        {
+          "id": "too-inconsistent",
+          "prompt": "I thought there were **too many inconsistencies** in the hints",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        },
+        {
+          "id": "quick-to-learn",
+          "prompt": "I would imagine that most people would **learn to use the hints very quickly**",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        },
+        {
+          "id": "cumbersome-to-use",
+          "prompt": "I found the hints **very cumbersome** to use",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        },
+        {
+          "id": "confident-using",
+          "prompt": "I felt **very confident** using the hints",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        },
+        {
+          "id": "needed-to-learn-lot",
+          "prompt": "I needed to **learn a lot of things** before I could get going with the hints",
+          "required": true,
+          "location": "aboveStimulus",
+          "type": "likert",
+          "numItems": 5,
+          "rightLabel": "Strongly Agree",
+          "leftLabel": "Strongly Disagree"
+        }
+      ]
+    }
+  },
+  "sequences": {}
+}

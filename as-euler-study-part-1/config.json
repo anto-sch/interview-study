@@ -1,0 +1,813 @@
+{
+    "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.1.1/src/parser/StudyConfigSchema.json",
+    "studyMetadata": {
+        "title": "Logical Diagramming for Conditionals",
+        "version": "pilot",
+        "authors": [
+            "Antonia Schlieder"
+        ],
+        "date": "2025-08-19",
+        "description": "First part of a user study on Euler diagrams as hints for solving reasoning tasks on conditionals in natural language.",
+        "organizations": [
+            "Heidelberg University"
+        ]
+    },
+    "uiConfig": {
+        "contactEmail": "antonia.schlieder@iwr.uni-heidelberg.de",
+        "helpTextPath": "as-euler-study-part-1/assets/help.md",
+        "logoPath": "revisitAssets/revisitLogoSquare.svg",
+        "withProgressBar": true,
+        "autoDownloadStudy": false,
+        "sidebar": true
+    },
+    "importedLibraries": [
+        "hus"
+    ],
+    "baseComponents": {
+        "post-task": {
+            "description": "post-task questionnaire",
+            "instruction": "",
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "seq",
+                    "prompt": "1. Overall, the task was ...",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "very difficult",
+                    "rightLabel": "very easy",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "confidence",
+                    "prompt": "2. How certain are you that you selected the correct answer?",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "very uncertain",
+                    "rightLabel": "very certain",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-context",
+                    "prompt": "3. I understood the logical structure of the context.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-question",
+                    "prompt": "4. I understood what kind of logical relationship the question was asking about.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-answers",
+                    "prompt": "5. I understood the logical structure of the answer options.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-hints",
+                    "prompt": "6. I understood how the hints relate to the context.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                }
+            ]
+        },
+        "vennTask": {
+            "description": "A logical reasoning task with Venn diagrams as hints",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-euler-study-part-1/assets/VennTask.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        },
+        "eulerTask": {
+            "description": "A logical reasoning task with Euler diagrams as hints",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-euler-study-part-1/assets/EulerTask.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        },
+        "baseline": {
+            "description": "A logical reasoning task without hints as baseline.",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-euler-study-part-1/assets/BaselineTask.tsx",
+            "parameters": {
+                "text": "The context of the task."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        }
+    },
+    "components": {
+        "introduction": {
+            "type": "markdown",
+            "path": "as-euler-study-part-1/assets/introduction.md",
+            "response": []
+        },
+        "consent": {
+            "type": "markdown",
+            "path": "as-euler-study-part-1/assets/consent-cm.md",
+            "nextButtonText": "Agree",
+            "response": [
+                {
+                    "id": "accept",
+                    "prompt": "Do you consent to the study and wish to continue?",
+                    "requiredValue": "Accept",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Decline",
+                        "Accept"
+                    ]
+                }
+            ]
+        },
+        "tutorial1": {
+            "type": "markdown",
+            "path": "as-euler-study-part-1/assets/tutorial1.md",
+            "response": []
+        },
+        "tutorial2": {
+            "type": "markdown",
+            "path": "as-euler-study-part-1/assets/tutorial2.md",
+            "response": []
+        },
+        "tutorial4": {
+            "type": "markdown",
+            "path": "as-euler-study-part-1/assets/tutorial4.md",
+            "response": []
+        },
+        "taskIM1": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "B",
+                        "consequent": "T",
+                        "text": "It takes <mark class='T'>a particular talent</mark> <mark class='B'>to be a successful business manager</mark>."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "S",
+                        "consequent": "T",
+                        "text": "<mark class='S'>Business courses can help people to solve management problems</mark>, but such courses can do so only for <mark class='T'>those people with managerial talent</mark>. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "If the statements above are true, which of the following must also be true on the basis of them?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "People who are helped by business courses in solving management problems also have managerial talent.",
+                        "Those people who have never taken business courses are unable to solve management problems when such problems arise.",
+                        "People who lack managerial talent are more likely to take business courses than are people who have managerial talent.",
+                        "People who are already skilled at solving management problems are unlikely to benefit from business courses."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "People who are helped by business courses in solving management problems also have managerial talent."
+                }
+            ]
+        },
+        "taskIM432": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "S",
+                        "consequent": "R",
+                        "text": "Everyone <mark class='S'>sitting in the clubhouse of the golf course today at ten o' clock</mark> <mark class='R'>had just registered for a beginner' s golf lesson</mark>. Gerald, Robert, and Shirley <mark class='S'>were sitting in the clubhouse this morning at ten o' clock</mark>."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "A",
+                        "consequent": "not R",
+                        "text": "No <mark class='A'>accomplished golfer</mark> would <mark class='R not'>register for a beginner' s golf lesson</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "If the statements above are true, which one of the following must also be true on the basis of them?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Gerald, Robert, and Shirley were the only people who registered for a beginner's golf lesson this morning.",
+                        "None of the people sitting in the clubhouse this morning at ten o'clock had ever played golf.",
+                        "Neither Gerald nor Shirley is an accomplished golfer.",
+                        "Everyone sitting in the clubhouse this morning at ten o'clock registered only for a beginner's golf lesson."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Neither Gerald nor Shirley is an accomplished golfer."
+                }
+            ]
+        },
+        "taskIM484": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "A",
+                        "consequent": "T",
+                        "text": "Geoffrey never <mark class='A'>attends a movie</mark> without <mark class='T'>watching the trailer</mark> and generally tries to read the reviews prior to the show."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "A",
+                        "consequent": "W",
+                        "text": "<mark class='A'>At the theater</mark>, Geoffrey sometimes buys popcorn and always <mark class='W'>buys a bottle of water</mark>. Geoffrey <mark class='A'>recently saw the eighth installment of the Boy Wizard Chronicles</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Based on these true statements, which of the following must be true?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Geoffrey has read the critics'reviews of the Boy Wizard Chronicles.",
+                        "Geoffrey ate popcorn during the Boy Wizard Chronicles.",
+                        "Geoff Geoffrey watched the Boy Wizard Chronicles' trailer and drank a bottle of water during the show.",
+                        "Geoffrey read the Boy Wizard Chronicles' reviews and drank a bottle of water during the show."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Geoff Geoffrey watched the Boy Wizard Chronicles' trailer and drank a bottle of water during the show."
+                }
+            ]
+        },
+        "taskIF97": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "T",
+                        "consequent": "not C",
+                        "text": "Since <mark class='T'>anyone who supports the new tax plan</mark> has <mark class='C not'>no chance of being elected</mark>, "
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "E",
+                        "consequent": "not T",
+                        "text": "and <mark class='E'>anyone who truly understands economics</mark> would <mark class='T not'>not support the tax plan</mark>, "
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "C",
+                        "consequent": "E",
+                        "text": "only <mark class='E'>someone who truly understands economics</mark> would <mark class='C'>have any chance of being elected.</mark>"
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The reasoning in the argument is flawed because the argument ignores the possibility that some people who",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "truly understand economics have no chance of being elected.",
+                        "truly understand economics do not support the tax plan",
+                        "do not support the tax plan do not truly understand economics.",
+                        "do not support the tax plan have no chance of being elected."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "do not support the tax plan do not truly understand economics."
+                }
+            ]
+        },
+        "taskIF210": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "H",
+                        "consequent": "S",
+                        "text": "<mark class='H'>On some hot days</mark> <mark class='S'>the smog in Hillview reaches unsafe levels</mark>,"
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "H",
+                        "consequent": "W",
+                        "text": " and <mark class='H'>on some hot days</mark> <mark class='W'>the wind blows into Hillview from the east</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "W",
+                        "consequent": "S",
+                        "text": "Therefore, on some days when <mark class='W'>the wind blows into Hillview from the east</mark>, <mark class='S'>the smog in Hillview reaches unsafe levels</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The reasoning in the argument is flawed in that the argument",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "contains a premise that is implausible unless the conclusion is presumed to be true",
+                        "fails to recognize that one set might have some members in common with each of two others even though those two other sets have no members in common with each other",
+                        "uses the key term 'unsafe' in one sense in a premise and in another sense in the conclusion",
+                        "infers a particular causal relation from a correlation that could be explained in a variety of other ways"
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "fails to recognize that one set might have some members in common with each of two others even though those two other sets have no members in common with each other"
+                }
+            ]
+        },
+        "taskSA370": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "C",
+                        "consequent": "not S",
+                        "text": "Many artists claim that art critics find it is easier to write about art that they dislike than to write about art that they like. Whether or not this hypothesis is correct, <mark class='C'>most art criticism is devoted to</mark> <mark class='S not'>art works that fail to satisfy the critic</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "C",
+                        "consequent": "not G",
+                        "text": "Hence it follows that <mark class='C'>most art criticism is devoted to</mark> <mark class='G not'>works other than the greatest works of art</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The conclusion above is properly drawn if which one of the following is assumed?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "All art critics find it difficult to discover art works that truly satisfy them.",
+                        "A work of art that receives extensive critical attention can thereby become more widely known than it otherwise would have been.",
+                        "The greatest works of art are works that inevitably satisfy all critics.",
+                        "No art critic enjoys writing about art works that he or she dislikes intensely."
+                    ]
+                }
+            ]
+        },
+        "taskSA473": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "E",
+                        "consequent": "G",
+                        "text": "<mark class='E'>Having an efficient, attractive subway system</mark> <mark class='G'>makes good economic sense</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "N",
+                        "consequent": "G",
+                        "text": "So, <mark class='N'>the city needs to purchase new subway cars</mark>, since <mark class='G'>the city should always do what makes good economic sense</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The conclusion drawn above follows logically if which one of the following is assumed?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "New subway cars are financially affordable.",
+                        "Cost-effective subway cars are an integral part of an efficient subway system.",
+                        "New subway cars are required in order for the city to have a subway system that is efficient and attractive.",
+                        "Investment in new subway cars makes better economic sense than many of the other investment options open to the city."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "If a culture smelted a metal, then it had a distinct word for that metal."
+                }
+            ]
+        },
+        "taskNA258": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "S",
+                        "consequent": "not L",
+                        "text": "Zoologist: <mark class='S'>Animals can certainly signal each other with sounds and gestures</mark>. However, <mark class='S'>this</mark> does not <mark class='L not'>confirm the thesis that animals possess language</mark>, "
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "S",
+                        "consequent": "not P",
+                        "text": "for <mark class='S'>it</mark> does not <mark class='P not'>prove that animals possess the ability to use sounds or gestures to refer to concrete objects or abstract ideas</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Which one of the following is an assumption on which the zoologist's argument depends?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Some animals that possess a language can refer to both concrete objects and abstract ideas.",
+                        "If a system of sounds or gestures contains no expressions referring to concrete objects or abstract ideas, then that system is not a language.",
+                        "If an animal's system of sounds or gestures is not a language, then that animal is unable to entertain abstract ideas.",
+                        "Animals do not have the cognitive capabilities to entertain abstract ideas."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "If a system of sounds or gestures contains no expressions referring to concrete objects or abstract ideas, then that system is not a language."
+                }
+            ]
+        },
+        "taskMA316": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "M",
+                        "consequent": "H",
+                        "text": "If Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='H'>get a bad case of heartburn</mark> later."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "H",
+                        "consequent": "G",
+                        "text": "If Patricia <mark class='H'>gets a bad case of heartburn</mark> later, she will <mark class='G'>be grouchy tomorrow morning</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "M",
+                        "consequent": "G",
+                        "text": "So if Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='G'>be grouchy tomorrow morning</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Which one of the following arguments is most similar in its logical features to the argument above?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Maria plants either petunias or geraniums in her garden. If Maria plants petunias, she plants purple ones. If Maria plants geraniums, she plants red ones. Since both petunias and geraniums are flowers, Maria will have either purple or red flowers in her garden.",
+                        "If Shawn starts gardening in early spring, he can plant tomatoes early. If Shawn can plant tomatoes early, he will have plenty of tomatoes for canning. But he does not have plenty of tomatoes for canning, so either he did not start gardening in early spring or he did not plant tomatoes early.",
+                        "If Bryan's fruit trees are to produce well, he must either prune them in the fall or fertilize them in the spring. Since Bryan wants his trees to produce well but forgot to prune them last fall, Bryan is sure to fertilize his trees this spring.",
+                        "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
+                }
+            ]
+        },
+        "taskMA417": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "conditional": "premise",
+                        "antecedent": "H",
+                        "consequent": "S",
+                        "text": "All <mark class='H'>historians</mark> are <mark class='S'>able to spot trends</mark>."
+                    },
+                    {
+                        "conditional": "premise",
+                        "antecedent": "S",
+                        "consequent": "D",
+                        "text": "But anyone <mark class='S'>able to spot trends</mark> is <mark class='D'>able to distinguish the significant from the insignificant</mark>."
+                    },
+                    {
+                        "conditional": "conclusion",
+                        "antecedent": "D",
+                        "consequent": "H",
+                        "text": "Thus anyone who <mark class='D'>can distinguish the significant from the insignificant</mark> is <mark class='H'>a historian</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The flawed reasoning in which one of the following arguments most closely resembles that in the argument above?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Animals that possess horns or antlers use them not to attack prey but for intraspecies combat. In fact, animals so equipped never have the claws or fangs that are possessed by predators. Thus any animal that fights with members of its own species is not a predator.",
+                        "All expressions used for emotional impact are expressions used by poets. All figures of speech are expressions used for emotional impact. So any expression used by poets is a figure of speech.",
+                        "No one without a deep desire to communicate can be a blues musician. So short-story writers, all of whom have that same desire to communicate, could also have become blues musicians.",
+                        "People living in open and democratic countries have customs that are determined at least in part by an inherited past. But no country's past is a product of free choice. Thus people living in open and democratic countries can never be entirely free."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "All expressions used for emotional impact are expressions used by poets. All figures of speech are expressions used for emotional impact. So any expression used by poets is a figure of speech."
+                }
+            ]
+        },
+        "pt_IM1": {
+            "baseComponent": "post-task"
+        },
+        "pt_IM432": {
+            "baseComponent": "post-task"
+        },
+        "pt_IM484": {
+            "baseComponent": "post-task"
+        },
+        "pt_IF97": {
+            "baseComponent": "post-task"
+        },
+        "pt_IF210": {
+            "baseComponent": "post-task"
+        },
+        "pt_SA370": {
+            "baseComponent": "post-task"
+        },
+        "pt_SA473": {
+            "baseComponent": "post-task"
+        },
+        "pt_NA258": {
+            "baseComponent": "post-task"
+        },
+        "pt_MA316": {
+            "baseComponent": "post-task"
+        },
+        "pt_MA417": {
+            "baseComponent": "post-task"
+        },
+        "post-study": {
+            "description": "post-study questionnaire",
+            "instruction": "",
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "hint-help",
+                    "prompt": "The hints made solving the tasks easier.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "hint-info",
+                    "prompt": "I felt that the hints offered just the right amount of information to help me solve the task.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "strategies",
+                    "prompt": "Please describe if you used any strategies (e.g., process of elimination) or aids (e.g., sketching out thoughts/taking notes) while working on the tasks.",
+                    "location": "aboveStimulus",
+                    "type": "longText"
+                },
+                {
+                    "id": "hints",
+                    "prompt": "Please describe how you used the hints for solving the tasks. How did they affect your strategies?",
+                    "location": "aboveStimulus",
+                    "type": "longText"
+                },
+                {
+                    "id": "exp_prog",
+                    "prompt": "Was there anything in the study that did not work? Did you see any errors?",
+                    "location": "aboveStimulus",
+                    "type": "longText"
+                }
+            ]
+        }
+    },
+    "sequence": {
+        "order": "fixed",
+        "components": [
+            "introduction",
+            "consent",
+            "tutorial1",
+            "tutorial2",
+            "tutorial4",
+            {
+                "order": "random",
+                "components": [
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIM1",
+                            "pt_IM1"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIM432",
+                            "pt_IM432"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIM484",
+                            "pt_IM484"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIF97",
+                            "pt_IF97"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIF210",
+                            "pt_IF210"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskSA370",
+                            "pt_SA370"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskSA473",
+                            "pt_SA473"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskNA258",
+                            "pt_NA258"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskMA316",
+                            "pt_MA316"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskMA417",
+                            "pt_MA417"
+                        ]
+                    }
+                ]
+            },
+            "$hus.co.hus",
+            "post-study"
+        ]
+    }
+}

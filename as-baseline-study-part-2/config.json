@@ -1,0 +1,616 @@
+{
+    "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.1.1/src/parser/StudyConfigSchema.json",
+    "studyMetadata": {
+        "title": "Logical Diagramming for Conditionals",
+        "version": "pilot",
+        "authors": [
+            "Antonia Schlieder"
+        ],
+        "date": "2025-08-19",
+        "description": "Second part of a user study that functions as the baseline for reasoning with conditionals in natural language.",
+        "organizations": [
+            "Heidelberg University"
+        ]
+    },
+    "uiConfig": {
+        "contactEmail": "antonia.schlieder@iwr.uni-heidelberg.de",
+        "helpTextPath": "as-baseline-study-part-1/assets/help.md",
+        "logoPath": "revisitAssets/revisitLogoSquare.svg",
+        "withProgressBar": true,
+        "autoDownloadStudy": false,
+        "sidebar": true
+    },
+    "baseComponents": {
+        "post-task": {
+            "description": "post-task questionnaire",
+            "instruction": "",
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "seq",
+                    "prompt": "1. Overall, the task was ...",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "very difficult",
+                    "rightLabel": "very easy",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "confidence",
+                    "prompt": "2. How certain are you that you selected the correct answer?",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "very uncertain",
+                    "rightLabel": "very certain",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-context",
+                    "prompt": "3. I understood the logical structure of the context.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-question",
+                    "prompt": "4. I understood what kind of logical relationship the question was asking about.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                },
+                {
+                    "id": "understand-answers",
+                    "prompt": "5. I understood the logical structure of the answer options.",
+                    "location": "aboveStimulus",
+                    "type": "likert",
+                    "numItems": 7,
+                    "leftLabel": "strongly disagree",
+                    "rightLabel": "strongly agree",
+                    "required": true,
+                    "withDivider": true
+                }
+            ]
+        },
+        "vennTask": {
+            "description": "A logical reasoning task with Venn diagrams as hints",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-baseline-study-part-1/assets/VennTask.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        },
+        "eulerTask": {
+            "description": "A logical reasoning task with Euler diagrams as hints",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-baseline-study-part-1/assets/EulerTask.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        },
+        "baselineTask": {
+            "description": "A logical reasoning task without hints as baseline.",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-baseline-study-part-1/assets/BaselineTask.tsx",
+            "parameters": {
+                "text": "The context of the task."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        }
+    },
+    "components": {
+        "introduction": {
+            "type": "markdown",
+            "path": "as-baseline-study-part-1/assets/introduction.md",
+            "response": []
+        },
+        "consent": {
+            "type": "markdown",
+            "path": "as-baseline-study-part-1/assets/consent-cm.md",
+            "nextButtonText": "Agree",
+            "response": [
+                {
+                    "id": "accept",
+                    "prompt": "Do you consent to the study and wish to continue?",
+                    "requiredValue": "Accept",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Decline",
+                        "Accept"
+                    ]
+                }
+            ]
+        },
+        "tutorial1": {
+            "type": "markdown",
+            "path": "as-baseline-study-part-1/assets/tutorial1.md",
+            "response": []
+        },
+        "tutorial4": {
+            "type": "markdown",
+            "path": "as-baseline-study-part-1/assets/tutorial4.md",
+            "response": []
+        },
+        "taskIM180": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "Amy McConnell is considering running for election against the incumbent, Gregory Lutz. If Lutz has a large campaign fund, then he is already far ahead, and McConnell will not run against him. If Lutz does not have a large campaign fund, McConnell will scrutinize Lutz' s record for any hints of scandal that she could use against him. Anything of a scandalous nature would increase McConnell' s chances of winning, and she would campaign for election. If Lutz has a clean record, however, McConnell will not run against him."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Given the information in the passage, which one of the following must be false?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Lutz's record contains nothing that would increase McConnell's chances of winning, and she runs against him.",
+                        "Lutz's record contains scandalous items, and McConnell does not run against him.",
+                        "Lutz does not have a large campaign fund, and McConnell does not run against him.",
+                        "Lutz's record contains items that would increase McConnell's chances of winning, and she runs against him."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Lutz's record contains nothing that would increase McConnell's chances of winning, and she runs against him."
+                }
+            ]
+        },
+        "taskIM193": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "Small species, such as fathead minnows and waterfleas, can be used to uncover the quantity of toxic chemicals being dumped into rivers and streams. Under new rules issued in a certain country, these 'indicator' species will be used to test the effluent pouring out of sewage treatment plants and factories among the country' s waterways. If many of these animals die as a result of the test, the country is going to require that pollution levels be reduced. The new rules will apply to about 450 of the 2, 000 factories and sewage treatment plants that legally discharge into the country's rivers and streams."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Which one of the following can be inferred from the passage above?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "If few individuals of the indicator species die during the test period, the country will not take action on water pollution.",
+                        "If, after the test, the country does not require that pollution levels be reduced, then few or none of the individuals of the indicator species died as a result of the test.",
+                        "Under the new rules, certain small species will be introduced into water samples taken from 2, 000 sites around the country.",
+                        "In the country in question, there are 1, 550 factories and sewage treatment plants that discharge pollutants illegally."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "If, after the test, the country does not require that pollution levels be reduced, then few or none of the individuals of the indicator species died as a result of the test."
+                }
+            ]
+        },
+        "taskIF497": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "A theory is either true or false. Galileo's observations of Jupiter's satellites showed that the Ptolemaic theory of the motion of celestial bodies is false. Therefore, since the Copernican theory of planetary motion is inconsistent with the Ptolemaic account, Galileo's observations of Jupiter's satellites proved the truth of the Copernican theory."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The argument above is open to the objection that it makes the questionable assumption that",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "numerous counterexamples were necessary in order to show the Ptolemaic theory to be false",
+                        "whoever first observed something inconsistent with the truth of the Ptolemaic theory should be credited with having proved that theory false",
+                        "the Ptolemaic and Copernican theories, being inconsistent, cannot both be false",
+                        "the Ptolemaic and Copernican theories, being inconsistent, cannot both be based on exactly the same evidence"
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "the Ptolemaic and Copernican theories, being inconsistent, cannot both be false"
+                }
+            ]
+        },
+        "taskSA133": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "Activist: Any member of the city council ought either to vote against the proposal or to abstain. But if all the members abstain, the matter will be decided by the city's voters. So at least one member of the city council should vote against the proposal."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The conclusion of the activist's argument follows logically if which one of the following is assumed?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "No members of the city council will vote in favor of the proposal.",
+                        "If one member of the city council ought to vote against the proposal, the other members should abstain in the vote on the proposal.",
+                        "The proposal should not be decided by the city's voters.",
+                        "If not every member of the city council abstains in the vote on the proposal, the matter will not be decided by the city's voters."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "The proposal should not be decided by the city's voters."
+                }
+            ]
+        },
+        "taskSA458": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "Archaeologists are discovering a great deal about the Sals culture. For example, recent excavations have unearthed smelting furnaces and tools of smelted copper and bronze. There were distinct Sals words for copper and for bronze, but none for iron. Thus, the Sals did not smelt iron."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The conclusion drawn above follows logically if which one of the following is assumed?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "If a culture smelted a metal, then it had a distinct word for that metal.",
+                        "If a culture was unfamiliar with a metal, then it did not have a distinct word for that metal.",
+                        "If a culture smelted copper and bronze, then it had distinct words for copper and bronze.",
+                        "If a culture had a distinct word for a metal, then it smelted that metal."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "If a culture smelted a metal, then it had a distinct word for that metal."
+                }
+            ]
+        },
+        "taskNA108": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": "Although computers can enhance people's ability to communicate, computer games are a cause of underdeveloped communication skills in children. After-school hours spent playing computer games are hours not spent talking with people. Ttherefore, children who spend all their spare time playing these games have less experience in interpersonal communication than other children have."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The argument depends on which of the following assumptions?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "The mental skills developed through playing computer games do not contribute significantly to children's intellectual development.",
+                        "Passive activities such as watching television and listening to music do not hinder the development of communication skills in children.",
+                        "Formal instruction contributes little or nothing to children's acquisition of communication skills.",
+                        "Children who do not spend all of their after-school hours playing computer games spend at least some of that time talking with other people."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Children who do not spend all of their after-school hours playing computer games spend at least some of that time talking with other people."
+                }
+            ]
+        },
+        "taskNA113": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "Economic considerations color every aspect of international dealings, and nations are just like individuals in that the lender sets the terms of its dealings with the borrower. That is why a nation that owes money to another nation cannot be a world leader."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The reasoning in the passage assumes which one of the following?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A nation that can set the terms of its dealings with other nations is certain to be a world leader.",
+                        "A nation that has no dealings with any other nation cannot be a world leader.",
+                        "A nation that has the terms of its dealings with another nation set by that nation cannot be a world leader.",
+                        "A nation that does not lend to any other nation cannot be a world leader."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "A nation that has the terms of its dealings with another nation set by that nation cannot be a world leader."
+                }
+            ]
+        },
+        "taskMA81": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "If a society encourages freedom of thought and expression, then, during the time when it does so, creativity will flourish in that society. In the United States creativity flourished during the eighteenth century. It is clear, therefore, that freedom of thought was encouraged in the United States during eighteenth century."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "An error of reasoning of the same kind as one contained in the passage is present in each of EXCEPT:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "According to the airline industry, airfares have to rise if air travel is to be made safer; since airfares were just raised, we can rest assured that air travel will therefore become safer.",
+                        "People who are really interested in the preservation of wildlife obviously do not go hunting for big game; since Gerda has never gone hunting for big game and intends never to do so, it is clear that she is really interested in the preservation of wildlife.",
+                        "If the contents of a bottle are safe to drink, the bottle will not be marked \"poison, \" so, since the bottle is not marked \"poison, \" its contents will be safe to drink.",
+                        "None of the so-called Western democracies is really democratic, because, for a country to be democratic, the opinion of each of its citizens must have a meaningful effect on government, and in none of these countries does each citizen's opinion have such an effect."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "None of the so-called Western democracies is really democratic, because, for a country to be democratic, the opinion of each of its citizens must have a meaningful effect on government, and in none of these countries does each citizen's opinion have such an effect."
+                }
+            ]
+        },
+        "taskMA221": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "Company president: Almost every really successful product introduced in the last ten years has been launched by a massive television advertising campaign. We are using a massive television advertising campaign to introduce the Vegetaste Burger. So the Vegetaste Burger will probably be very successful."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The flawed nature of the company president's argument can most effectively be demonstrated by noting that, by parallel reasoning, we could conclude that",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "almost all of Acme's employees oppose the pending merger with Barrington Corporation, since almost all of Acme's employees are factory workers, and almost all of the factory workers at Acme oppose the merger",
+                        "the president of Corbin Corporation has an office that is not in Corbin's headquarters building, since almost all of the offices in Corbin's headquarters building are small, whereas Corbin's president has a large office",
+                        "Robinson will probably be appointed as president of Sifton University, since almost every one of Sifton's previous presidents had a Ph. D. , and Robinson has a Ph. D.",
+                        "Donna has at least ten years of experience as a computer programmer, since almost every programmer who works for Coderight Software has at least ten years experience, and Donna will probably be hired as a programmer by Coderight"
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Robinson will probably be appointed as president of Sifton University, since almost every one of Sifton's previous presidents had a Ph. D. , and Robinson has a Ph. D."
+                }
+            ]
+        },
+        "taskMA471": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "text": "Some eloquent speakers impress their audiences with the vividness and clarity of the messages conveyed. Speakers who resort to obscenity, however, are not genuinely eloquent, so none of these speakers impress their audiences."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The flawed reasoning in which one of the following is most similar to that in the argument above?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Cities that are centers of commerce are always centers of industry as well. It follows that some centers of commerce are small cities, since there are centers of industry that are not small cities.",
+                        "A culture without myths will also lack fundamental moral certainties. Thus, this culture must lack fundamental moral certainties, since it is devoid of myth.",
+                        "Sculptors sometimes produce significant works of art. But musicians are not sculptors. Hence, musicians never produce significant works of art.",
+                        "Most farmers like living in rural areas. Since Carla is not a farmer, she probably would not enjoy living in the country."
+                    ]
+                }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "Sculptors sometimes produce significant works of art. But musicians are not sculptors. Hence, musicians never produce significant works of art."
+                }
+            ]
+        },
+        "pt_IM180": {
+            "baseComponent": "post-task"
+        },
+        "pt_IM193": {
+            "baseComponent": "post-task"
+        },
+        "pt_IF497": {
+            "baseComponent": "post-task"
+        },
+        "pt_SA133": {
+            "baseComponent": "post-task"
+        },
+        "pt_SA458": {
+            "baseComponent": "post-task"
+        },
+        "pt_NA108": {
+            "baseComponent": "post-task"
+        },
+        "pt_NA113": {
+            "baseComponent": "post-task"
+        },
+        "pt_MA81": {
+            "baseComponent": "post-task"
+        },
+        "pt_MA221": {
+            "baseComponent": "post-task"
+        },
+        "pt_MA471": {
+            "baseComponent": "post-task"
+        },
+        "post-study": {
+            "description": "post-study questionnaire",
+            "instruction": "",
+            "type": "questionnaire",
+            "response": [
+                {
+                    "id": "strategies",
+                    "prompt": "Please describe if you used any strategies (e.g., process of elimination) or aids (e.g., sketching out thoughts/taking notes) while working on the tasks.",
+                    "location": "aboveStimulus",
+                    "type": "longText"
+                },
+                {
+                    "id": "exp_prog",
+                    "prompt": "Was there anything in the study that did not work? Did you see any errors?",
+                    "location": "aboveStimulus",
+                    "type": "longText"
+                }
+            ]
+        }
+    },
+    "sequence": {
+        "order": "fixed",
+        "components": [
+            "introduction",
+            "consent",
+            "tutorial1",
+            "tutorial4",
+            {
+                "order": "random",
+                "components": [
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIM180",
+                            "pt_IM180"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIM193",
+                            "pt_IM193"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskIF497",
+                            "pt_IF497"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskSA133",
+                            "pt_SA133"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskSA458",
+                            "pt_SA458"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskNA108",
+                            "pt_NA108"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskNA113",
+                            "pt_NA113"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskMA81",
+                            "pt_MA81"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskMA221",
+                            "pt_MA221"
+                        ]
+                    },
+                    {
+                        "order": "fixed",
+                        "components": [
+                            "taskMA471",
+                            "pt_MA471"
+                        ]
+                    }
+                ]
+            },
+            "post-study"
+        ]
+    }
+}

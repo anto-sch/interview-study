@@ -1,0 +1,558 @@
+{
+    "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v2.1.1/src/parser/StudyConfigSchema.json",
+    "studyMetadata": {
+        "title": "Interview Study: Logical Diagramming for Conditionals",
+        "version": "pilot",
+        "authors": [
+            "Antonia Schlieder"
+        ],
+        "date": "2025-08-19",
+        "description": "Interview study on logical diagrams as hints for solving reasoning tasks on conditionals in natural language.",
+        "organizations": [
+            "Heidelberg University"
+        ]
+    },
+    "uiConfig": {
+        "contactEmail": "antonia.schlieder@iwr.uni-heidelberg.de",
+        "helpTextPath": "as-interview-study/assets/help.md",
+        "logoPath": "revisitAssets/revisitLogoSquare.svg",
+        "withProgressBar": true,
+        "autoDownloadStudy": false,
+        "sidebar": true
+    },
+    "baseComponents": {
+        "vennTask": {
+            "description": "A logical reasoning task with Venn diagrams as hints",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-interview-study/assets/VennTask.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        },
+        "eulerTask": {
+            "description": "A logical reasoning task with Euler diagrams as hints",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-interview-study/assets/EulerTask.tsx",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "A",
+                        "consequent": "B",
+                        "text": "Sentence describing A implies B."
+                    },
+                    {
+                        "antecedent": "B",
+                        "consequent": "C",
+                        "text": "Sentence describing B implies C."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        },
+        "baseline": {
+            "description": "A logical reasoning task without hints as baseline.",
+            "instruction": "",
+            "type": "react-component",
+            "path": "as-interview-study/assets/BaselineTask.tsx",
+            "parameters": {
+                "text": "The context of the task."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "required": true,
+                    "prompt": "Select the correct answer:",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                }
+            ],
+            "nextButtonLocation": "belowStimulus",
+            "instructionLocation": "belowStimulus"
+        }
+    },
+    "components": {
+        "introduction": {
+            "type": "markdown",
+            "path": "as-interview-study/assets/introduction.md",
+            "response": []
+        },
+        "consent": {
+            "type": "markdown",
+            "path": "as-interview-study/assets/consent-cm.md",
+            "nextButtonText": "Agree",
+            "response": [
+                {
+                    "id": "accept",
+                    "prompt": "Do you consent to the study and wish to continue?",
+                    "requiredValue": "Accept",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Decline",
+                        "Accept"
+                    ]
+                }
+            ]
+        },
+        "tutorial1": {
+            "type": "markdown",
+            "path": "as-interview-study/assets/tutorial1.md",
+            "response": []
+        },
+        "tutorial2": {
+            "type": "markdown",
+            "path": "as-interview-study/assets/tutorial2.md",
+            "response": []
+        },
+        "tutorial3": {
+            "type": "markdown",
+            "path": "as-interview-study/assets/tutorial3.md",
+            "response": []
+        },
+        "tutorial4": {
+            "type": "markdown",
+            "path": "as-interview-study/assets/tutorial4.md",
+            "response": []
+        },
+        "venntask1": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "argument": "premise",
+                        "antecedent": "B",
+                        "consequent": "T",
+                        "text": "It takes <mark class='T'>a particular talent</mark> <mark class='B'>to be a successful business manager</mark>."
+                    },
+                    {
+                        "argument": "premise",
+                        "antecedent": "S",
+                        "consequent": "T",
+                        "text": "<mark class='S'>Business courses can help people to solve management problems</mark>, but such courses can do so only for <mark class='T'>those people with managerial talent</mark>. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "If the statements above are true, which of the following must also be true on the basis of them?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "People who are helped by business courses in solving management problems also have managerial talent.",
+                        "Those people who have never taken business courses are unable to solve management problems when such problems arise.",
+                        "People who lack managerial talent are more likely to take business courses than are people who have managerial talent.",
+                        "People who are already skilled at solving management problems are unlikely to benefit from business courses."
+                    ]
+                }
+            ]
+        },
+        "venntask2": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "argument": "premise",
+                        "antecedent": "L",
+                        "consequent": "not S",
+                        "text": "Researcher: Research has shown that <mark class='L'>inhaling the scent of lavender</mark> has <mark class='S'>measurable physiological effects tending to reduce stress</mark>."
+                    },
+                    {
+                        "argument": "premise",
+                        "antecedent": "S",
+                        "consequent": "I",
+                        "text": "It is known that <mark class='S'>intense stress</mark> can <mark class='I'>impair the immune system, making one more susceptible to illness</mark>."
+                    },
+                    {
+                        "argument": "conclusion",
+                        "antecedent": "L",
+                        "consequent": "not I",
+                        "text": "Therefore, it is likely that the <mark class='I'>incidence of illness</mark> among <mark class='L'>those who regularly inhale the scent of lavender</mark> <mark class='I'>is reduced</mark> by this practice."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Which one of the following is an assumption that the researcher's argument requires?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Many, if not all, of the scents that have a tendency to reduce susceptibility to illness do so, at least in part, by reducing stress.",
+                        "At least some people who use the scent of lavender to induce relaxation and reduce stress are no more susceptible to illness than average.",
+                        "Some people who regularly inhale the scent of lavender would otherwise be under enough stress to impair their immune systems.",
+                        "Reduced stress diminishes susceptibility to illness only for people who are under enough stress to impair their immune systems to at least some degree."
+                    ]
+                }
+            ]
+        },
+        "venntask3": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "argument": "premise",
+                        "antecedent": "T",
+                        "consequent": "not C",
+                        "text": "Since <mark class='T'>anyone who supports the new tax plan</mark> has <mark class='C'>no chance of being elected</mark>, "
+                    },
+                    {
+                        "argument": "premise",
+                        "antecedent": "E",
+                        "consequent": "not T",
+                        "text": "and <mark class='E'>anyone who truly understands economics</mark> would <mark class='T'>not support the tax plan</mark>, "
+                    },
+                    {
+                        "argument": "conclusion",
+                        "antecedent": "C",
+                        "consequent": "E",
+                        "text": "only <mark class='E'>someone who truly understands economics</mark> would <mark class='C'>have any chance of being elected.</mark>"
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The reasoning in the argument is flawed because the argument ignores the possibility that some people who",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "truly understand economics have no chance of being elected.",
+                        "truly understand economics do not support the tax plan",
+                        "do not support the tax plan do not truly understand economics.",
+                        "do not support the tax plan have no chance of being elected."
+                    ]
+                }
+            ]
+        },
+        "venntask4": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "argument": "premise",
+                        "antecedent": "C",
+                        "consequent": "not S",
+                        "text": "Many artists claim that art critics find it is easier to write about art that they dislike than to write about art that they like. Whether or not this hypothesis is correct, <mark class='C'>most art criticism is devoted to</mark> <mark class='S'>art works that fail to satisfy the critic</mark>."
+                    },
+                    {
+                        "argument": "conclusion",
+                        "antecedent": "C",
+                        "consequent": "not G",
+                        "text": "Hence it follows that <mark class='C'>most art criticism is devoted to</mark> <mark class='G'>works other than the greatest works of art</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The conclusion above is properly drawn if which one of the following is assumed?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "All art critics find it difficult to discover art works that truly satisfy them.",
+                        "A work of art that receives extensive critical attention can thereby become more widely known than it otherwise would have been.",
+                        "The greatest works of art are works that inevitably satisfy all critics.",
+                        "No art critic enjoys writing about art works that he or she dislikes intensely."
+                    ]
+                }
+            ]
+        },
+        "venntask5": {
+            "baseComponent": "vennTask",
+            "parameters": {
+                "data": [
+                    {
+                        "argument": "premise",
+                        "antecedent": "M",
+                        "consequent": "H",
+                        "text": "If Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='H'>get a bad case of heartburn</mark> later."
+                    },
+                    {
+                        "argument": "premise",
+                        "antecedent": "H",
+                        "consequent": "G",
+                        "text": "If Patricia <mark class='H'>gets a bad case of heartburn</mark> later, she will <mark class='G'>be grouchy tomorrow morning</mark>."
+                    },
+                    {
+                        "argument": "conclusion",
+                        "antecedent": "M",
+                        "consequent": "G",
+                        "text": "So if Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='G'>be grouchy tomorrow morning</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Which one of the following arguments is most similar in its logical features to the argument above?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                       "Maria plants either petunias or geraniums in her garden. If Maria plants petunias, she plants purple ones. If Maria plants geraniums, she plants red ones. Since both petunias and geraniums are flowers, Maria will have either purple or red flowers in her garden.",
+                       "If Shawn starts gardening in early spring, he can plant tomatoes early. If Shawn can plant tomatoes early, he will have plenty of tomatoes for canning. But he does not have plenty of tomatoes for canning, so either he did not start gardening in early spring or he did not plant tomatoes early.",
+                       "If Bryan's fruit trees are to produce well, he must either prune them in the fall or fertilize them in the spring. Since Bryan wants his trees to produce well but forgot to prune them last fall, Bryan is sure to fertilize his trees this spring.",
+                       "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
+                    ]
+                }
+            ]
+        },
+        "eulertask1": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "B",
+                        "consequent": "T",
+                        "text": "It takes <mark class='T'>a particular talent</mark> <mark class='B'>to be a successful business manager</mark>."
+                    },
+                    {
+                        "antecedent": "S",
+                        "consequent": "T",
+                        "text": "<mark class='S'>Business courses can help people to solve management problems</mark>, but such courses can do so only for <mark class='T'>those people with managerial talent</mark>. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "If the statements above are true, which of the following must also be true on the basis of them?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "People who are helped by business courses in solving management problems also have managerial talent.",
+                        "Those people who have never taken business courses are unable to solve management problems when such problems arise.",
+                        "People who lack managerial talent are more likely to take business courses than are people who have managerial talent.",
+                        "People who are already skilled at solving management problems are unlikely to benefit from business courses."
+                    ]
+                }
+            ]
+        },
+        "eulertask2": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "L",
+                        "consequent": "not S",
+                        "text": "Researcher: Research has shown that <mark class='L'>inhaling the scent of lavender</mark> has <mark class='S'>measurable physiological effects tending to reduce stress</mark>."
+                    },
+                    {
+                        "antecedent": "S",
+                        "consequent": "I",
+                        "text": "It is known that <mark class='S'>intense stress</mark> can <mark class='I'>impair the immune system, making one more susceptible to illness</mark>."
+                    },
+                    {
+                        "antecedent": "L",
+                        "consequent": "not I",
+                        "text": "Therefore, it is likely that the <mark class='I'>incidence of illness</mark> among <mark class='L'>those who regularly inhale the scent of lavender</mark> <mark class='I'>is reduced</mark> by this practice."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Which one of the following is an assumption that the researcher's argument requires?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "Many, if not all, of the scents that have a tendency to reduce susceptibility to illness do so, at least in part, by reducing stress.",
+                        "At least some people who use the scent of lavender to induce relaxation and reduce stress are no more susceptible to illness than average.",
+                        "Some people who regularly inhale the scent of lavender would otherwise be under enough stress to impair their immune systems.",
+                        "Reduced stress diminishes susceptibility to illness only for people who are under enough stress to impair their immune systems to at least some degree."
+                    ]
+                }
+            ]
+        },
+        "eulertask3": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "T",
+                        "consequent": "not C",
+                        "text": "Since <mark class='T'>anyone who supports the new tax plan</mark> has <mark class='C'>no chance of being elected</mark>, "
+                    },
+                    {
+                        "antecedent": "E",
+                        "consequent": "not T",
+                        "text": "and <mark class='E'>anyone who truly understands economics</mark> would <mark class='T'>not support the tax plan</mark>, "
+                    },
+                    {
+                        "antecedent": "C",
+                        "consequent": "E",
+                        "text": "only <mark class='E'>someone who truly understands economics</mark> would <mark class='C'>have any chance of being elected.</mark>"
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The reasoning in the argument is flawed because the argument ignores the possibility that some people who",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "truly understand economics have no chance of being elected.",
+                        "truly understand economics do not support the tax plan",
+                        "do not support the tax plan do not truly understand economics.",
+                        "do not support the tax plan have no chance of being elected."
+                    ]
+                }
+            ]
+        },
+        "eulertask4": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "C",
+                        "consequent": "not S",
+                        "text": "Many artists claim that art critics find it is easier to write about art that they dislike than to write about art that they like. Whether or not this hypothesis is correct, <mark class='C'>most art criticism is devoted to</mark> <mark class='S'>art works that fail to satisfy the critic</mark>."
+                    },
+                    {
+                        "antecedent": "C",
+                        "consequent": "not G",
+                        "text": "Hence it follows that <mark class='C'>most art criticism is devoted to</mark> <mark class='G'>works other than the greatest works of art</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "The conclusion above is properly drawn if which one of the following is assumed?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "All art critics find it difficult to discover art works that truly satisfy them.",
+                        "A work of art that receives extensive critical attention can thereby become more widely known than it otherwise would have been.",
+                        "The greatest works of art are works that inevitably satisfy all critics.",
+                        "No art critic enjoys writing about art works that he or she dislikes intensely."
+                    ]
+                }
+            ]
+        },
+        "eulertask5": {
+            "baseComponent": "eulerTask",
+            "parameters": {
+                "data": [
+                    {
+                        "antecedent": "M",
+                        "consequent": "H",
+                        "text": "If Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='H'>get a bad case of heartburn</mark> later."
+                    },
+                    {
+                        "antecedent": "H",
+                        "consequent": "G",
+                        "text": "If Patricia <mark class='H'>gets a bad case of heartburn</mark> later, she will <mark class='G'>be grouchy tomorrow morning</mark>."
+                    },
+                    {
+                        "antecedent": "M",
+                        "consequent": "G",
+                        "text": "So if Patricia <mark class='M'>eats a heavy, spicy meal</mark> tonight, she will <mark class='G'>be grouchy tomorrow morning</mark>."
+                    }
+                ]
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "Which one of the following arguments is most similar in its logical features to the argument above?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                       "Maria plants either petunias or geraniums in her garden. If Maria plants petunias, she plants purple ones. If Maria plants geraniums, she plants red ones. Since both petunias and geraniums are flowers, Maria will have either purple or red flowers in her garden.",
+                       "If Shawn starts gardening in early spring, he can plant tomatoes early. If Shawn can plant tomatoes early, he will have plenty of tomatoes for canning. But he does not have plenty of tomatoes for canning, so either he did not start gardening in early spring or he did not plant tomatoes early.",
+                       "If Bryan's fruit trees are to produce well, he must either prune them in the fall or fertilize them in the spring. Since Bryan wants his trees to produce well but forgot to prune them last fall, Bryan is sure to fertilize his trees this spring.",
+                       "If Li plants old rose varieties, her garden will look beautiful. If Li's garden looks beautiful, Li's neighbors will be impressed. So if Li plants old rose varieties, her neighbors will be impressed."
+                    ]
+                }
+            ]
+        },
+        "baseline1": {
+            "baseComponent": "baseline",
+            "parameters": {
+                "text": "It takes a particular talent to be a successful business manager. Business courses can help people to solve management problems, but such courses can do so only for those people with managerial talent. Such people should take business courses to acquire ideas that they can subsequently use to good advantage if management problems happen to arise."
+            },
+            "response": [
+                {
+                    "id": "lr-response",
+                    "prompt": "If the statements above are true, which of the following must also be true on the basis of them?",
+                    "location": "belowStimulus",
+                    "type": "radio",
+                    "options": [
+                        "People who are helped by business courses in solving management problems also have managerial talent.",
+                        "Those people who have never taken business courses are unable to solve management problems when such problems arise.",
+                        "People who lack managerial talent are more likely to take business courses than are people who have managerial talent.",
+                        "People who are already skilled at solving management problems are unlikely to benefit from business courses."
+                    ]
+                }
+            ]
+        }
+    },
+    "sequence": {
+        "order": "fixed",
+        "components": [
+            "introduction",
+            "consent",
+            "tutorial1",
+            "tutorial2",
+            "tutorial3",
+            "tutorial4",
+            "eulertask1",
+            "venntask2",
+            "eulertask3",
+            "venntask5"
+        ]
+    }
+}
