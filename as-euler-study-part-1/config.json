@@ -19,7 +19,8 @@
         "withProgressBar": true,
         "autoDownloadStudy": false,
         "sidebar": true,
-        "urlParticipantIdParam": "PROLIFIC_PID"
+        "urlParticipantIdParam": "PROLIFIC_PID",
+        "studyEndMsg": "**Thank you for completing the study. You may click this link and return to Prolific**: [https://app.prolific.com/submissions/complete?cc=CIECX4FZ](https://app.prolific.com/submissions/complete?cc=CIECX4FZ)"
     },
     "importedLibraries": [
         "hus"
@@ -203,6 +204,12 @@
         "introduction": {
             "type": "markdown",
             "path": "as-euler-study-part-1/assets/introduction.md",
+            "response": []
+        },
+        "consent": {
+            "type": "markdown",
+            "path": "as-euler-study-part-1/assets/consent-cm.md",
+            "nextButtonText": "Agree",
             "response": [
                 {
                     "id": "prolificId",
@@ -212,14 +219,7 @@
                     "type": "shortText",
                     "placeholder": "Prolific ID",
                     "paramCapture": "PROLIFIC_PID"
-                }
-            ]
-        },
-        "consent": {
-            "type": "markdown",
-            "path": "as-euler-study-part-1/assets/consent-cm.md",
-            "nextButtonText": "Agree",
-            "response": [
+                },
                 {
                     "id": "accept",
                     "prompt": "Do you consent to the study and wish to continue?",
