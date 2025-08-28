@@ -18,7 +18,8 @@
         "logoPath": "revisitAssets/revisitLogoSquare.svg",
         "withProgressBar": true,
         "autoDownloadStudy": false,
-        "sidebar": true
+        "sidebar": true,
+        "urlParticipantIdParam": "PROLIFIC_PID"
     },
     "baseComponents": {
         "post-task": {
@@ -187,12 +188,22 @@
     "components": {
         "introduction": {
             "type": "markdown",
-            "path": "as-baseline-study-part-1/assets/introduction.md",
-            "response": []
+            "path": "as-venn-study-part-2/assets/introduction.md",
+            "response": [
+                {
+                    "id": "prolificId",
+                    "prompt": "Please enter your Prolific ID",
+                    "required": true,
+                    "location": "belowStimulus",
+                    "type": "shortText",
+                    "placeholder": "Prolific ID",
+                    "paramCapture": "PROLIFIC_PID"
+                }
+            ]
         },
         "consent": {
             "type": "markdown",
-            "path": "as-baseline-study-part-1/assets/consent-cm.md",
+            "path": "as-venn-study-part-2/assets/consent-cm.md",
             "nextButtonText": "Agree",
             "response": [
                 {
@@ -210,12 +221,12 @@
         },
         "tutorial1": {
             "type": "markdown",
-            "path": "as-baseline-study-part-1/assets/tutorial1.md",
+            "path": "as-venn-study-part-2/assets/tutorial1.md",
             "response": []
         },
         "tutorial4": {
             "type": "markdown",
-            "path": "as-baseline-study-part-1/assets/tutorial4.md",
+            "path": "as-venn-study-part-2/assets/tutorial4.md",
             "response": []
         },
         "taskIM180": {
