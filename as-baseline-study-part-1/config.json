@@ -18,7 +18,8 @@
         "logoPath": "revisitAssets/revisitLogoSquare.svg",
         "withProgressBar": true,
         "autoDownloadStudy": false,
-        "sidebar": true
+        "sidebar": true,
+        "urlParticipantIdParam": "PROLIFIC_PID"
     },
     "baseComponents": {
         "post-task": {
@@ -188,7 +189,17 @@
         "introduction": {
             "type": "markdown",
             "path": "as-baseline-study-part-1/assets/introduction.md",
-            "response": []
+            "response": [
+                {
+                    "id": "prolificId",
+                    "prompt": "Please enter your Prolific ID",
+                    "required": true,
+                    "location": "belowStimulus",
+                    "type": "shortText",
+                    "placeholder": "Prolific ID",
+                    "paramCapture": "PROLIFIC_PID"
+                }
+            ]
         },
         "consent": {
             "type": "markdown",
