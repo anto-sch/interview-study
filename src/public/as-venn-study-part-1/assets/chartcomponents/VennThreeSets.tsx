@@ -261,27 +261,58 @@ export default function VennThreeSets({
 
         const fullRect = { x: 0, y: 0, w: width, h: height };
 
+        // Hatched pattern
+        const spacing = 8;
+        const angle = 45;
+        const stroke = palette.shade;     // or a different color if you want
+        const idHatch = `hatch`; // ensure uniqueness per component
+
+        const pattern = defs
+            .append("pattern")
+            .attr("id", idHatch)
+            .attr("patternUnits", "userSpaceOnUse")
+            .attr("width", spacing)
+            .attr("height", spacing)
+            .attr("patternTransform", `rotate(${angle})`);
+
+        pattern
+            .append("rect")
+            .attr("width", spacing)
+            .attr("height", spacing)
+            .attr("fill", "white")          // or palette.shade with lower opacity
+            .attr("opacity", 0.0);          // 0 for transparent background
+
+        // One stripe per tile (the pattern repeats)
+        pattern
+            .append("line")
+            .attr("x1", 0)
+            .attr("y1", 0)
+            .attr("x2", 0)
+            .attr("y2", spacing)
+            .attr("stroke", stroke)
+            .attr("stroke-width", strokeWidth * 3);
+
         // Draw order:
         // 1) Singles: A, B, C (entire circles) using "only" flags; later layers will overwrite overlaps
         drawRectWithClip(
             svg,
             fullRect,
             idA,
-            regions.singles[A] ? "#FFFF" : palette.shade,
+            regions.singles[A] ? "#FFFF" : `url(#${idHatch})`,
             0.9
         );
         drawRectWithClip(
             svg,
             fullRect,
             idB,
-            regions.singles[B] ? "#FFFF" : palette.shade,
+            regions.singles[B] ? "#FFFF" : `url(#${idHatch})`,
             0.9
         );
         drawRectWithClip(
             svg,
             fullRect,
             idC,
-            regions.singles[C] ? "#FFFF" : palette.shade,
+            regions.singles[C] ? "#FFFF" : `url(#${idHatch})`,
             0.9
         );
 
@@ -294,7 +325,7 @@ export default function VennThreeSets({
             idB,
             regions.pairs[pairKey(A, B)]
                 ? "#FFFF"
-                : palette.shade,
+                : `url(#${idHatch})`,
             0.9
         );
         drawNestedPair(
@@ -304,7 +335,7 @@ export default function VennThreeSets({
             idC,
             regions.pairs[pairKey(A, C)]
                 ? "#FFFF"
-                : palette.shade,
+                : `url(#${idHatch})`,
             0.9
         );
         drawNestedPair(
@@ -314,7 +345,7 @@ export default function VennThreeSets({
             idC,
             regions.pairs[pairKey(B, C)]
                 ? "#FFFF"
-                : palette.shade,
+                : `url(#${idHatch})`,
             0.9
         );
 
@@ -325,21 +356,9 @@ export default function VennThreeSets({
             idA,
             idB,
             idC,
-            regions.triple ? "#FFFF" : palette.shade,
+            regions.triple ? "#FFFF" : `url(#${idHatch})`,
             0.9
         );
-
-        // 4) Circle outlines
-        // [A, B, C].forEach((n) => {
-        //     svg
-        //         .append("circle")
-        //         .attr("cx", centers[n].x)
-        //         .attr("cy", centers[n].y)
-        //         .attr("r", r)
-        //         .attr("fill", "none")
-        //         .attr("stroke", stroke)
-        //         .attr("stroke-width", strokeWidth);
-        // });
 
         svg
             .append("circle")

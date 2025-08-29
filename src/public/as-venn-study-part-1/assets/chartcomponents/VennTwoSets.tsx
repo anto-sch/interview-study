@@ -69,6 +69,12 @@ export default function VennTwoSets({
     [colors]
   );
 
+  const hatchPattern = `<pattern id="diagonalHatch" patternUnits="userSpaceOnUse" width="4"     height="4"><path d="M-1,1 l2,-2
+                      M0,4 l4,-4
+                      M3,5 l2,-2" 
+              style="stroke:black; stroke-width:1" />
+    </pattern>`
+
   // Resolve booleans from either generic keys or name-based keys.
   const norm = useMemo(() => {
     // If generic keys exist, use them directly.
@@ -116,6 +122,38 @@ export default function VennTwoSets({
     addClip(defs, idClipA, cxA, cy, r);
     addClip(defs, idClipB, cxB, cy, r);
 
+    // Hatched pattern
+    const spacing = 8;
+    const angle = 45;
+    const stroke = palette.shade;     // or a different color if you want
+    const idHatch = `hatch-${idClipA}`; // ensure uniqueness per component
+
+    const pattern = defs
+      .append("pattern")
+      .attr("id", idHatch)
+      .attr("patternUnits", "userSpaceOnUse")
+      .attr("width", spacing)
+      .attr("height", spacing)
+      .attr("patternTransform", `rotate(${angle})`);
+
+    pattern
+      .append("rect")
+      .attr("width", spacing)
+      .attr("height", spacing)
+      .attr("fill", "white")          // or palette.shade with lower opacity
+      .attr("opacity", 0.0);          // 0 for transparent background
+
+    // One stripe per tile (the pattern repeats)
+    pattern
+      .append("line")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", 0)
+      .attr("y2", spacing)
+      .attr("stroke", stroke)
+      .attr("stroke-width", strokeWidth*3);
+
+
     // Only Left region (clipped to left circle)
     svg
       .append("rect")
@@ -123,7 +161,7 @@ export default function VennTwoSets({
       .attr("y", 0)
       .attr("width", width)
       .attr("height", height)
-      .attr("fill", norm.onlyLeft ? "#FFFF" : palette.shade)
+      .attr("fill", norm.onlyLeft ? "#FFFF" : `url(#${idHatch})`)
       .attr("opacity", 0.9)
       .attr("clip-path", `url(#${idClipA})`);
 
@@ -134,7 +172,7 @@ export default function VennTwoSets({
       .attr("y", 0)
       .attr("width", width)
       .attr("height", height)
-      .attr("fill", norm.onlyRight ? "#FFFF" : palette.shade)
+      .attr("fill", norm.onlyRight ? "#FFFF" : `url(#${idHatch})`)
       .attr("opacity", 0.9)
       .attr("clip-path", `url(#${idClipB})`);
 
@@ -146,7 +184,7 @@ export default function VennTwoSets({
       .attr("y", 0)
       .attr("width", width)
       .attr("height", height)
-      .attr("fill", norm.both ? "#FFFF" : palette.shade)
+      .attr("fill", norm.both ? "#FFFF" : `url(#${idHatch})`)
       .attr("opacity", 0.9)
       .attr("clip-path", `url(#${idClipB})`);
 
