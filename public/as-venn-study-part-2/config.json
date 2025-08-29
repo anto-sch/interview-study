@@ -156,7 +156,7 @@
             "response": []
         },
         "taskIM180": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "text": "Amy McConnell is considering running for election against the incumbent, Gregory Lutz. If Lutz has a large campaign fund, then he is already far ahead, and McConnell will not run against him. If Lutz does not have a large campaign fund, McConnell will scrutinize Lutz' s record for any hints of scandal that she could use against him. Anything of a scandalous nature would increase McConnell' s chances of winning, and she would campaign for election. If Lutz has a clean record, however, McConnell will not run against him."
             },
@@ -182,7 +182,7 @@
             ]
         },
         "taskIM193": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "text": "Small species, such as fathead minnows and waterfleas, can be used to uncover the quantity of toxic chemicals being dumped into rivers and streams. Under new rules issued in a certain country, these 'indicator' species will be used to test the effluent pouring out of sewage treatment plants and factories among the country' s waterways. If many of these animals die as a result of the test, the country is going to require that pollution levels be reduced. The new rules will apply to about 450 of the 2, 000 factories and sewage treatment plants that legally discharge into the country's rivers and streams."
             },
@@ -208,7 +208,7 @@
             ]
         },
         "taskIF497": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "text": "A theory is either true or false. Galileo's observations of Jupiter's satellites showed that the Ptolemaic theory of the motion of celestial bodies is false. Therefore, since the Copernican theory of planetary motion is inconsistent with the Ptolemaic account, Galileo's observations of Jupiter's satellites proved the truth of the Copernican theory."
             },
@@ -234,7 +234,7 @@
             ]
         },
         "taskSA133": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "text": "Activist: Any member of the city council ought either to vote against the proposal or to abstain. But if all the members abstain, the matter will be decided by the city's voters. So at least one member of the city council should vote against the proposal."
             },
@@ -260,7 +260,7 @@
             ]
         },
         "taskSA458": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "text": "Archaeologists are discovering a great deal about the Sals culture. For example, recent excavations have unearthed smelting furnaces and tools of smelted copper and bronze. There were distinct Sals words for copper and for bronze, but none for iron. Thus, the Sals did not smelt iron."
             },
@@ -286,7 +286,7 @@
             ]
         },
         "taskNA108": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "data": "Although computers can enhance people's ability to communicate, computer games are a cause of underdeveloped communication skills in children. After-school hours spent playing computer games are hours not spent talking with people. Ttherefore, children who spend all their spare time playing these games have less experience in interpersonal communication than other children have."
             },
@@ -312,7 +312,7 @@
             ]
         },
         "taskNA113": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "text": "Economic considerations color every aspect of international dealings, and nations are just like individuals in that the lender sets the terms of its dealings with the borrower. That is why a nation that owes money to another nation cannot be a world leader."
             },
@@ -338,7 +338,7 @@
             ]
         },
         "taskMA81": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "text": "If a society encourages freedom of thought and expression, then, during the time when it does so, creativity will flourish in that society. In the United States creativity flourished during the eighteenth century. It is clear, therefore, that freedom of thought was encouraged in the United States during eighteenth century."
             },
@@ -364,7 +364,7 @@
             ]
         },
         "taskMA221": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "text": "Company president: Almost every really successful product introduced in the last ten years has been launched by a massive television advertising campaign. We are using a massive television advertising campaign to introduce the Vegetaste Burger. So the Vegetaste Burger will probably be very successful."
             },
@@ -390,7 +390,7 @@
             ]
         },
         "taskMA471": {
-            "baseComponent": "vennTask",
+            "baseComponent": "baselineTask",
             "parameters": {
                 "text": "Some eloquent speakers impress their audiences with the vividness and clarity of the messages conveyed. Speakers who resort to obscenity, however, are not genuinely eloquent, so none of these speakers impress their audiences."
             },
