@@ -19,7 +19,8 @@
         "withProgressBar": true,
         "autoDownloadStudy": false,
         "sidebar": true,
-        "urlParticipantIdParam": "PROLIFIC_PID"
+        "urlParticipantIdParam": "PROLIFIC_PID",
+        "studyEndMsg": "**Thank you for completing the study. You may click this link and return to Prolific**: [https://app.prolific.com/submissions/complete?cc=CIECX4FZ](https://app.prolific.com/submissions/complete?cc=CIECX4FZ)"
     },
     "baseComponents": {
         "post-task": {
@@ -84,80 +85,6 @@
                 }
             ]
         },
-        "vennTask": {
-            "description": "A logical reasoning task with Venn diagrams as hints",
-            "instruction": "",
-            "type": "react-component",
-            "path": "as-baseline-study-part-1/assets/VennTask.tsx",
-            "parameters": {
-                "data": [
-                    {
-                        "antecedent": "A",
-                        "consequent": "B",
-                        "text": "Sentence describing A implies B."
-                    },
-                    {
-                        "antecedent": "B",
-                        "consequent": "C",
-                        "text": "Sentence describing B implies C."
-                    }
-                ]
-            },
-            "response": [
-                {
-                    "id": "lr-response",
-                    "required": true,
-                    "prompt": "Select the correct answer:",
-                    "location": "belowStimulus",
-                    "type": "radio",
-                    "options": [
-                        "A",
-                        "B",
-                        "C",
-                        "D"
-                    ]
-                }
-            ],
-            "nextButtonLocation": "belowStimulus",
-            "instructionLocation": "belowStimulus"
-        },
-        "eulerTask": {
-            "description": "A logical reasoning task with Euler diagrams as hints",
-            "instruction": "",
-            "type": "react-component",
-            "path": "as-baseline-study-part-1/assets/EulerTask.tsx",
-            "parameters": {
-                "data": [
-                    {
-                        "antecedent": "A",
-                        "consequent": "B",
-                        "text": "Sentence describing A implies B."
-                    },
-                    {
-                        "antecedent": "B",
-                        "consequent": "C",
-                        "text": "Sentence describing B implies C."
-                    }
-                ]
-            },
-            "response": [
-                {
-                    "id": "lr-response",
-                    "required": true,
-                    "prompt": "Select the correct answer:",
-                    "location": "belowStimulus",
-                    "type": "radio",
-                    "options": [
-                        "A",
-                        "B",
-                        "C",
-                        "D"
-                    ]
-                }
-            ],
-            "nextButtonLocation": "belowStimulus",
-            "instructionLocation": "belowStimulus"
-        },
         "baselineTask": {
             "description": "A logical reasoning task without hints as baseline.",
             "instruction": "",
@@ -189,6 +116,12 @@
         "introduction": {
             "type": "markdown",
             "path": "as-euler-study-part-2/assets/introduction.md",
+            "response": []
+        },
+        "consent": {
+            "type": "markdown",
+            "path": "as-euler-study-part-2/assets/consent-cm.md",
+            "nextButtonText": "Agree",
             "response": [
                 {
                     "id": "prolificId",
@@ -198,14 +131,7 @@
                     "type": "shortText",
                     "placeholder": "Prolific ID",
                     "paramCapture": "PROLIFIC_PID"
-                }
-            ]
-        },
-        "consent": {
-            "type": "markdown",
-            "path": "as-euler-study-part-2/assets/consent-cm.md",
-            "nextButtonText": "Agree",
-            "response": [
+                },
                 {
                     "id": "accept",
                     "prompt": "Do you consent to the study and wish to continue?",
