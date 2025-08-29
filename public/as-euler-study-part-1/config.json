@@ -248,6 +248,11 @@
             "path": "as-euler-study-part-1/assets/tutorial4.md",
             "response": []
         },
+        "tutorial5": {
+            "type": "markdown",
+            "path": "as-euler-study-part-1/assets/tutorial5.md",
+            "response": []
+        },
         "taskIM1": {
             "baseComponent": "eulerTask",
             "parameters": {
@@ -748,6 +753,7 @@
             "tutorial1",
             "tutorial2",
             "tutorial4",
+            "tutorial5",
             {
                 "order": "random",
                 "components": [

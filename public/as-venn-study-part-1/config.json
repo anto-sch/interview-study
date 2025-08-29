@@ -253,6 +253,11 @@
             "path": "as-venn-study-part-1/assets/tutorial4.md",
             "response": []
         },
+        "tutorial5": {
+            "type": "markdown",
+            "path": "as-venn-study-part-1/assets/tutorial5.md",
+            "response": []
+        },
         "taskIM1": {
             "baseComponent": "vennTask",
             "parameters": {
@@ -754,6 +759,7 @@
             "tutorial2",
             "tutorial3",
             "tutorial4",
+            "tutorial5",
             {
                 "order": "random",
                 "components": [

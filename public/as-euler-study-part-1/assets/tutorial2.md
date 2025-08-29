@@ -8,7 +8,7 @@ The first type of clue is the color coding of the task text. The "if" and "then"
 
 "To be <mark style="background-color: #874fff88">allowed to buy alcohol in Germany</mark>, you must <mark style="background-color: #24CB7188">be of legal age</mark>. Anyone <mark style="background-color: #FF723788">under the age of 18</mark> is considered a <mark style="background-color: #24CB7188">minor</mark>. Anyone who is <mark style="background-color: #874fff88">allowed to buy alcohol in Germany</mark> must be <mark style="background-color: #FF723788">18 years of age or older</mark>."
 
-This cue is intended to help you reliably identify the if-then form of declarative sentences, even in cases where negations are present. In case an if-part or then-part is negated, the corresponding text is <mark stlye="text-decoration: underline">underlined</mark>.
+This cue is intended to help you reliably identify the if-then form of declarative sentences, even in cases where negations are present. In case an if-part or then-part is negated, the corresponding text is <ins>underlined</ins>.
 
 ##### Second Type of Cue: Euler Diagrams
 
@@ -16,6 +16,6 @@ The second type of cue consists of set diagrams, which are displayed next to the
 
 An example: The following Euler diagram is displayed for the conditional "To be <mark style="background-color: #874fff88">allowed to buy alcohol in Germany</mark>, you must <mark style="background-color: #24CB7188">be of legal age</mark>":
 
-<div width="300px" style="position: center"><img src="./assets/euler_example.png" width="auto" height="100px"></div>
+<div width="300px" style="position: center"><img src="./assets/euler_example.png" width="auto" height="150px"></div>
 
 The logical relationship is illustrated as a set relationship: People who are allowed to buy alcohol are a subset of people who are of legal age. There may be further restrictions. For example, you must not be legally incapacitated. It is also said that legal age is a necessary condition for purchasing alcohol. Conversely, being allowed to purchase alcohol is a sufficient condition for inferring legal age. Visualizing logical relationships using set diagrams should help to avoid confusing sufficient and necessary conditions.
