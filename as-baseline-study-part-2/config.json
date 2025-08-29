@@ -288,7 +288,7 @@
         "taskNA108": {
             "baseComponent": "baselineTask",
             "parameters": {
-                "data": "Although computers can enhance people's ability to communicate, computer games are a cause of underdeveloped communication skills in children. After-school hours spent playing computer games are hours not spent talking with people. Ttherefore, children who spend all their spare time playing these games have less experience in interpersonal communication than other children have."
+                "text": "Although computers can enhance people's ability to communicate, computer games are a cause of underdeveloped communication skills in children. After-school hours spent playing computer games are hours not spent talking with people. Ttherefore, children who spend all their spare time playing these games have less experience in interpersonal communication than other children have."
             },
             "response": [
                 {
