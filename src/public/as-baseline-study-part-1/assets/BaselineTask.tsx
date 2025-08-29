@@ -80,7 +80,7 @@ function BaselineTask({ parameters, setAnswer }: StimulusParams<any>) {
                     gridTemplateColumns: "0.85fr auto",
                     alignItems: "center",
                     gap,
-                    width: "60%"
+                    width: "80%"
                 }}
             >
                 {/* Left column: sentences as one flowing block, no manual line breaks */}

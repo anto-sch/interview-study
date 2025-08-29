@@ -33,7 +33,7 @@ function uniqueMarkClassesDOM(items: Implication[]): string[] {
         scratch.innerHTML = it.text || '';
         scratch.querySelectorAll('mark').forEach(mark => {
             mark.classList.forEach(c => {
-                if (c && !seen.has(c)) {
+                if (c && !seen.has(c) && c !== "not") {
                     seen.add(c);
                     ordered.push(c);
                 }

@@ -486,6 +486,12 @@
                         "No art critic enjoys writing about art works that he or she dislikes intensely."
                     ]
                 }
+            ],
+            "correctAnswer": [
+                {
+                    "id": "lr-response",
+                    "answer": "The greatest works of art are works that inevitably satisfy all critics."
+                }
             ]
         },
         "taskSA473": {

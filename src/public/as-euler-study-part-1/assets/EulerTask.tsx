@@ -32,7 +32,7 @@ function uniqueMarkClassesDOM(items: Implication[]): string[] {
         scratch.innerHTML = it.text || '';
         scratch.querySelectorAll('mark').forEach(mark => {
             mark.classList.forEach(c => {
-                if (c && !seen.has(c)) {
+                if (c && !seen.has(c) && c !== "not") {
                     seen.add(c);
                     ordered.push(c);
                 }
@@ -228,7 +228,7 @@ function EulerTask({ parameters, setAnswer }: StimulusParams<any>) {
                     gridTemplateColumns: "0.85fr auto auto",
                     alignItems: "center",
                     gap,
-                    width: "75%"
+                    width: "90%"
                 }}
             >
                 {/* Left column: sentences as one flowing block, no manual line breaks */}
@@ -312,27 +312,27 @@ function EulerTask({ parameters, setAnswer }: StimulusParams<any>) {
                         <div style={{ color: "#666", fontStyle: "italic" }}>No pair data</div>
                     )}
                 </div>
-            </div>
-            {/* Far right: sketch pad for externalization */}
-            <div
-                className="sketchpad"
-                style={{
-                    display: "flex",
-                    justifyContent: "center"
-                }}
-            >
+                {/* Far right: sketch pad for externalization */}
                 <div
-                    style={{ border: '1px solid #ccc', borderRadius: 8, padding: 8 }}>
-                    <SvgDraw
-                        width={400}
-                        height={400}
-                        stroke="#228be6"
-                        strokeWidth={2}
-                        background="white"
-                        onChangeSvg={handleSvgChange}
-                    />
-                    <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>
-                        sketchpad
+                    className="sketchpad"
+                    style={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}
+                >
+                    <div
+                        style={{ border: '1px solid #ccc', borderRadius: 8, padding: 8 }}>
+                        <SvgDraw
+                            width={400}
+                            height={400}
+                            stroke="#228be6"
+                            strokeWidth={2}
+                            background="white"
+                            onChangeSvg={handleSvgChange}
+                        />
+                        <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>
+                            sketchpad
+                        </div>
                     </div>
                 </div>
             </div>
