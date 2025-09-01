@@ -10,9 +10,9 @@ The first type of clue is the color coding of the task text. The "if" and "then"
 
 This cue is intended to help you reliably identify the if-then form of declarative sentences, even in cases where negations are present. In case an if-part or then-part is negated, the corresponding text is <ins>underlined</ins>.
 
-##### Second Type of Cue: Venn Diagrams
+##### Second Cue: Venn Diagrams
 
-The second type of cue consists of set diagrams, which are displayed next to the text in addition to the color coding. Each premise and conclusion has its own set diagram. It shows the "if" part and the "then" part of the conditional as two sets. The shading (hatched area) indicates that the "if" part of the conditional must lie exactly in the intersection and must therefore be a subset of the "then" part. These diagrams are also called Venn diagrams.
+The second type of cue consists of set diagrams, which are displayed next to the text in addition to the color coding. Each premise and conclusion has its own set diagram. It shows the "if" part and the "then" part of the conditional as two sets. If an area is shaded, it means that the situations contained within that subset cannot exist. The shading (hatched area) indicates that the "if" part of the conditional must lie exactly in the intersection and must therefore be a subset of the "then" part. These diagrams are also called Venn diagrams.
 
 An example: The following Venn diagram is displayed for the conditional "To be <mark style="background-color: #874fff88">allowed to buy alcohol in Germany</mark>, you must <mark style="background-color: #24CB7188">be of legal age</mark>":
 

@@ -1,4 +1,4 @@
-##### Second Type of Cue: Venn Diagrams
+##### Second Cue: Venn Diagrams
 
 Venn diagrams have the advantage that they can also represent a logical inference with two premises. Here is an example:
 

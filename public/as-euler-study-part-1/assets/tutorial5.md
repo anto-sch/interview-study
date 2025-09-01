@@ -4,7 +4,7 @@ Each task requires you to read and comprehend a short passage, then answer one q
 
 <img src="./assets/hint_interface.png" width="auto" height="50px">
 
-The cues will be revealed to you sequentially, you can replay them as often as you want. 
+The cues will be revealed to you sequentially, you can replay them as often as you want. Hover over the diagrams to see what they represent. 
 
 On the right-hand side is a virtual sketchpad that you can draw on with your mouse: 
 
