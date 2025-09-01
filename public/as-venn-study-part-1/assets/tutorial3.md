@@ -1,4 +1,4 @@
-##### Second Cue: Venn Diagrams
+##### Third Cue: Venn Diagrams for Combining Premises
 
 Venn diagrams have the advantage that they can also represent a logical inference with two premises. Here is an example:
 
@@ -6,6 +6,8 @@ Venn diagrams have the advantage that they can also represent a logical inferenc
 
 <img src="./assets/venn3_example.png" width="auto" height="280px">
 
-The Venn diagram depicts the logical conditions of both premises by shading. Only the areas that are free of shading represent possible situations. It can be seen that legal age is a necessary but not sufficient condition for purchasing alcohol. Being at least 18 years old is a necessary and sufficient condition for legal age.
+The Venn diagram depicts the logical conditions of both premises by shading. Only the areas that are not shaded represent possible situations. It can be seen that legal age is a necessary but not sufficient condition for purchasing alcohol. Being at least 18 years old is a necessary and sufficient condition for legal age.
 
-The Venn diagram of the premises shows which conclusion must apply. All persons who are allowed to purchase alcohol are 18 years of age or older. The unshaded parts of set A are a subset of the unshaded parts of set Y.
+The Venn diagram of the premises shows which conclusion must apply. Only non-shaded areas correspond to valid conclusions. In the example, all persons who are allowed to purchase alcohol are 18 years of age or older. The unshaded parts of set A are a subset of the unshaded parts of set Y.
+
+*Why is this important?* This cue is intended to help understand at a glance which valid conclusions can be drawn from a set of premises.

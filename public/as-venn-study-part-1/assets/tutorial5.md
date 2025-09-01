@@ -1,6 +1,6 @@
 #### Task Types
 
-Each task requires you to read and comprehend a short passage, then answer one question. Before you give your answer, **you must look at the cues** by clicking on the 'Hint' button:
+Each task requires you to read and comprehend a short passage, then answer one question. Before you give your answer, **you must look at the cues** by clicking on the 'Cue' button:
 
 <img src="./assets/hint_interface.png" width="auto" height="50px">
 
@@ -20,8 +20,8 @@ The questions require a wide range of skills involved in logical reasoning, incl
 - Detecting assumptions made by particular arguments
 - Identifying flaws in arguments
 
-All of these skills build on the ability to recognize the parts of an argument and their relationships. This is what the hints should help you with.
+All of these skills build on the ability to recognize the parts of an argument and their relationships. This is what the cues should help you with.
 
-Always look at the hint first, then decide on an answer. Do not pick a response simply because it is a true statement. Although true, it may not answer the question posed. Answer each question on the basis of the information that is given. Work within the context provided by the passage.
+Always look at the cues first, then decide on an answer. Do not pick a response simply because it is a true statement. Although true, it may not answer the question posed. Answer each question on the basis of the information that is given. Work within the context provided by the passage.
 
 By clicking 'Next' you will be presented with the first of the ten reasoning tasks you need to solve.

@@ -4,11 +4,11 @@ All tasks include visual cues to help you find the solution. Each cue offers sup
 
 ##### First Cue: Highlighting
 
-The first type of clue is the color coding of the task text. The "if" and "then" parts of the premises and the conclusion are highlighted in color. If two parts are highlighted in the same color, they are either the same statements or a statement and its negation. An example:
+The first type of clue is the color coding of the task text. The "if" and "then" parts of the premises and the conclusion are highlighted in color. If two parts are highlighted in the same color, they are either the same statements or a statement and its negation. In case an if-part or then-part is negated, the corresponding text is <ins>underlined</ins>. An example:
 
 "To be <mark style="background-color: #874fff88">allowed to buy alcohol in Germany</mark>, you must <mark style="background-color: #24CB7188">be of legal age</mark>. Anyone <ins><mark style="background-color: #FF723788">under the age of 18</mark></ins> is considered a <ins><mark style="background-color: #24CB7188">minor</mark></ins>. Anyone who is <mark style="background-color: #874fff88">allowed to buy alcohol in Germany</mark> must be <mark style="background-color: #FF723788">18 years of age or older</mark>."
 
-This cue is intended to help you reliably identify the if-then form of declarative sentences, even in cases where negations are present. In case an if-part or then-part is negated, the corresponding text is <ins>underlined</ins>.
+*Why is this important?* This cue is intended to help you reliably identify the if-then form of declarative sentences, even in cases where negations are present.
 
 ##### Second Cue: Euler Diagrams
 
@@ -19,3 +19,5 @@ An example: The following Euler diagram is displayed for the conditional "To be 
 <div width="300px" style="position: center"><img src="./assets/euler_example.png" width="auto" height="150px"></div>
 
 The logical relationship is illustrated as a set relationship: People who are allowed to buy alcohol are a subset of people who are of legal age. There may be further restrictions. For example, you must not be legally incapacitated. It is also said that legal age is a necessary condition for purchasing alcohol. Conversely, being allowed to purchase alcohol is a sufficient condition for inferring legal age. Visualizing logical relationships using set diagrams should help to avoid confusing sufficient and necessary conditions.
+
+*Why is this important?* This cue is intended to help avoiding confusing sufficient and necessary conditions.

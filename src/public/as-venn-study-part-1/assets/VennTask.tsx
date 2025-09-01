@@ -436,7 +436,7 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
             </div>
             {/* Controls */}
             <div className="vp-controls" style={{ display: "flex", marginBottom: "20px", gap }}>
-                Remember to look at the hint!
+                Remember to look at the cue!
                 <button
                     type="button"
                     className="vp-btn-hint"
@@ -444,7 +444,7 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
                     disabled={!canHint}
                     aria-disabled={!canHint}
                 >
-                    Hint
+                    Cue
                 </button>
                 <button
                     type="button"
