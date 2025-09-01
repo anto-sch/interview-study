@@ -7,7 +7,7 @@
             "Antonia Schlieder"
         ],
         "date": "2025-08-19",
-        "description": "First part of a user study on Euler diagrams as hints for solving reasoning tasks on conditionals in natural language.",
+        "description": "First part of a user study on Euler diagrams as cues for solving reasoning tasks on conditionals in natural language.",
         "organizations": [
             "Heidelberg University"
         ]
@@ -55,7 +55,7 @@
                 },
                 {
                     "id": "understand-context",
-                    "prompt": "3. I understood the logical structure of the context.",
+                    "prompt": "3. I understood the logical structure of the problem's premises and conclusion.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -66,7 +66,7 @@
                 },
                 {
                     "id": "understand-question",
-                    "prompt": "4. I understood what kind of logical relationship the question was asking about.",
+                    "prompt": "4. I understood what kind of logical inference the question was asking about.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -88,7 +88,7 @@
                 },
                 {
                     "id": "understand-hints",
-                    "prompt": "6. I understood how the hints relate to the context.",
+                    "prompt": "6. I understood how the cues relate to the context.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -704,7 +704,7 @@
             "response": [
                 {
                     "id": "hint-help",
-                    "prompt": "The hints made solving the tasks easier.",
+                    "prompt": "The cues made solving the tasks easier.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -715,7 +715,7 @@
                 },
                 {
                     "id": "hint-info",
-                    "prompt": "I felt that the hints offered just the right amount of information to help me solve the task.",
+                    "prompt": "I felt that the cues offered just the right amount of information to help me solve the task.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -732,7 +732,7 @@
                 },
                 {
                     "id": "hints",
-                    "prompt": "Please describe how you used the hints for solving the tasks. How did they affect your strategies?",
+                    "prompt": "Please describe how you used the cues for solving the tasks. How did they affect your strategies?",
                     "location": "aboveStimulus",
                     "type": "longText"
                 },

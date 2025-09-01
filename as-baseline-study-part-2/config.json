@@ -52,7 +52,7 @@
                 },
                 {
                     "id": "understand-context",
-                    "prompt": "3. I understood the logical structure of the context.",
+                    "prompt": "3. I understood the logical structure of the problem's premises and conclusion.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
@@ -63,7 +63,7 @@
                 },
                 {
                     "id": "understand-question",
-                    "prompt": "4. I understood what kind of logical relationship the question was asking about.",
+                    "prompt": "4. I understood what kind of logical inference the question was asking about.",
                     "location": "aboveStimulus",
                     "type": "likert",
                     "numItems": 7,
