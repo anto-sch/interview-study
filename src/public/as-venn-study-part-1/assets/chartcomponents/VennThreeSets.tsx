@@ -1,6 +1,87 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { select, BaseType, Selection } from 'd3-selection';
 
+// Helpers — must be defined before the component to satisfy no-use-before-define
+
+type Sel = Selection<SVGSVGElement, unknown, BaseType, unknown>;
+type DefsSel = Selection<SVGDefsElement, unknown, BaseType, unknown>;
+
+function addClip(
+  defs: DefsSel,
+  id: string,
+  cx: number,
+  cy: number,
+  r: number,
+) {
+  defs
+    .append('clipPath')
+    .attr('id', id)
+    .attr('clipPathUnits', 'userSpaceOnUse')
+    .append('circle')
+    .attr('cx', cx)
+    .attr('cy', cy)
+    .attr('r', r);
+}
+
+function drawRectWithClip(
+  svg: Sel,
+  rect: { x: number; y: number; w: number; h: number },
+  clipId: string,
+  fill: string,
+  opacity: number,
+) {
+  svg
+    .append('rect')
+    .attr('x', rect.x)
+    .attr('y', rect.y)
+    .attr('width', rect.w)
+    .attr('height', rect.h)
+    .attr('fill', fill)
+    .attr('opacity', opacity)
+    .attr('clip-path', `url(#${clipId})`);
+}
+
+function drawNestedPair(
+  svg: Sel,
+  rect: { x: number; y: number; w: number; h: number },
+  clipId1: string,
+  clipId2: string,
+  fill: string,
+  opacity: number,
+) {
+  const g = svg.append('g').attr('clip-path', `url(#${clipId1})`);
+  g.append('rect')
+    .attr('x', rect.x)
+    .attr('y', rect.y)
+    .attr('width', rect.w)
+    .attr('height', rect.h)
+    .attr('fill', fill)
+    .attr('opacity', opacity)
+    .attr('clip-path', `url(#${clipId2})`);
+}
+
+function drawNestedTriple(
+  svg: Sel,
+  rect: { x: number; y: number; w: number; h: number },
+  clipIdA: string,
+  clipIdB: string,
+  clipIdC: string,
+  fill: string,
+  opacity: number,
+) {
+  const gA = svg.append('g').attr('clip-path', `url(#${clipIdA})`);
+  const gB = gA.append('g').attr('clip-path', `url(#${clipIdB})`);
+  gB
+    .append('rect')
+    .attr('x', rect.x)
+    .attr('y', rect.y)
+    .attr('width', rect.w)
+    .attr('height', rect.h)
+    .attr('fill', fill)
+    .attr('opacity', opacity)
+    .attr('clip-path', `url(#${clipIdC})`);
+}
+
 export type PairData = Record<string, boolean | undefined>;
 
 export type CombineMode = 'or' | 'and' | 'vote';
@@ -65,9 +146,9 @@ export default function VennThreeSets({
     for (const d of data) {
       for (const k of Object.keys(d)) {
         if (k.includes(',')) {
-          const [l, r] = k.split(',').map((s) => s.trim());
+          const [l, rPart] = k.split(',').map((part) => part.trim());
           if (l) set.add(l);
-          if (r) set.add(r);
+          if (rPart) set.add(rPart);
         } else {
           set.add(k.trim());
         }
@@ -139,15 +220,15 @@ export default function VennThreeSets({
 
       for (const k of Object.keys(d)) {
         if (k.includes(',')) {
-          const [l, r] = k.split(',').map((s) => s.trim());
-          if (names.indexOf(l) !== -1 && names.indexOf(r) !== -1) {
+          const [l, rPart] = k.split(',').map((part) => part.trim());
+          if (names.indexOf(l) !== -1 && names.indexOf(rPart) !== -1) {
             left = l;
-            right = r;
+            right = rPart;
             // Accept either order in the object
-            bothVal = d[`${l},${r}`]
-                            ?? d[`${l}, ${r}`]
-                            ?? d[`${r},${l}`]
-                            ?? d[`${r}, ${l}`];
+            bothVal = d[`${l},${rPart}`]
+                            ?? d[`${l}, ${rPart}`]
+                            ?? d[`${rPart},${l}`]
+                            ?? d[`${rPart}, ${l}`];
             break;
           }
         }
@@ -162,32 +243,31 @@ export default function VennThreeSets({
                         ?? d[`${left}, ${right}`]
                         ?? d[`${right},${left}`]
                         ?? d[`${right}, ${left}`];
-        } else {
-          // Skip malformed entries
-          continue;
         }
       }
 
-      const X = left;
-      const Y = right;
-      const Z = names.find((n) => n !== X && n !== Y)!;
+      if (left && right) {
+        const X = left;
+        const Y = right;
+        const Z = names.find((n) => n !== X && n !== Y)!;
 
-      const onlyX = d[X];
-      const onlyY = d[Y];
-      const bothXY = !!bothVal;
+        const onlyX = d[X];
+        const onlyY = d[Y];
+        const bothXY = !!bothVal;
 
-      // Map this pair to 3-set micro-regions
-      // only X => X-only, XZ-only
-      addVote(X, onlyX);
-      addVote(pairKey(X, Z), onlyX);
+        // Map this pair to 3-set micro-regions
+        // only X => X-only, XZ-only
+        addVote(X, onlyX);
+        addVote(pairKey(X, Z), onlyX);
 
-      // both X,Y => XY-only, XYZ
-      addVote(pairKey(X, Y), bothXY);
-      addVote(tripleKey(A, B, C), bothXY);
+        // both X,Y => XY-only, XYZ
+        addVote(pairKey(X, Y), bothXY);
+        addVote(tripleKey(A, B, C), bothXY);
 
-      // only Y => Y-only, YZ-only
-      addVote(Y, onlyY);
-      addVote(pairKey(Y, Z), onlyY);
+        // only Y => Y-only, YZ-only
+        addVote(Y, onlyY);
+        addVote(pairKey(Y, Z), onlyY);
+      }
     }
 
     // Reduce by combineMode
@@ -264,7 +344,7 @@ export default function VennThreeSets({
     // Hatched pattern
     const spacing = 8;
     const angle = 45;
-    const stroke = palette.shade; // or a different color if you want
+    const hatchStroke = palette.shade; // or a different color if you want
     const idHatch = 'hatch'; // ensure uniqueness per component
 
     const pattern = defs
@@ -289,7 +369,7 @@ export default function VennThreeSets({
       .attr('y1', 0)
       .attr('x2', 0)
       .attr('y2', spacing)
-      .attr('stroke', stroke)
+      .attr('stroke', hatchStroke)
       .attr('stroke-width', strokeWidth * 3);
 
     // Draw order:
@@ -449,85 +529,4 @@ export default function VennThreeSets({
       aria-label="Venn diagram of three sets"
     />
   );
-}
-
-// Helpers
-
-type Sel = Selection<SVGSVGElement, unknown, any, unknown>;
-type DefsSel = Selection<SVGDefsElement, unknown, any, unknown>;
-
-function addClip(
-  defs: DefsSel,
-  id: string,
-  cx: number,
-  cy: number,
-  r: number,
-) {
-  defs
-    .append('clipPath')
-    .attr('id', id)
-    .attr('clipPathUnits', 'userSpaceOnUse')
-    .append('circle')
-    .attr('cx', cx)
-    .attr('cy', cy)
-    .attr('r', r);
-}
-
-function drawRectWithClip(
-  svg: Sel,
-  rect: { x: number; y: number; w: number; h: number },
-  clipId: string,
-  fill: string,
-  opacity: number,
-) {
-  svg
-    .append('rect')
-    .attr('x', rect.x)
-    .attr('y', rect.y)
-    .attr('width', rect.w)
-    .attr('height', rect.h)
-    .attr('fill', fill)
-    .attr('opacity', opacity)
-    .attr('clip-path', `url(#${clipId})`);
-}
-
-function drawNestedPair(
-  svg: Sel,
-  rect: { x: number; y: number; w: number; h: number },
-  clipId1: string,
-  clipId2: string,
-  fill: string,
-  opacity: number,
-) {
-  const g = svg.append('g').attr('clip-path', `url(#${clipId1})`);
-  g.append('rect')
-    .attr('x', rect.x)
-    .attr('y', rect.y)
-    .attr('width', rect.w)
-    .attr('height', rect.h)
-    .attr('fill', fill)
-    .attr('opacity', opacity)
-    .attr('clip-path', `url(#${clipId2})`);
-}
-
-function drawNestedTriple(
-  svg: Sel,
-  rect: { x: number; y: number; w: number; h: number },
-  clipIdA: string,
-  clipIdB: string,
-  clipIdC: string,
-  fill: string,
-  opacity: number,
-) {
-  const gA = svg.append('g').attr('clip-path', `url(#${clipIdA})`);
-  const gB = gA.append('g').attr('clip-path', `url(#${clipIdB})`);
-  gB
-    .append('rect')
-    .attr('x', rect.x)
-    .attr('y', rect.y)
-    .attr('width', rect.w)
-    .attr('height', rect.h)
-    .attr('fill', fill)
-    .attr('opacity', opacity)
-    .attr('clip-path', `url(#${clipIdC})`);
 }

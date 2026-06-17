@@ -1,6 +1,23 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { select, Selection, BaseType } from 'd3-selection';
 
+function addClip(
+  defs: Selection<SVGDefsElement, unknown, BaseType, unknown>,
+  id: string,
+  cx: number,
+  cy: number,
+  r: number,
+) {
+  defs
+    .append('clipPath')
+    .attr('id', id)
+    .attr('clipPathUnits', 'userSpaceOnUse')
+    .append('circle')
+    .attr('cx', cx)
+    .attr('cy', cy)
+    .attr('r', r);
+}
+
 type GenericRegions = {
   onlyLeft?: boolean;
   both?: boolean;
@@ -69,12 +86,6 @@ export default function VennTwoSets({
     [colors],
   );
 
-  const hatchPattern = `<pattern id="diagonalHatch" patternUnits="userSpaceOnUse" width="4"     height="4"><path d="M-1,1 l2,-2
-                      M0,4 l4,-4
-                      M3,5 l2,-2" 
-              style="stroke:black; stroke-width:1" />
-    </pattern>`;
-
   // Resolve booleans from either generic keys or name-based keys.
   const norm = useMemo(() => {
     // If generic keys exist, use them directly.
@@ -125,7 +136,7 @@ export default function VennTwoSets({
     // Hatched pattern
     const spacing = 8;
     const angle = 45;
-    const stroke = palette.shade; // or a different color if you want
+    const hatchStroke = palette.shade; // or a different color if you want
     const idHatch = `hatch-${idClipA}`; // ensure uniqueness per component
 
     const pattern = defs
@@ -150,7 +161,7 @@ export default function VennTwoSets({
       .attr('y1', 0)
       .attr('x2', 0)
       .attr('y2', spacing)
-      .attr('stroke', stroke)
+      .attr('stroke', hatchStroke)
       .attr('stroke-width', strokeWidth * 3);
 
     // Only Left region (clipped to left circle)
@@ -257,21 +268,4 @@ export default function VennTwoSets({
       aria-label="Venn diagram of two sets"
     />
   );
-}
-
-function addClip(
-  defs: Selection<SVGDefsElement, unknown, BaseType, unknown>,
-  id: string,
-  cx: number,
-  cy: number,
-  r: number,
-) {
-  defs
-    .append('clipPath')
-    .attr('id', id)
-    .attr('clipPathUnits', 'userSpaceOnUse')
-    .append('circle')
-    .attr('cx', cx)
-    .attr('cy', cy)
-    .attr('r', r);
 }

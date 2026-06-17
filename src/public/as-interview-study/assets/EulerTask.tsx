@@ -19,24 +19,15 @@ function extractPairNames(d: PairData): [string, string] {
   return ['A', 'B']; // fallback
 }
 
-function uniqueMarkClassesDOM(items: Implication[]): string[] {
+function uniquePropositionNames(items: Implication[]): string[] {
   const seen = new Set<string>();
   const ordered: string[] = [];
-  const scratch = document.createElement('div');
-
   for (const it of items) {
-    scratch.innerHTML = it.text || '';
-    scratch.querySelectorAll('mark').forEach((mark) => {
-      mark.classList.forEach((c) => {
-        if (c && !seen.has(c)) {
-          seen.add(c);
-          ordered.push(c);
-        }
-      });
-    });
+    const a = parseLiteral(it.antecedent).name;
+    const b = parseLiteral(it.consequent).name;
+    if (a && !seen.has(a)) { seen.add(a); ordered.push(a); }
+    if (b && !seen.has(b)) { seen.add(b); ordered.push(b); }
   }
-
-  scratch.innerHTML = '';
   return ordered;
 }
 
@@ -44,10 +35,6 @@ function uniqueMarkClassesDOM(items: Implication[]): string[] {
 // Cycles through hues using golden-angle steps
 function colorForIndex(i: number) {
   const colors = ['#874fff', '#FF7237', '#24CB71'];
-  const hue = (i * 137.508) % 360;
-  const sat = 80; // %
-  const light = 85; // %
-  // return `hsl(${hue}, ${sat}%, ${light}%)`;
   return `${colors[i]}88`;
 }
 
@@ -76,7 +63,15 @@ function buildScopedCSS(classList: ReadonlyArray<string>, scopeId: string) {
   return css;
 }
 
-function EulerTask({ parameters }: { parameters: any }) {
+type EulerTaskParams = {
+  data?: Implication[];
+  gap?: number;
+  twoWidth?: number;
+  twoHeight?: number;
+  textMaxWidth?: number;
+};
+
+function EulerTask({ parameters }: { parameters: EulerTaskParams }) {
   const items: Implication[] = Array.isArray(parameters?.data) ? parameters.data : [];
 
   // Sizing (you can override via parameters)
@@ -97,7 +92,6 @@ function EulerTask({ parameters }: { parameters: any }) {
   const totalSteps = items.length;
 
   const revealedCount = Math.min(step, items.length); // sentences + EulerTwoSets revealed
-  const showThree = step >= items.length + 1;
 
   const canHint = step < totalSteps && items.length > 0;
 
@@ -111,7 +105,7 @@ function EulerTask({ parameters }: { parameters: any }) {
   // Unique scope id so styles don't leak between component instances
   const scopeId = useRef(`vp-${Math.random().toString(36).slice(2, 9)}`).current;
 
-  const classList = useMemo(() => uniqueMarkClassesDOM(items), [items]);
+  const classList = useMemo(() => uniquePropositionNames(items), [items]);
   const colorMap = useMemo(() => buildColorMap(classList), [classList]);
   const dynamicCSS = useMemo(() => buildScopedCSS(classList, scopeId), [classList, scopeId]);
 

@@ -6,7 +6,7 @@ import { initializeTrrack, Registry } from '@trrack/core';
 import { optimize } from 'svgo';
 import { StimulusParams } from '../../../store/types';
 import VennTwoSets from './chartcomponents/VennTwoSets';
-import VennThreeSets from './chartcomponents/VennThreeSets';
+import VennThreeSets, { CombineMode } from './chartcomponents/VennThreeSets';
 import { Implication, implicationsToVennPairs, parseLiteral } from './chartcomponents/ImplicationsToVennPairs';
 import { SvgDraw } from './SVGdraw';
 import './chartcomponents/UIstyles.css';
@@ -27,24 +27,15 @@ function extractPairNames(d: PairData): [string, string] {
   return ['A', 'B']; // fallback
 }
 
-function uniqueMarkClassesDOM(items: Implication[]): string[] {
+function uniquePropositionNames(items: Implication[]): string[] {
   const seen = new Set<string>();
   const ordered: string[] = [];
-  const scratch = document.createElement('div');
-
   for (const it of items) {
-    scratch.innerHTML = it.text || '';
-    scratch.querySelectorAll('mark').forEach((mark) => {
-      mark.classList.forEach((c) => {
-        if (c && !seen.has(c)) {
-          seen.add(c);
-          ordered.push(c);
-        }
-      });
-    });
+    const a = parseLiteral(it.antecedent).name;
+    const b = parseLiteral(it.consequent).name;
+    if (a && !seen.has(a)) { seen.add(a); ordered.push(a); }
+    if (b && !seen.has(b)) { seen.add(b); ordered.push(b); }
   }
-
-  scratch.innerHTML = '';
   return ordered;
 }
 
@@ -105,7 +96,7 @@ function getSingleDifference(arr1: string[], arr2: string[]) {
   const a = [...arr1].sort();
   const b = [...arr2].sort();
   const len = Math.max(a.length, b.length);
-  for (let i = 0; i < len; i++) {
+  for (let i = 0; i < len; i += 1) {
     if (a[i] !== b[i]) {
       // That element is the only mismatch
       return (a[i] !== undefined && b[i] !== undefined)
@@ -117,7 +108,20 @@ function getSingleDifference(arr1: string[], arr2: string[]) {
   return undefined;
 }
 
-function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
+type VennTaskParams = {
+  data?: Implication[];
+  gap?: number;
+  twoWidth?: number;
+  twoHeight?: number;
+  threeWidth?: number;
+  threeHeight?: number;
+  textMaxWidth?: number;
+  combineMode?: CombineMode;
+  centerDistance?: number;
+  orientation?: string;
+};
+
+function VennTask({ parameters, setAnswer }: StimulusParams<VennTaskParams>) {
   const items: Implication[] = Array.isArray(parameters?.data) ? parameters.data : [];
   const premises = items.filter((item) => item.conditional === 'premise');
   const hasConclusion = items.some((item) => item.conditional === 'conclusion');
@@ -159,9 +163,9 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
   const scopeId = useRef(`vp-${Math.random().toString(36).slice(2, 9)}`).current;
 
   // get propositions in premises
-  const classListPremises = useMemo(() => uniqueMarkClassesDOM(premises), [premises]);
+  const classListPremises = useMemo(() => uniquePropositionNames(premises), [premises]);
   // get propositions in argument
-  const classList = useMemo(() => uniqueMarkClassesDOM(items), [items]);
+  const classList = useMemo(() => uniquePropositionNames(items), [items]);
   const colorMap = useMemo(() => buildColorMap(classList), [classList]);
   const dynamicCSS = useMemo(() => buildScopedCSS(classList, scopeId), [classList, scopeId]);
 
@@ -176,12 +180,12 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
     };
   }
 
-  const [svg, setSvg] = React.useState<string>('');
+  const [, setSvg] = React.useState<string>('');
 
   const { actions, trrack } = useMemo(() => {
     const reg = Registry.create();
 
-    const clickAction = reg.register('draw', (state, currentSketch: any) => {
+    const clickAction = reg.register('draw', (state, currentSketch: string | number) => {
       state.sketch = currentSketch;
       return state;
     });
@@ -225,8 +229,7 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
 
   useEffect(() => {
     let timer: number | undefined;
-    if (!canHint) return;
-    if (step > 0) {
+    if (step > 0 && canHint) {
       timer = window.setTimeout(() => {
         setStep((s) => Math.min(s + 1, totalSteps));
       }, 1500);
@@ -234,7 +237,7 @@ function VennTask({ parameters, setAnswer }: StimulusParams<any>) {
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [step, totalSteps]);
+  }, [step, totalSteps, canHint]);
 
   const onReset = useCallback(() => {
     setStep(0);

@@ -15,7 +15,55 @@ export interface SvgDrawProps {
     onChangeSvg?: (svg: string) => void; // called after each completed stroke
 }
 
-export const SvgDraw: React.FC<SvgDrawProps> = ({
+// Minimal attribute escape for stroke color strings
+function escapeAttr(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
+
+// Helper to serialize strokes -> SVG string
+export function strokesToSvgString(
+  strokes: Stroke[],
+  opts: {
+        width: number;
+        height: number;
+        stroke: string;
+        strokeWidth: number;
+        background?: string;
+        roundDecimals?: number;
+    },
+): string {
+  const {
+    width,
+    height,
+    stroke,
+    strokeWidth,
+    background = 'transparent',
+    roundDecimals = 1,
+  } = opts;
+
+  const round = (n: number) => {
+    const f = 10 ** roundDecimals;
+    return Math.round(n * f) / f;
+  };
+
+  const bg = background && background !== 'transparent'
+    ? `<rect x="0" y="0" width="100%" height="100%" fill="${escapeAttr(background)}" />`
+    : '';
+
+  const paths = strokes
+    .map((pts) => {
+      if (!pts || pts.length === 0) return '';
+      const d = `M ${pts.map((p) => `${round(p.x)
+      }, ${round(p.y)
+      }`).join(' L ')}`;
+      return `<path d="${d}" fill="none" stroke="${escapeAttr(stroke)}" stroke-linecap="round" stroke-linejoin="round" stroke-width="${strokeWidth}" />`;
+    })
+    .join('');
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">${bg}${paths}</svg>`;
+}
+
+export function SvgDraw({
   width = 300,
   height = 200,
   stroke = 'black',
@@ -25,7 +73,7 @@ export const SvgDraw: React.FC<SvgDrawProps> = ({
   className,
   style,
   onChangeSvg,
-}) => {
+}: SvgDrawProps) {
   const [strokes, setStrokes] = React.useState<Stroke[]>([]);
   const drawingRef = React.useRef(false);
 
@@ -143,52 +191,4 @@ export const SvgDraw: React.FC<SvgDrawProps> = ({
 }
     </svg>
   );
-};
-
-// Helper to serialize strokes -> SVG string
-export function strokesToSvgString(
-  strokes: Stroke[],
-  opts: {
-        width: number;
-        height: number;
-        stroke: string;
-        strokeWidth: number;
-        background?: string;
-        roundDecimals?: number;
-    },
-): string {
-  const {
-    width,
-    height,
-    stroke,
-    strokeWidth,
-    background = 'transparent',
-    roundDecimals = 1,
-  } = opts;
-
-  const round = (n: number) => {
-    const f = 10 ** roundDecimals;
-    return Math.round(n * f) / f;
-  };
-
-  const bg = background && background !== 'transparent'
-    ? <rect x="0" y="0" width="100%" height="100%" fill="${background}" />
-    : '';
-
-  const paths = strokes
-    .map((pts) => {
-      if (!pts || pts.length === 0) return '';
-      const d = `M ${pts.map((p) => `${round(p.x)
-      }, ${round(p.y)
-      }`).join(' L ')}`;
-      return `<path d="${d}" fill="none" stroke="${escapeAttr(stroke)}" stroke-linecap="round" stroke-linejoin="round" stroke-width="${strokeWidth}" />`;
-    })
-    .join('');
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">${bg}${paths}</svg>`;
-}
-
-// Minimal attribute escape for stroke color strings
-function escapeAttr(s: string): string {
-  return s.replace(/&/g, '&').replace(/"/g, '"').replace(/</g, '<');
 }

@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useEffect, useMemo, useRef, useState,
+  useCallback, useMemo,
 } from 'react';
 import { initializeTrrack, Registry } from '@trrack/core';
 // eslint-disable-next-line import/no-unresolved
@@ -29,18 +29,24 @@ function minifySvg(svg: string) {
   return data;
 }
 
-function BaselineTask({ parameters, setAnswer }: StimulusParams<any>) {
+type BaselineTaskParams = {
+  gap?: number;
+  textMaxWidth?: number;
+  text: string;
+};
+
+function BaselineTask({ parameters, setAnswer }: StimulusParams<BaselineTaskParams>) {
   // Sizing (you can override via parameters)
   const gap: number = parameters?.gap ?? 16;
 
   const textMaxWidth: number | undefined = parameters?.textMaxWidth ?? 500;
 
-  const [svg, setSvg] = React.useState<string>('');
+  const [, setSvg] = React.useState<string>('');
 
   const { actions, trrack } = useMemo(() => {
     const reg = Registry.create();
 
-    const clickAction = reg.register('draw', (state, currentSketch: any) => {
+    const clickAction = reg.register('draw', (state, currentSketch: string) => {
       state.sketch = currentSketch;
       return state;
     });
@@ -63,7 +69,7 @@ function BaselineTask({ parameters, setAnswer }: StimulusParams<any>) {
     trrack.apply('draw path', actions.clickAction(s));
 
     const min = minifySvg(s);
-    console.log(min);
+    console.warn(min);
 
     setAnswer({
       status: true,

@@ -1,6 +1,12 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React from 'react';
 
-function BaselineTask({ parameters }: { parameters: any }) {
+type BaselineTaskParams = {
+  gap?: number;
+  textMaxWidth?: number;
+  text: string;
+};
+
+function BaselineTask({ parameters }: { parameters: BaselineTaskParams }) {
   // Sizing (you can override via parameters)
   const gap: number = parameters?.gap ?? 16;
 

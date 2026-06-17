@@ -7,6 +7,16 @@ export type Implication = {
 
 export type VennPairData = Record<string, boolean>;
 
+export function parseLiteral(lit: string): { name: string; negated: boolean } {
+  const t = lit.trim();
+  // Accept "not X", "!X", "¬X" (case-insensitive for "not")
+  const m = t.match(/^(?:not\s+|!\s*|¬\s*)(.+)$/i);
+  if (m) {
+    return { name: m[1].trim(), negated: true };
+  }
+  return { name: t, negated: false };
+}
+
 export function implicationsToVennPairs(inputs: Implication[]): VennPairData[] {
   return inputs.map((imp) => {
     const A = parseLiteral(imp.antecedent);
@@ -35,14 +45,4 @@ export function implicationsToVennPairs(inputs: Implication[]): VennPairData[] {
       [rightName]: onlyRight,
     };
   });
-}
-
-export function parseLiteral(lit: string): { name: string; negated: boolean } {
-  const t = lit.trim();
-  // Accept "not X", "!X", "¬X" (case-insensitive for "not")
-  const m = t.match(/^(?:not\s+|!\s*|¬\s*)(.+)$/i);
-  if (m) {
-    return { name: m[1].trim(), negated: true };
-  }
-  return { name: t, negated: false };
 }

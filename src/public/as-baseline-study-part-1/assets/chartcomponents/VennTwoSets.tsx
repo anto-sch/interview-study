@@ -1,6 +1,23 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { select, Selection, BaseType } from 'd3-selection';
 
+function addClip(
+  defs: Selection<SVGDefsElement, unknown, BaseType, unknown>,
+  id: string,
+  cx: number,
+  cy: number,
+  r: number,
+) {
+  defs
+    .append('clipPath')
+    .attr('id', id)
+    .attr('clipPathUnits', 'userSpaceOnUse')
+    .append('circle')
+    .attr('cx', cx)
+    .attr('cy', cy)
+    .attr('r', r);
+}
+
 type GenericRegions = {
   onlyLeft?: boolean;
   both?: boolean;
@@ -220,21 +237,4 @@ export default function VennTwoSets({
       aria-label="Venn diagram of two sets"
     />
   );
-}
-
-function addClip(
-  defs: Selection<SVGDefsElement, unknown, BaseType, unknown>,
-  id: string,
-  cx: number,
-  cy: number,
-  r: number,
-) {
-  defs
-    .append('clipPath')
-    .attr('id', id)
-    .attr('clipPathUnits', 'userSpaceOnUse')
-    .append('circle')
-    .attr('cx', cx)
-    .attr('cy', cy)
-    .attr('r', r);
 }

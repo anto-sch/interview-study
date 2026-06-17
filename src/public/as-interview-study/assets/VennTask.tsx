@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import VennTwoSets from './chartcomponents/VennTwoSets';
-import VennThreeSets from './chartcomponents/VennThreeSets';
+import VennThreeSets, { CombineMode } from './chartcomponents/VennThreeSets';
 import { Implication, implicationsToVennPairs, parseLiteral } from './chartcomponents/ImplicationsToVennPairs';
 import './chartcomponents/UIstyles.css';
 
@@ -20,24 +20,15 @@ function extractPairNames(d: PairData): [string, string] {
   return ['A', 'B']; // fallback
 }
 
-function uniqueMarkClassesDOM(items: Implication[]): string[] {
+function uniquePropositionNames(items: Implication[]): string[] {
   const seen = new Set<string>();
   const ordered: string[] = [];
-  const scratch = document.createElement('div');
-
   for (const it of items) {
-    scratch.innerHTML = it.text || '';
-    scratch.querySelectorAll('mark').forEach((mark) => {
-      mark.classList.forEach((c) => {
-        if (c && !seen.has(c)) {
-          seen.add(c);
-          ordered.push(c);
-        }
-      });
-    });
+    const a = parseLiteral(it.antecedent).name;
+    const b = parseLiteral(it.consequent).name;
+    if (a && !seen.has(a)) { seen.add(a); ordered.push(a); }
+    if (b && !seen.has(b)) { seen.add(b); ordered.push(b); }
   }
-
-  scratch.innerHTML = '';
   return ordered;
 }
 
@@ -45,10 +36,6 @@ function uniqueMarkClassesDOM(items: Implication[]): string[] {
 // Cycles through hues using golden-angle steps
 function colorForIndex(i: number) {
   const colors = ['#874fff', '#FF7237', '#24CB71'];
-  const hue = (i * 137.508) % 360;
-  const sat = 80; // %
-  const light = 85; // %
-  // return `hsl(${hue}, ${sat}%, ${light}%)`;
   return `${colors[i]}88`;
 }
 
@@ -82,7 +69,7 @@ function getSingleDifference(arr1: string[], arr2: string[]) {
   const a = [...arr1].sort();
   const b = [...arr2].sort();
   const len = Math.max(a.length, b.length);
-  for (let i = 0; i < len; i++) {
+  for (let i = 0; i < len; i += 1) {
     if (a[i] !== b[i]) {
       // That element is the only mismatch
       return (a[i] !== undefined && b[i] !== undefined)
@@ -94,10 +81,23 @@ function getSingleDifference(arr1: string[], arr2: string[]) {
   return undefined;
 }
 
-function VennTask({ parameters }: { parameters: any }) {
+type VennTaskParams = {
+  data?: Implication[];
+  gap?: number;
+  twoWidth?: number;
+  twoHeight?: number;
+  threeWidth?: number;
+  threeHeight?: number;
+  textMaxWidth?: number;
+  combineMode?: CombineMode;
+  centerDistance?: number;
+  orientation?: string;
+};
+
+function VennTask({ parameters }: { parameters: VennTaskParams }) {
   const items: Implication[] = Array.isArray(parameters?.data) ? parameters.data : [];
-  const premises = items.filter((item) => item.argument === 'premise');
-  const hasConclusion = items.some((item) => item.argument === 'conclusion');
+  const premises = items.filter((item) => item.conditional === 'premise');
+  const hasConclusion = items.some((item) => item.conditional === 'conclusion');
 
   // Sizing (you can override via parameters)
   const gap: number = parameters?.gap ?? 16;
@@ -142,8 +142,8 @@ function VennTask({ parameters }: { parameters: any }) {
   const scopeId = useRef(`vp-${Math.random().toString(36).slice(2, 9)}`).current;
 
   // get propositions in premises
-  const classListPremises = useMemo(() => uniqueMarkClassesDOM(premises), [premises]);
-  const classList = useMemo(() => uniqueMarkClassesDOM(items), [items]);
+  const classListPremises = useMemo(() => uniquePropositionNames(premises), [premises]);
+  const classList = useMemo(() => uniquePropositionNames(items), [items]);
   const colorMap = useMemo(() => buildColorMap(classList), [classList]);
   const dynamicCSS = useMemo(() => buildScopedCSS(classList, scopeId), [classList, scopeId]);
 

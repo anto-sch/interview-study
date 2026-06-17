@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import { select, Selection, BaseType } from 'd3-selection';
+import { select } from 'd3-selection';
 
 type GenericRegions = {
     onlyLeft?: boolean;
@@ -48,7 +48,6 @@ export default function EulerTwoSets({
   style,
 }: EulerTwoSetsProps) {
   const svgRef = useRef<SVGSVGElement | null>(null);
-  const uidRef = useRef<string>(`e2-${Math.random().toString(36).slice(2, 9)}`);
 
   const [leftName, rightName] = setNames;
   const [labelLeft, labelRight] = labels ?? setNames;
@@ -102,8 +101,6 @@ export default function EulerTwoSets({
   useEffect(() => {
     const svg = select(svgRef.current);
     svg.selectAll('*').remove();
-
-    const uid = uidRef.current;
 
     switch (true) {
       // left implies right
@@ -263,6 +260,9 @@ export default function EulerTwoSets({
           .text(labelRight);
         break;
       }
+
+      default:
+        break;
     }
   }, [
     data,
