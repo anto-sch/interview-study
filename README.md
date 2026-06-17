@@ -1,6 +1,6 @@
-# Externalizing Set-Membership Reasoning: A Controlled Study of Sketch-Based Cues
+# Controlled Study: Visual Cues for Logical Reasoning about Text Enhance Metacognitive Sensitivity
 
-This repository contains the implementation of a two-session, between-subjects user study investigating how sketch-based visual cues support set-membership reasoning. The study is published in the Proceedings of EuroVis 2026 — A. Schlieder, J. Rummel & F. Sadlo. [Visual Cues for Logical Reasoning about Text Enhance Metacognitive Sensitivity](https://diglib.eg.org/items/f14e8d51-a5ff-453d-9677-1ac4e44d8e05). The study is implemented using the [reVISit](https://revisit.dev) framework. Stimuli are defined as React components under `src/public/<condition>/assets/` and wired into the reVISit study configuration.
+This repository contains the implementation of a two-session, between-subjects user study investigating how sketch-based visual cues support set-membership reasoning. The study is published in the Proceedings of EuroVis 2026 — [A. Schlieder, J. Rummel & F. Sadlo. Visual Cues for Logical Reasoning about Text Enhance Metacognitive Sensitivity](https://diglib.eg.org/items/f14e8d51-a5ff-453d-9677-1ac4e44d8e05). The study is implemented using the [reVISit](https://revisit.dev) framework. Stimuli are defined as React components under `src/public/<condition>/assets/` and wired into the reVISit study configuration.
 
 ## Study Overview
 
