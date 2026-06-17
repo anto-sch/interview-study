@@ -1,27 +1,41 @@
-# reVISit study – Interactive, Web-Based User Studies.  
+# Externalizing Set-Membership Reasoning: A Controlled Study of Sketch-Based Cues
 
-Create your own interactive, web-based data visualization user studies by cloning/forking and editing configuration files and adding stimuli in the `public` folder. 
+This repository contains the implementation of a two-session, between-subjects user study investigating how sketch-based visual cues support set-membership reasoning. The study is published in the Proceedings of EuroVis 2026 — A. Schlieder, J. Rummel & F. Sadlo. [Visual Cues for Logical Reasoning about Text Enhance Metacognitive Sensitivity](https://diglib.eg.org/items/f14e8d51-a5ff-453d-9677-1ac4e44d8e05). The study is implemented using the [reVISit](https://revisit.dev) framework. Stimuli are defined as React components under `src/public/<condition>/assets/` and wired into the reVISit study configuration.
 
-reVISit introduces reVISit.spec a DSL for specifying study setups (consent forms, training, trials, etc) for interactive web based studies. You describe your experimental setup in reVISit.spec, add your stimuli as images, forms, html pages, or React components, build and deploy – and you're ready to run your study. For tutorials and documentation, see the [reVISit website](https://revisit.dev). 
+## Study Overview
 
-## Build Instructions
+Participants were assigned to one of three between-subjects conditions:
 
-To run this demo experiment locally, you will need to install node on your computer. 
+- **Baseline** (`as-baseline-study-part-1`) — no visual cues; participants reason from text alone.
+- **Euler-type cues** (`as-euler-study-part-1`) — progressive Euler diagram cues revealed on demand.
+- **Venn-type cues** (`as-venn-study-part-1`) — progressive Venn diagram cues revealed on demand.
 
-* Clone `https://github.com/revisit-studies/study`
-* Run `yarn install`. If you don't have yarn installed, run `npm i -g yarn`. 
-* To run locally, run `yarn serve`.
-* Go to [http://localhost:8080](http://localhost:8080) to view it in your browser. The page will reload when you make changes. 
+The study ran across two sessions. An additional interview condition (`as-interview-study`) was used for a qualitative pilot study with different domain experts.
 
-## Release Instructions
 
-Releasing reVISit.dev happens automatically when a PR is merged into the `main` branch. The name of the pull request should be the title of the release, e.g. `v1.0.0`. Releasing creates a tag with the same name as the PR, but the official GitGub release should be created manually. The `main` branch is protected and requires two reviews before merging.
 
-The workflow for release looks as follows:
-Develop features on feature branch
-| PRs
-Dev branch
-| PR (1 per release)
-Main branch
-| Run release workflow on merge
-References are updated and commit is tagged
+## Running Locally
+
+You need Node.js installed.
+
+```bash
+yarn install     # install dependencies (run npm i -g yarn first if yarn is missing)
+yarn serve       # start local dev server
+```
+
+Then open [http://localhost:8080](http://localhost:8080). The page reloads on changes.
+
+## Repository Structure
+
+```
+src/public/
+  as-baseline-study-part-1/   # baseline condition
+  as-euler-study-part-1/      # Euler-type cue condition
+  as-venn-study-part-1/       # Venn-type cue condition
+  as-interview-study/         # qualitative interview condition
+```
+
+Each condition folder contains:
+- `assets/` — React stimulus components (`EulerTask.tsx`, `VennTask.tsx`, `BaselineTask.tsx`, chart components)
+
+The respective reVISit study config JSON defining the trial sequence, consent, and training can be found under `public/as-<condition-name>` 
