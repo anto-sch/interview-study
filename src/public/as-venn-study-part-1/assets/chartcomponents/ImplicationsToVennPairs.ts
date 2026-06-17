@@ -14,16 +14,16 @@ export function implicationsToVennPairs(inputs: Implication[]): VennPairData[] {
 
         // Region colors per your 4 cases:
         // 1) A -> B          => { A: false, "A,B": true,  B: true }
-        // 2) not A -> B      => { A: true,  "A,B": false, B: true }
+        // 2) not A -> B      => { A: true,  "A,B": true, B: true }
         // 3) A -> not B      => { A: true,  "A,B": false, B: true }
         // 4) not A -> not B  => { A: true,  "A,B": true,  B: false }
         //
         // Compact formulas that match the above:
         // onlyLeft  = aNeg OR bNeg
-        // both      = aNeg === bNeg      (XNOR)
+        // both      = NOT (aNeg AND bNeg)
         // onlyRight = NOT (aNeg AND bNeg)
         const onlyLeft = A.negated || B.negated;
-        const both = A.negated === B.negated;
+        const both = !(A.negated && B.negated);
         const onlyRight = !(A.negated && B.negated);
 
         const leftName = A.name;
