@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import { select, Selection, BaseType } from "d3-selection";
+import React, { useEffect, useMemo, useRef } from 'react';
+import { select, Selection, BaseType } from 'd3-selection';
 
 type GenericRegions = {
   onlyLeft?: boolean;
@@ -34,16 +34,16 @@ export type VennTwoSetsProps = {
 
 export default function VennTwoSets({
   data,
-  setNames = ["A", "B"],
+  setNames = ['A', 'B'],
   labels,
   width = 420,
   height = 260,
   r: rProp,
   gap: gapProp,
   colors = {},
-  stroke = "#333",
+  stroke = '#333',
   strokeWidth = 3,
-  fontFamily = "system-ui, sans-serif",
+  fontFamily = 'system-ui, sans-serif',
   className,
   style,
 }: VennTwoSetsProps) {
@@ -55,33 +55,33 @@ export default function VennTwoSets({
 
   const r = useMemo(
     () => rProp ?? Math.min(width, height) / 3,
-    [rProp, width, height]
+    [rProp, width, height],
   );
   const gap = useMemo(() => gapProp ?? r * 1.2, [gapProp, r]);
 
   const palette = useMemo(
     () => ({
-      A: colors.A ?? "#5DA5DA",
-      B: colors.B ?? "#F17CB0",
-      AB: colors.AB ?? "#B2912F",
-      shade: colors.shade ?? "#D9D9D9",
+      A: colors.A ?? '#5DA5DA',
+      B: colors.B ?? '#F17CB0',
+      AB: colors.AB ?? '#B2912F',
+      shade: colors.shade ?? '#D9D9D9',
     }),
-    [colors]
+    [colors],
   );
 
   const hatchPattern = `<pattern id="diagonalHatch" patternUnits="userSpaceOnUse" width="4"     height="4"><path d="M-1,1 l2,-2
                       M0,4 l4,-4
                       M3,5 l2,-2" 
               style="stroke:black; stroke-width:1" />
-    </pattern>`
+    </pattern>`;
 
   // Resolve booleans from either generic keys or name-based keys.
   const norm = useMemo(() => {
     // If generic keys exist, use them directly.
     if (
-      typeof (data as GenericRegions).onlyLeft === "boolean" ||
-      typeof (data as GenericRegions).both === "boolean" ||
-      typeof (data as GenericRegions).onlyRight === "boolean"
+      typeof (data as GenericRegions).onlyLeft === 'boolean'
+      || typeof (data as GenericRegions).both === 'boolean'
+      || typeof (data as GenericRegions).onlyRight === 'boolean'
     ) {
       const g = data as GenericRegions;
       return {
@@ -107,7 +107,7 @@ export default function VennTwoSets({
 
   useEffect(() => {
     const svg = select(svgRef.current);
-    svg.selectAll("*").remove();
+    svg.selectAll('*').remove();
 
     const uid = uidRef.current;
 
@@ -118,114 +118,113 @@ export default function VennTwoSets({
     const idClipA = `${uid}-clipA`;
     const idClipB = `${uid}-clipB`;
 
-    const defs = svg.append("defs");
+    const defs = svg.append('defs');
     addClip(defs, idClipA, cxA, cy, r);
     addClip(defs, idClipB, cxB, cy, r);
 
     // Hatched pattern
     const spacing = 8;
     const angle = 45;
-    const stroke = palette.shade;     // or a different color if you want
+    const stroke = palette.shade; // or a different color if you want
     const idHatch = `hatch-${idClipA}`; // ensure uniqueness per component
 
     const pattern = defs
-      .append("pattern")
-      .attr("id", idHatch)
-      .attr("patternUnits", "userSpaceOnUse")
-      .attr("width", spacing)
-      .attr("height", spacing)
-      .attr("patternTransform", `rotate(${angle})`);
+      .append('pattern')
+      .attr('id', idHatch)
+      .attr('patternUnits', 'userSpaceOnUse')
+      .attr('width', spacing)
+      .attr('height', spacing)
+      .attr('patternTransform', `rotate(${angle})`);
 
     pattern
-      .append("rect")
-      .attr("width", spacing)
-      .attr("height", spacing)
-      .attr("fill", "white")          // or palette.shade with lower opacity
-      .attr("opacity", 0.0);          // 0 for transparent background
+      .append('rect')
+      .attr('width', spacing)
+      .attr('height', spacing)
+      .attr('fill', 'white') // or palette.shade with lower opacity
+      .attr('opacity', 0.0); // 0 for transparent background
 
     // One stripe per tile (the pattern repeats)
     pattern
-      .append("line")
-      .attr("x1", 0)
-      .attr("y1", 0)
-      .attr("x2", 0)
-      .attr("y2", spacing)
-      .attr("stroke", stroke)
-      .attr("stroke-width", strokeWidth*3);
-
+      .append('line')
+      .attr('x1', 0)
+      .attr('y1', 0)
+      .attr('x2', 0)
+      .attr('y2', spacing)
+      .attr('stroke', stroke)
+      .attr('stroke-width', strokeWidth * 3);
 
     // Only Left region (clipped to left circle)
     svg
-      .append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", width)
-      .attr("height", height)
-      .attr("fill", norm.onlyLeft ? "#FFFF" : `url(#${idHatch})`)
-      .attr("opacity", 0.9)
-      .attr("clip-path", `url(#${idClipA})`);
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', width)
+      .attr('height', height)
+      .attr('fill', norm.onlyLeft ? '#FFFF' : `url(#${idHatch})`)
+      .attr('opacity', 0.9)
+      .attr('clip-path', `url(#${idClipA})`);
 
     // Only Right region (clipped to right circle)
     svg
-      .append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", width)
-      .attr("height", height)
-      .attr("fill", norm.onlyRight ? "#FFFF" : `url(#${idHatch})`)
-      .attr("opacity", 0.9)
-      .attr("clip-path", `url(#${idClipB})`);
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', width)
+      .attr('height', height)
+      .attr('fill', norm.onlyRight ? '#FFFF' : `url(#${idHatch})`)
+      .attr('opacity', 0.9)
+      .attr('clip-path', `url(#${idClipB})`);
 
     // Intersection region (clip to left then right)
-    const gAB = svg.append("g").attr("clip-path", `url(#${idClipA})`);
+    const gAB = svg.append('g').attr('clip-path', `url(#${idClipA})`);
     gAB
-      .append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", width)
-      .attr("height", height)
-      .attr("fill", norm.both ? "#FFFF" : `url(#${idHatch})`)
-      .attr("opacity", 0.9)
-      .attr("clip-path", `url(#${idClipB})`);
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', width)
+      .attr('height', height)
+      .attr('fill', norm.both ? '#FFFF' : `url(#${idHatch})`)
+      .attr('opacity', 0.9)
+      .attr('clip-path', `url(#${idClipB})`);
 
     // Outlines
     svg
-      .append("circle")
-      .attr("cx", cxA)
-      .attr("cy", cy)
-      .attr("r", r)
-      .attr("fill", "none")
-      .attr("stroke", palette.A)
-      .attr("stroke-width", strokeWidth);
+      .append('circle')
+      .attr('cx', cxA)
+      .attr('cy', cy)
+      .attr('r', r)
+      .attr('fill', 'none')
+      .attr('stroke', palette.A)
+      .attr('stroke-width', strokeWidth);
 
     svg
-      .append("circle")
-      .attr("cx", cxB)
-      .attr("cy", cy)
-      .attr("r", r)
-      .attr("fill", "none")
-      .attr("stroke", palette.B)
-      .attr("stroke-width", strokeWidth);
+      .append('circle')
+      .attr('cx', cxB)
+      .attr('cy', cy)
+      .attr('r', r)
+      .attr('fill', 'none')
+      .attr('stroke', palette.B)
+      .attr('stroke-width', strokeWidth);
 
     // Labels
     svg
-      .append("text")
-      .attr("x", cxA - r * 0.75)
-      .attr("y", cy - r * 1.0)
-      .attr("font-family", fontFamily)
-      .attr("font-size", 20)
-      .attr("font-weight", "bold")
-      .attr("fill", palette.A)
+      .append('text')
+      .attr('x', cxA - r * 0.75)
+      .attr('y', cy - r * 1.0)
+      .attr('font-family', fontFamily)
+      .attr('font-size', 20)
+      .attr('font-weight', 'bold')
+      .attr('fill', palette.A)
       .text(labelLeft);
 
     svg
-      .append("text")
-      .attr("x", cxB + r * 0.55)
-      .attr("y", cy - r * 1.0)
-      .attr("font-family", fontFamily)
-      .attr("font-size", 20)
-      .attr("font-weight", "bold")
-      .attr("fill", palette.B)
+      .append('text')
+      .attr('x', cxB + r * 0.55)
+      .attr('y', cy - r * 1.0)
+      .attr('font-family', fontFamily)
+      .attr('font-size', 20)
+      .attr('font-weight', 'bold')
+      .attr('fill', palette.B)
       .text(labelRight);
   }, [
     data,
@@ -265,14 +264,14 @@ function addClip(
   id: string,
   cx: number,
   cy: number,
-  r: number
+  r: number,
 ) {
   defs
-    .append("clipPath")
-    .attr("id", id)
-    .attr("clipPathUnits", "userSpaceOnUse")
-    .append("circle")
-    .attr("cx", cx)
-    .attr("cy", cy)
-    .attr("r", r);
+    .append('clipPath')
+    .attr('id', id)
+    .attr('clipPathUnits', 'userSpaceOnUse')
+    .append('circle')
+    .attr('cx', cx)
+    .attr('cy', cy)
+    .attr('r', r);
 }
